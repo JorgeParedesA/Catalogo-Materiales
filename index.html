@@ -3,27 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Catálogo de Materiales — Agrícola de los Llanos</title>
+<title>Catálogo Unificado de Materiales</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #faf9f7;
+    --bg: #f6f6f4;
     --surface: #ffffff;
-    --surface2: #f5f3ef;
-    --border: #e8e4dc;
-    --border2: #d6d0c4;
-    --yellow: #f5a623;
-    --yellow-dark: #d4881a;
-    --yellow-light: #fef4e0;
-    --red: #c0392b;
-    --red-dark: #962d22;
-    --red-light: #fceae8;
-    --orange: #e07020;
-    --gray: #4a4a4a;
-    --gray-light: #787878;
-    --text: #2c2c2c;
-    --text-muted: #666660;
-    --text-dim: #a8a49c;
+    --surface2: #f0f0ed;
+    --border: #e2e2de;
+    --border2: #ccccc7;
+    --bio-green: #72b626;
+    --bio-green-dark: #5a9020;
+    --bio-green-light: #eaf3d6;
+    --bio-blue: #1ab2e8;
+    --bio-blue-dark: #1090bf;
+    --bio-blue-light: #e0f5fd;
+    --agr-yellow: #f5a623;
+    --agr-yellow-dark: #d4881a;
+    --agr-yellow-light: #fef4e0;
+    --agr-red: #c0392b;
+    --agr-red-dark: #962d22;
+    --agr-orange: #e07020;
+    --text: #1c1c1a;
+    --text-muted: #636360;
+    --text-dim: #a8a8a3;
     --radius: 14px;
     --shadow-sm: 0 1px 4px rgba(0,0,0,0.06);
     --shadow: 0 3px 16px rgba(0,0,0,0.08);
@@ -32,537 +35,164 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    min-height: 100vh;
-  }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
 
-  /* ── HEADER ── */
-  header {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: var(--shadow-sm);
-  }
+  header { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); }
 
-  .header-inner {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    height: 72px;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-  }
+  .header-inner { max-width: 1400px; margin: 0 auto; padding: 0 2rem; height: 72px; display: flex; align-items: center; gap: 1.5rem; }
 
-  .logo-wrap { flex-shrink: 0; }
+  .logos-wrap { display: flex; align-items: center; gap: 1rem; flex-shrink: 0; }
 
-  .logo-img {
-    height: 46px;
-    width: auto;
-    object-fit: contain;
-  }
+  .logo-img { height: 40px; width: auto; object-fit: contain; }
 
-  .header-divider {
-    width: 1px;
-    height: 34px;
-    background: var(--border2);
-    flex-shrink: 0;
-  }
+  .logos-separator { width: 1px; height: 28px; background: var(--border2); }
 
-  /* ── SEARCH ── */
-  .search-wrapper {
-    flex: 1;
-    position: relative;
-  }
+  .header-divider { width: 1px; height: 34px; background: var(--border2); flex-shrink: 0; }
 
-  .search-icon {
-    position: absolute;
-    left: 18px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-dim);
-    font-size: 1.1rem;
-    pointer-events: none;
-  }
+  .search-wrapper { flex: 1; position: relative; }
 
-  #searchInput {
-    width: 100%;
-    background: var(--surface2);
-    border: 1.5px solid var(--border);
-    border-radius: 12px;
-    padding: 0.82rem 3rem 0.82rem 3.2rem;
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1rem;
-    outline: none;
-    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
-  }
+  .search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-dim); font-size: 1.1rem; pointer-events: none; }
 
-  #searchInput:focus {
-    border-color: var(--yellow);
-    background: var(--surface);
-    box-shadow: 0 0 0 3px rgba(245,166,35,0.15);
-  }
+  #searchInput { width: 100%; background: var(--surface2); border: 1.5px solid var(--border); border-radius: 12px; padding: 0.82rem 3rem 0.82rem 3.2rem; color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 1rem; outline: none; transition: border-color 0.2s, background 0.2s, box-shadow 0.2s; }
+
+  #searchInput:focus { border-color: var(--bio-blue); background: var(--surface); box-shadow: 0 0 0 3px rgba(26,178,232,0.12); }
 
   #searchInput::placeholder { color: var(--text-dim); }
 
-  .search-clear {
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: var(--border2);
-    border: none;
-    border-radius: 50%;
-    width: 22px;
-    height: 22px;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 0.72rem;
-    color: var(--text-muted);
-    transition: background 0.15s, color 0.15s;
-  }
+  .search-clear { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: var(--border2); border: none; border-radius: 50%; width: 22px; height: 22px; display: none; align-items: center; justify-content: center; cursor: pointer; font-size: 0.72rem; color: var(--text-muted); transition: background 0.15s; }
   .search-clear.visible { display: flex; }
-  .search-clear:hover { background: var(--red); color: #fff; }
+  .search-clear:hover { background: var(--text-muted); color: #fff; }
 
-  /* ── STATS ── */
-  .header-stats {
-    flex-shrink: 0;
-    display: flex;
-    gap: 0.6rem;
-  }
+  .header-stats { flex-shrink: 0; display: flex; gap: 0.5rem; }
 
-  .stat-pill {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    padding: 0.32rem 0.9rem;
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-  }
+  .stat-pill { background: var(--surface2); border: 1px solid var(--border); border-radius: 100px; padding: 0.32rem 0.9rem; font-size: 0.78rem; color: var(--text-muted); white-space: nowrap; display: flex; align-items: center; gap: 0.35rem; }
 
-  .stat-pill strong { color: var(--red); font-weight: 700; font-family: 'Outfit', sans-serif; }
+  .stat-pill strong { color: var(--text); font-weight: 700; font-family: 'Outfit', sans-serif; }
 
-  /* ── MAIN ── */
-  main {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 1.75rem 2rem 3rem;
-  }
+  main { max-width: 1400px; margin: 0 auto; padding: 1.75rem 2rem 3rem; }
 
-  /* ── FILTER BAR ── */
-  .filter-bar {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-    min-height: 34px;
-  }
+  .filter-bar { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; min-height: 34px; }
 
-  .filter-label {
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-family: 'Outfit', sans-serif;
-  }
+  .filter-label { font-size: 0.72rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Outfit', sans-serif; }
 
-  .tag-btn {
-    background: var(--surface);
-    border: 1.5px solid var(--border);
-    color: var(--text-muted);
-    border-radius: 100px;
-    padding: 0.3rem 0.9rem;
-    font-size: 0.78rem;
-    font-weight: 500;
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    transition: all 0.15s;
-  }
+  .tag-btn { background: var(--surface); border: 1.5px solid var(--border); color: var(--text-muted); border-radius: 100px; padding: 0.3rem 0.9rem; font-size: 0.78rem; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.15s; }
+  .tag-btn:hover { border-color: var(--bio-blue); color: var(--bio-blue-dark); background: var(--bio-blue-light); }
+  .tag-btn.active { background: var(--bio-blue); border-color: var(--bio-blue); color: #fff; font-weight: 600; }
 
-  .tag-btn:hover {
-    border-color: var(--yellow);
-    color: var(--yellow-dark);
-    background: var(--yellow-light);
-  }
+  #catalogGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.25rem; }
 
-  .tag-btn.active {
-    background: var(--yellow);
-    border-color: var(--yellow);
-    color: #fff;
-    font-weight: 600;
-  }
+  .material-card { background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius); overflow: hidden; cursor: pointer; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; animation: fadeUp 0.3s ease both; box-shadow: var(--shadow); }
 
-  /* ── GRID ── */
-  #catalogGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-    gap: 1.25rem;
-  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-  /* ── CARD ── */
-  .material-card {
-    background: var(--surface);
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    cursor: pointer;
-    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-    animation: fadeUp 0.3s ease both;
-    box-shadow: var(--shadow);
-  }
+  .material-card:hover { border-color: var(--bio-blue); transform: translateY(-4px); box-shadow: var(--shadow-hover); }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+  .card-accent { height: 3px; background: linear-gradient(90deg, var(--bio-green) 0%, var(--bio-blue) 49%, var(--agr-yellow) 51%, var(--agr-red) 100%); }
 
-  .material-card:hover {
-    border-color: var(--yellow);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-hover);
-  }
-
-  .card-img-wrap {
-    width: 100%;
-    height: 165px;
-    overflow: hidden;
-    background: var(--surface2);
-    position: relative;
-  }
-
-  .card-img-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.35s ease;
-  }
-
+  .card-img-wrap { width: 100%; height: 165px; overflow: hidden; background: var(--surface2); }
+  .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.35s ease; }
   .material-card:hover .card-img-wrap img { transform: scale(1.05); }
 
-  .no-img {
-    width: 100%;
-    height: 165px;
-    background: linear-gradient(135deg, #f5f3ef 0%, #ede9e0 100%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    color: var(--text-dim);
-    font-size: 0.75rem;
-    font-weight: 500;
-  }
-
+  .no-img { width: 100%; height: 165px; background: var(--surface2); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; color: var(--text-dim); font-size: 0.75rem; }
   .no-img span { font-size: 2rem; opacity: 0.35; }
 
-  /* Accent bar top of card */
-  .card-accent {
-    height: 3px;
-    background: linear-gradient(90deg, var(--yellow), var(--orange), var(--red));
-  }
+  .card-body { padding: 1rem 1.2rem 1.2rem; }
 
-  .card-body { padding: 1.1rem 1.2rem 1.25rem; }
+  .card-code { font-size: 0.67rem; font-weight: 800; letter-spacing: 0.1em; color: var(--bio-green-dark); text-transform: uppercase; margin-bottom: 0.3rem; font-family: 'Outfit', sans-serif; }
 
-  .card-code {
-    font-size: 0.67rem;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    color: var(--red);
-    text-transform: uppercase;
-    margin-bottom: 0.3rem;
-    font-family: 'Outfit', sans-serif;
-  }
+  .card-name { font-size: 0.95rem; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.4rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-family: 'Outfit', sans-serif; }
 
-  .card-name {
-    font-size: 0.96rem;
-    font-weight: 700;
-    color: var(--text);
-    line-height: 1.3;
-    margin-bottom: 0.42rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    font-family: 'Outfit', sans-serif;
-  }
+  .card-desc { font-size: 0.77rem; color: var(--text-muted); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 0.8rem; }
 
-  .card-desc {
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    line-height: 1.55;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    margin-bottom: 0.85rem;
-  }
+  .card-societies { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
 
-  .card-meta {
-    display: flex;
-    gap: 0.45rem;
-    flex-wrap: wrap;
-  }
+  .soc-badge { border-radius: 6px; padding: 0.18rem 0.55rem; font-size: 0.67rem; font-weight: 700; font-family: 'Outfit', sans-serif; display: flex; align-items: center; gap: 0.25rem; }
+  .soc-bio { background: var(--bio-green-light); border: 1px solid rgba(114,182,38,0.3); color: var(--bio-green-dark); }
+  .soc-agr { background: var(--agr-yellow-light); border: 1px solid rgba(245,166,35,0.3); color: var(--agr-yellow-dark); }
 
-  .meta-chip {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 0.2rem 0.55rem;
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-  }
+  .card-meta { display: flex; gap: 0.4rem; flex-wrap: wrap; }
 
-  .qty-chip {
-    background: var(--yellow-light);
-    border: 1px solid rgba(245,166,35,0.3);
-    color: var(--yellow-dark);
-    border-radius: 6px;
-    padding: 0.2rem 0.55rem;
-    font-size: 0.7rem;
-    font-weight: 700;
-    font-family: 'Outfit', sans-serif;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-  }
+  .meta-chip { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 0.18rem 0.5rem; font-size: 0.69rem; color: var(--text-muted); font-weight: 500; display: flex; align-items: center; gap: 0.25rem; }
 
-  /* ── EMPTY STATE ── */
-  .empty-state {
-    grid-column: 1/-1;
-    text-align: center;
-    padding: 5rem 2rem;
-    color: var(--text-dim);
-  }
-
+  .empty-state { grid-column: 1/-1; text-align: center; padding: 5rem 2rem; }
   .empty-state .icon { font-size: 3rem; margin-bottom: 1rem; opacity: 0.4; }
+  .empty-state h3 { font-size: 1.15rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.5rem; font-family: 'Outfit', sans-serif; }
+  .empty-state p { font-size: 0.85rem; color: var(--text-dim); max-width: 360px; margin: 0 auto; line-height: 1.6; }
 
-  .empty-state h3 {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--text-muted);
-    margin-bottom: 0.5rem;
-    font-family: 'Outfit', sans-serif;
-  }
-
-  .empty-state p {
-    font-size: 0.85rem;
-    color: var(--text-dim);
-    max-width: 340px;
-    margin: 0 auto;
-    line-height: 1.6;
-  }
-
-  /* ── MODAL ── */
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(44,44,44,0.55);
-    backdrop-filter: blur(6px);
-    z-index: 200;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-  }
-
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(28,28,26,0.55); backdrop-filter: blur(6px); z-index: 200; align-items: center; justify-content: center; padding: 1rem; }
   .modal-overlay.open { display: flex; }
 
-  .modal {
-    background: var(--surface);
-    border-radius: 18px;
-    max-width: 860px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 24px 80px rgba(0,0,0,0.2);
-    animation: modalIn 0.25s ease;
-    position: relative;
-  }
+  .modal { background: var(--surface); border-radius: 18px; max-width: 900px; width: 100%; max-height: 92vh; overflow-y: auto; box-shadow: 0 24px 80px rgba(0,0,0,0.2); animation: modalIn 0.25s ease; position: relative; }
 
-  @keyframes modalIn {
-    from { opacity: 0; transform: scale(0.96) translateY(8px); }
-    to   { opacity: 1; transform: scale(1) translateY(0); }
-  }
+  @keyframes modalIn { from { opacity: 0; transform: scale(0.96) translateY(8px); } to { opacity: 1; transform: scale(1) translateY(0); } }
 
-  /* Accent bar top of modal */
-  .modal-accent {
-    height: 4px;
-    background: linear-gradient(90deg, var(--yellow), var(--orange), var(--red));
-    border-radius: 18px 18px 0 0;
-  }
+  .modal-accent { height: 4px; background: linear-gradient(90deg, var(--bio-green) 0%, var(--bio-blue) 49%, var(--agr-yellow) 51%, var(--agr-red) 100%); border-radius: 18px 18px 0 0; }
 
-  .modal-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 420px;
-  }
+  .modal-layout { display: grid; grid-template-columns: 1fr 1.2fr; min-height: 460px; }
 
-  .modal-img {
-    background: var(--surface2);
-    overflow: hidden;
-    border-radius: 0 0 0 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 4rem;
-    color: var(--text-dim);
-    min-height: 420px;
-  }
-
+  .modal-img { background: var(--surface2); overflow: hidden; border-radius: 0 0 0 18px; display: flex; align-items: center; justify-content: center; font-size: 4rem; color: var(--text-dim); min-height: 460px; }
   .modal-img img { width: 100%; height: 100%; object-fit: contain; background: var(--surface2); }
 
   .modal-body { padding: 1.75rem; overflow-y: auto; }
 
-  .modal-code {
-    font-size: 0.72rem;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    color: var(--red);
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-    font-family: 'Outfit', sans-serif;
-  }
+  .modal-code { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; color: var(--bio-green-dark); text-transform: uppercase; margin-bottom: 0.4rem; font-family: 'Outfit', sans-serif; }
 
-  .modal-name {
-    font-size: 1.4rem;
-    font-weight: 800;
-    line-height: 1.2;
-    margin-bottom: 1.1rem;
-    color: var(--text);
-    font-family: 'Outfit', sans-serif;
-  }
+  .modal-name { font-size: 1.35rem; font-weight: 800; line-height: 1.2; margin-bottom: 0.4rem; color: var(--text); font-family: 'Outfit', sans-serif; }
 
-  .modal-divider { border: none; border-top: 1px solid var(--border); margin: 1rem 0; }
+  .modal-unit { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.8rem; }
 
-  .modal-section-label {
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    margin-bottom: 0.4rem;
-    font-family: 'Outfit', sans-serif;
-  }
+  .modal-divider { border: none; border-top: 1px solid var(--border); margin: 0.9rem 0; }
 
-  .modal-desc {
-    font-size: 0.88rem;
-    color: var(--text-muted);
-    line-height: 1.7;
-    margin-bottom: 1.2rem;
-  }
+  .modal-section-label { font-size: 0.67rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.5rem; font-family: 'Outfit', sans-serif; }
 
-  .modal-fields {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
-  }
+  .modal-desc { font-size: 0.86rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 0.9rem; }
 
-  .modal-field {
-    background: var(--surface2);
-    border-radius: 10px;
-    padding: 0.8rem 1rem;
-    border: 1px solid var(--border);
-  }
+  .modal-societies { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.9rem; }
 
-  .modal-field-label {
-    font-size: 0.67rem;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-weight: 700;
-    margin-bottom: 0.3rem;
-    font-family: 'Outfit', sans-serif;
-  }
+  .soc-panel { border-radius: 10px; padding: 0.9rem 1rem; border: 1.5px solid; }
+  .soc-panel.bio { background: var(--bio-green-light); border-color: rgba(114,182,38,0.3); }
+  .soc-panel.agr { background: var(--agr-yellow-light); border-color: rgba(245,166,35,0.3); }
 
-  .modal-field-value {
-    font-size: 0.92rem;
-    font-weight: 700;
-    color: var(--text);
-    font-family: 'Outfit', sans-serif;
-  }
+  .soc-panel-header { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.65rem; }
+  .soc-panel-logo { height: 18px; width: auto; object-fit: contain; }
+  .soc-panel-name { font-size: 0.7rem; font-weight: 700; font-family: 'Outfit', sans-serif; text-transform: uppercase; letter-spacing: 0.06em; }
+  .soc-panel.bio .soc-panel-name { color: var(--bio-green-dark); }
+  .soc-panel.agr .soc-panel-name { color: var(--agr-yellow-dark); }
 
-  .modal-close {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    background: rgba(255,255,255,0.95);
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    border-radius: 50%;
-    width: 34px;
-    height: 34px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background 0.15s, color 0.15s;
-    box-shadow: var(--shadow-sm);
-    z-index: 10;
-  }
+  .soc-field { margin-bottom: 0.5rem; }
+  .soc-field:last-child { margin-bottom: 0; }
+  .soc-field-label { font-size: 0.63rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.07em; font-weight: 700; font-family: 'Outfit', sans-serif; margin-bottom: 0.15rem; }
+  .soc-field-value { font-size: 0.88rem; font-weight: 700; font-family: 'Outfit', sans-serif; color: var(--text); }
+  .soc-panel.bio .soc-field-value.qty { color: var(--bio-green-dark); }
+  .soc-panel.agr .soc-field-value.qty { color: var(--agr-yellow-dark); }
+  .soc-na { font-size: 0.8rem; color: var(--text-dim); font-style: italic; }
 
-  .modal-close:hover { background: var(--red); color: #fff; border-color: var(--red); }
+  .modal-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .modal-field { background: var(--surface2); border-radius: 10px; padding: 0.75rem 1rem; border: 1px solid var(--border); }
+  .modal-field-label { font-size: 0.63rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; margin-bottom: 0.25rem; font-family: 'Outfit', sans-serif; }
+  .modal-field-value { font-size: 0.9rem; font-weight: 700; color: var(--text); font-family: 'Outfit', sans-serif; }
 
-  /* ── LOADING BAR ── */
-  .loading-bar {
-    position: fixed;
-    top: 0; left: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--yellow), var(--orange), var(--red));
-    width: 0%;
-    z-index: 999;
-    transition: width 0.4s ease;
-    border-radius: 0 2px 2px 0;
-  }
+  .modal-close { position: absolute; top: 14px; right: 14px; background: rgba(255,255,255,0.95); border: 1px solid var(--border); color: var(--text-muted); border-radius: 50%; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1rem; z-index: 10; transition: all 0.15s; box-shadow: var(--shadow-sm); }
+  .modal-close:hover { background: var(--text); color: #fff; border-color: var(--text); }
 
-  /* ── FOOTER ── */
-  footer {
-    text-align: center;
-    padding: 1.5rem 2rem;
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    border-top: 1px solid var(--border);
-    background: var(--surface);
-    margin-top: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.6rem;
-  }
+  .loading-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--bio-green), var(--bio-blue), var(--agr-yellow), var(--agr-red)); width: 0%; z-index: 999; transition: width 0.4s ease; }
 
-  footer img { height: 24px; opacity: 0.5; }
+  footer { text-align: center; padding: 1.5rem 2rem; font-size: 0.75rem; color: var(--text-dim); border-top: 1px solid var(--border); background: var(--surface); margin-top: 2rem; display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  footer img { height: 20px; opacity: 0.5; }
 
-  /* ── SCROLLBAR ── */
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
 
-  @media (max-width: 640px) {
-    .header-inner { gap: 1rem; padding: 0 1rem; }
+  @media (max-width: 700px) {
+    .header-inner { gap: 0.75rem; padding: 0 1rem; }
     .header-stats { display: none; }
+    .logo-img { height: 28px; }
     main { padding: 1rem; }
     .modal-layout { grid-template-columns: 1fr; }
-    .modal-img { border-radius: 0; min-height: 220px; }
-    .modal-fields { grid-template-columns: 1fr; }
-    .logo-img { height: 36px; }
+    .modal-img { border-radius: 0; min-height: 200px; }
+    .modal-societies { grid-template-columns: 1fr; }
+    .modal-field-row { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -570,19 +200,17 @@
 
 <div class="loading-bar" id="loadingBar"></div>
 
-<!-- HEADER -->
 <header>
   <div class="header-inner">
-    <div class="logo-wrap">
-      <img src="logo_agricola.png" alt="Agrícola de los Llanos" class="logo-img"
-           onerror="this.style.display='none'">
+    <div class="logos-wrap">
+      <img src="https://i.postimg.cc/wTs951ZF/logo-bio.jpg" alt="Bioenergy" class="logo-img" onerror="this.style.display='none'">
+      <div class="logos-separator"></div>
+      <img src="logo_agricola.png" alt="Agrícola de los Llanos" class="logo-img" onerror="this.style.display='none'">
     </div>
     <div class="header-divider"></div>
     <div class="search-wrapper">
       <span class="search-icon">⌕</span>
-      <input type="text" id="searchInput"
-             placeholder="Buscar material por código, nombre, descripción o ubicación…"
-             autocomplete="off">
+      <input type="text" id="searchInput" placeholder="Buscar por código, nombre, descripción o ubicación…" autocomplete="off">
       <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
     </div>
     <div class="header-stats">
@@ -592,25 +220,23 @@
   </div>
 </header>
 
-<!-- MAIN -->
 <main>
   <div class="filter-bar" id="filterBar"></div>
   <div id="catalogGrid">
     <div class="empty-state">
-      <div class="icon">🌾</div>
+      <div class="icon">🔍</div>
       <h3>Cargando catálogo…</h3>
-      <p>Obteniendo materiales, un momento por favor.</p>
+      <p>Un momento por favor.</p>
     </div>
   </div>
 </main>
 
-<!-- FOOTER -->
 <footer>
+  <img src="https://i.postimg.cc/wTs951ZF/logo-bio.jpg" alt="Bioenergy" onerror="this.style.display='none'">
+  <span>Catálogo Unificado de Materiales</span>
   <img src="logo_agricola.png" alt="Agrícola de los Llanos" onerror="this.style.display='none'">
-  Agrícola de los Llanos · Catálogo de Materiales
 </footer>
 
-<!-- MODAL -->
 <div class="modal-overlay" id="detailModal" onclick="closeModalOutside(event)">
   <div class="modal" id="modalContent">
     <button class="modal-close" onclick="closeModal()">✕</button>
@@ -622,8 +248,8 @@
   let filteredMaterials = [];
   let activeCategory = null;
 
-  // ── IMAGE FALLBACK ────────────────────────────────────────────
-  function imgWithFallback(src, alt) {
+  function imgWithFallback(src, alt, fit) {
+    fit = fit || 'cover';
     const id = 'img_' + Math.random().toString(36).substr(2, 9);
     setTimeout(function() {
       const el = document.getElementById(id);
@@ -641,22 +267,21 @@
         }
       };
     }, 0);
-    return '<img id="' + id + '" src="' + src + '" alt="' + alt + '" style="width:100%;height:100%;object-fit:cover;display:block">';
+    return '<img id="' + id + '" src="' + src + '" alt="' + alt + '" style="width:100%;height:100%;object-fit:' + fit + ';display:block">';
   }
 
-  // ── AUTO-CARGA CSV ────────────────────────────────────────────
   async function autoLoadCSV() {
     const bar = document.getElementById('loadingBar');
     bar.style.width = '40%';
     try {
       const res = await fetch('materiales.csv');
       bar.style.width = '70%';
-      if (!res.ok) { showEmpty('No se encontró el archivo de materiales.'); bar.style.width = '100%'; return; }
+      if (!res.ok) { showEmpty('No se encontró el archivo materiales.csv.'); bar.style.width = '100%'; return; }
       const text = await res.text();
       const parsed = parseCSV(text);
       bar.style.width = '100%';
       setTimeout(() => bar.style.width = '0%', 400);
-      if (parsed.length === 0) { showEmpty('El archivo CSV no contiene materiales.'); return; }
+      if (parsed.length === 0) { showEmpty('El CSV no contiene materiales.'); return; }
       allMaterials = parsed;
       filteredMaterials = [];
       buildFilterTags();
@@ -666,7 +291,7 @@
         <div class="empty-state">
           <div class="icon">🔍</div>
           <h3>Catálogo listo — ${allMaterials.length.toLocaleString()} materiales</h3>
-          <p>Ingresa un código, nombre o descripción para encontrar materiales.</p>
+          <p>Ingresa al menos 2 caracteres para buscar por código, nombre, descripción o ubicación.</p>
         </div>`;
     } catch(e) {
       bar.style.width = '100%';
@@ -677,15 +302,10 @@
 
   function showEmpty(msg) {
     document.getElementById('catalogGrid').innerHTML = `
-      <div class="empty-state">
-        <div class="icon">📦</div>
-        <h3>Sin materiales</h3>
-        <p>${msg}</p>
-      </div>`;
+      <div class="empty-state"><div class="icon">📦</div><h3>Sin materiales</h3><p>${msg}</p></div>`;
     updateCounts();
   }
 
-  // ── CSV PARSER ────────────────────────────────────────────────
   function parseCSV(text) {
     const lines = text.trim().split(/\r?\n/);
     if (lines.length < 2) return [];
@@ -697,14 +317,16 @@
       const obj = {};
       headers.forEach((h, idx) => { obj[h] = (row[idx] || '').trim().replace(/^"|"$/g, ''); });
       results.push({
-        codigo:      obj['codigo']      || obj['code']     || `MAT-${i}`,
-        nombre:      obj['nombre']      || obj['name']     || 'Sin nombre',
-        descripcion: obj['descripcion'] || obj['description'] || '',
-        unidad:      obj['unidad']      || obj['um']       || '',
-        ubicacion:   obj['ubicacion']   || obj['location'] || '',
-        imagen:      obj['imagen']      || obj['image']    || '',
-        categoria:   obj['categoria']   || obj['category'] || '',
-        cantidad:    obj['cantidad']    || obj['stock']    || '',
+        codigo:        obj['codigo']        || `MAT-${i}`,
+        nombre:        obj['nombre']        || 'Sin nombre',
+        descripcion:   obj['descripcion']   || '',
+        unidad:        obj['unidad']        || '',
+        categoria:     obj['categoria']     || '',
+        imagen:        obj['imagen']        || '',
+        ubicacion_bio: obj['ubicacion_bio'] || obj['ubicacion bioenergy'] || '',
+        cantidad_bio:  obj['cantidad_bio']  || obj['cantidad bioenergy']  || '',
+        ubicacion_agr: obj['ubicacion_agr'] || obj['ubicacion agricola']  || '',
+        cantidad_agr:  obj['cantidad_agr']  || obj['cantidad agricola']   || '',
       });
     }
     return results;
@@ -722,41 +344,39 @@
     return result;
   }
 
-  // ── RENDER GRID ───────────────────────────────────────────────
   function renderGrid(materials) {
     const grid = document.getElementById('catalogGrid');
     if (materials.length === 0) {
-      grid.innerHTML = `
-        <div class="empty-state">
-          <div class="icon">🔍</div>
-          <h3>Sin resultados</h3>
-          <p>No hay materiales que coincidan con tu búsqueda.</p>
-        </div>`;
+      grid.innerHTML = `<div class="empty-state"><div class="icon">🔍</div><h3>Sin resultados</h3><p>No hay materiales que coincidan con tu búsqueda.</p></div>`;
       return;
     }
     grid.innerHTML = materials.map((m, i) => {
       const idx = allMaterials.indexOf(m);
+      const hasBio = m.ubicacion_bio || m.cantidad_bio;
+      const hasAgr = m.ubicacion_agr || m.cantidad_agr;
       return `
       <div class="material-card" style="animation-delay:${Math.min(i*0.025,0.3)}s" onclick="openDetail(${idx})">
         ${m.imagen
-          ? `<div class="card-img-wrap">${imgWithFallback(esc(m.imagen), esc(m.nombre))}</div>`
+          ? `<div class="card-img-wrap">${imgWithFallback(esc(m.imagen), esc(m.nombre), 'cover')}</div>`
           : `<div class="no-img"><span>📦</span>Sin imagen</div>`}
         <div class="card-accent"></div>
         <div class="card-body">
           <div class="card-code">${esc(m.codigo)}</div>
           <div class="card-name">${esc(m.nombre)}</div>
           ${m.descripcion ? `<div class="card-desc">${esc(m.descripcion)}</div>` : ''}
+          <div class="card-societies">
+            ${hasBio ? `<span class="soc-badge soc-bio">🟢 Bioenergy${m.cantidad_bio ? ' · ' + esc(m.cantidad_bio) : ''}</span>` : ''}
+            ${hasAgr ? `<span class="soc-badge soc-agr">🟡 Agrícola${m.cantidad_agr ? ' · ' + esc(m.cantidad_agr) : ''}</span>` : ''}
+          </div>
           <div class="card-meta">
             ${m.unidad    ? `<span class="meta-chip">📐 ${esc(m.unidad)}</span>` : ''}
-            ${m.ubicacion ? `<span class="meta-chip">📍 ${esc(m.ubicacion)}</span>` : ''}
-            ${m.cantidad  ? `<span class="qty-chip">📦 ${esc(m.cantidad)}</span>` : ''}
+            ${m.categoria ? `<span class="meta-chip">🏷 ${esc(m.categoria)}</span>` : ''}
           </div>
         </div>
       </div>`;
     }).join('');
   }
 
-  // ── SEARCH ────────────────────────────────────────────────────
   document.getElementById('searchInput').addEventListener('input', function() {
     document.getElementById('searchClear').classList.toggle('visible', this.value.length > 0);
     applyFilters();
@@ -773,8 +393,7 @@
     if (q.length < 2 && !activeCategory) {
       filteredMaterials = [];
       document.getElementById('catalogGrid').innerHTML = `
-        <div class="empty-state">
-          <div class="icon">🔍</div>
+        <div class="empty-state"><div class="icon">🔍</div>
           <h3>Catálogo listo — ${allMaterials.length.toLocaleString()} materiales</h3>
           <p>Ingresa al menos 2 caracteres para buscar.</p>
         </div>`;
@@ -787,14 +406,14 @@
         m.codigo.toLowerCase().includes(q) ||
         m.nombre.toLowerCase().includes(q) ||
         m.descripcion.toLowerCase().includes(q) ||
-        m.ubicacion.toLowerCase().includes(q);
+        m.ubicacion_bio.toLowerCase().includes(q) ||
+        m.ubicacion_agr.toLowerCase().includes(q);
       return matchCat && matchSearch;
     });
     renderGrid(filteredMaterials);
     updateCounts();
   }
 
-  // ── FILTER TAGS ───────────────────────────────────────────────
   function buildFilterTags() {
     const cats = [...new Set(allMaterials.map(m => m.categoria).filter(Boolean))];
     const bar = document.getElementById('filterBar');
@@ -805,65 +424,68 @@
 
   function filterCat(cat) {
     activeCategory = (activeCategory === cat) ? null : cat;
-    document.querySelectorAll('.tag-btn').forEach(b => {
-      b.classList.toggle('active', b.textContent === activeCategory);
-    });
+    document.querySelectorAll('.tag-btn').forEach(b => { b.classList.toggle('active', b.textContent === activeCategory); });
     applyFilters();
   }
 
-  // ── COUNTS ────────────────────────────────────────────────────
   function updateCounts() {
-    document.getElementById('totalCount').textContent   = allMaterials.length.toLocaleString() || '—';
+    document.getElementById('totalCount').textContent   = allMaterials.length.toLocaleString();
     document.getElementById('showingCount').textContent = filteredMaterials.length || '—';
   }
 
-  // ── DETAIL MODAL ──────────────────────────────────────────────
   function openDetail(idx) {
     const m = allMaterials[idx];
-    const modal = document.getElementById('modalContent');
-    modal.innerHTML = `
+    const hasBio = m.ubicacion_bio || m.cantidad_bio;
+    const hasAgr = m.ubicacion_agr || m.cantidad_agr;
+    document.getElementById('modalContent').innerHTML = `
       <button class="modal-close" onclick="closeModal()">✕</button>
       <div class="modal-accent"></div>
       <div class="modal-layout">
         <div class="modal-img">
-          ${m.imagen ? imgWithFallback(esc(m.imagen), esc(m.nombre)) : '📦'}
+          ${m.imagen ? imgWithFallback(esc(m.imagen), esc(m.nombre), 'contain') : '📦'}
         </div>
         <div class="modal-body">
           <div class="modal-code">${esc(m.codigo)}</div>
           <div class="modal-name">${esc(m.nombre)}</div>
+          ${m.unidad ? `<div class="modal-unit">Unidad de medida: <strong>${esc(m.unidad)}</strong></div>` : ''}
           <hr class="modal-divider">
-          ${m.descripcion ? `
-            <div class="modal-section-label">Descripción</div>
-            <div class="modal-desc">${esc(m.descripcion)}</div>` : ''}
-          <div class="modal-fields">
-            ${m.unidad    ? `<div class="modal-field"><div class="modal-field-label">Unidad de medida</div><div class="modal-field-value">${esc(m.unidad)}</div></div>` : ''}
-            ${m.ubicacion ? `<div class="modal-field"><div class="modal-field-label">Ubicación</div><div class="modal-field-value">${esc(m.ubicacion)}</div></div>` : ''}
-            ${m.cantidad  ? `<div class="modal-field"><div class="modal-field-label">Stock aprox.</div><div class="modal-field-value" style="color:var(--yellow-dark)">${esc(m.cantidad)} ${esc(m.unidad)}</div></div>` : ''}
-            ${m.categoria ? `<div class="modal-field"><div class="modal-field-label">Categoría</div><div class="modal-field-value">${esc(m.categoria)}</div></div>` : ''}
+          ${m.descripcion ? `<div class="modal-section-label">Descripción</div><div class="modal-desc">${esc(m.descripcion)}</div>` : ''}
+          <div class="modal-section-label">Existencias por sociedad</div>
+          <div class="modal-societies">
+            <div class="soc-panel bio">
+              <div class="soc-panel-header">
+                <img src="https://i.postimg.cc/wTs951ZF/logo-bio.jpg" class="soc-panel-logo" alt="Bioenergy" onerror="this.style.display='none'">
+                <span class="soc-panel-name">Bioenergy</span>
+              </div>
+              ${hasBio ? `
+                ${m.ubicacion_bio ? `<div class="soc-field"><div class="soc-field-label">Ubicación</div><div class="soc-field-value">${esc(m.ubicacion_bio)}</div></div>` : ''}
+                ${m.cantidad_bio  ? `<div class="soc-field"><div class="soc-field-label">Stock aprox.</div><div class="soc-field-value qty">${esc(m.cantidad_bio)}</div></div>` : ''}
+              ` : '<div class="soc-na">Sin registros</div>'}
+            </div>
+            <div class="soc-panel agr">
+              <div class="soc-panel-header">
+                <img src="logo_agricola.png" class="soc-panel-logo" alt="Agrícola" onerror="this.style.display='none'">
+                <span class="soc-panel-name">Agrícola de los Llanos</span>
+              </div>
+              ${hasAgr ? `
+                ${m.ubicacion_agr ? `<div class="soc-field"><div class="soc-field-label">Ubicación</div><div class="soc-field-value">${esc(m.ubicacion_agr)}</div></div>` : ''}
+                ${m.cantidad_agr  ? `<div class="soc-field"><div class="soc-field-label">Stock aprox.</div><div class="soc-field-value qty">${esc(m.cantidad_agr)}</div></div>` : ''}
+              ` : '<div class="soc-na">Sin registros</div>'}
+            </div>
           </div>
+          ${m.categoria ? `<div class="modal-field-row"><div class="modal-field"><div class="modal-field-label">Categoría</div><div class="modal-field-value">${esc(m.categoria)}</div></div></div>` : ''}
         </div>
       </div>`;
     document.getElementById('detailModal').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
 
-  function closeModal() {
-    document.getElementById('detailModal').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  function closeModalOutside(e) {
-    if (e.target === document.getElementById('detailModal')) closeModal();
-  }
-
+  function closeModal() { document.getElementById('detailModal').classList.remove('open'); document.body.style.overflow = ''; }
+  function closeModalOutside(e) { if (e.target === document.getElementById('detailModal')) closeModal(); }
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-  // ── UTILS ─────────────────────────────────────────────────────
-  function esc(s) {
-    return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
+  function esc(s) { return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
-  // ── INIT ──────────────────────────────────────────────────────
   autoLoadCSV();
 </script>
 </body>
