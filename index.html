@@ -70,13 +70,31 @@
 
   main { max-width: 1400px; margin: 0 auto; padding: 1.75rem 2rem 3rem; }
 
-  .filter-bar { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; min-height: 34px; }
+  .filter-bar { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; }
 
-  .filter-label { font-size: 0.72rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Outfit', sans-serif; }
+  .filter-label { font-size: 0.72rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Outfit', sans-serif; flex-shrink: 0; }
 
-  .tag-btn { background: var(--surface); border: 1.5px solid var(--border); color: var(--text-muted); border-radius: 100px; padding: 0.3rem 0.9rem; font-size: 0.78rem; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.15s; }
-  .tag-btn:hover { border-color: var(--bio-blue); color: var(--bio-blue-dark); background: var(--bio-blue-light); }
-  .tag-btn.active { background: var(--bio-blue); border-color: var(--bio-blue); color: #fff; font-weight: 600; }
+  #categorySelect {
+    flex: 1;
+    max-width: 340px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.5rem 2.2rem 0.5rem 0.9rem;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23a8a8a3' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  #categorySelect:focus { border-color: var(--bio-blue); box-shadow: 0 0 0 3px rgba(26,178,232,0.12); }
 
   #catalogGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.25rem; }
 
@@ -113,10 +131,13 @@
 
   .meta-chip { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 0.18rem 0.5rem; font-size: 0.69rem; color: var(--text-muted); font-weight: 500; display: flex; align-items: center; gap: 0.25rem; }
 
-  .empty-state { grid-column: 1/-1; text-align: center; padding: 5rem 2rem; }
+  .empty-state { grid-column: 1/-1; text-align: center; padding: 3rem 2rem 5rem; }
   .empty-state .icon { font-size: 3rem; margin-bottom: 1rem; opacity: 0.4; }
   .empty-state h3 { font-size: 1.15rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.5rem; font-family: 'Outfit', sans-serif; }
   .empty-state p { font-size: 0.85rem; color: var(--text-dim); max-width: 360px; margin: 0 auto; line-height: 1.6; }
+  .welcome-logos { display: flex; align-items: center; justify-content: center; gap: 2rem; margin-bottom: 2.5rem; }
+  .welcome-logos img { height: 52px; width: auto; object-fit: contain; opacity: 0.85; }
+  .welcome-sep { width: 1px; height: 44px; background: var(--border2); }
 
   .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(28,28,26,0.55); backdrop-filter: blur(6px); z-index: 200; align-items: center; justify-content: center; padding: 1rem; }
   .modal-overlay.open { display: flex; }
@@ -215,12 +236,22 @@
 </header>
 
 <main>
-  <div class="filter-bar" id="filterBar"></div>
+  <div class="filter-bar" id="filterBar" style="display:none">
+    <span class="filter-label">Categoría:</span>
+    <select id="categorySelect" onchange="filterCat(this.value)">
+      <option value="">Todas las categorías</option>
+    </select>
+  </div>
   <div id="catalogGrid">
-    <div class="empty-state">
+    <div class="empty-state" id="welcomeState">
+      <div class="welcome-logos">
+        <img src="https://i.postimg.cc/wTs951ZF/logo-bio.jpg" alt="Bioenergy" onerror="this.style.display='none'">
+        <div class="welcome-sep"></div>
+        <img src="logo_agricola.png" alt="Agrícola de los Llanos" onerror="this.style.display='none'">
+      </div>
       <div class="icon">🔍</div>
-      <h3>Cargando catálogo…</h3>
-      <p>Un momento por favor.</p>
+      <h3 id="welcomeTitle">Cargando catálogo…</h3>
+      <p id="welcomeText">Un momento por favor.</p>
     </div>
   </div>
 </main>
@@ -283,12 +314,8 @@
       filteredMaterials = [];
       buildFilterTags();
 
-      document.getElementById('catalogGrid').innerHTML = `
-        <div class="empty-state">
-          <div class="icon">🔍</div>
-          <h3>Catálogo listo — ${allMaterials.length.toLocaleString()} materiales</h3>
-          <p>Ingresa al menos 2 caracteres para buscar por código, nombre, descripción o ubicación.</p>
-        </div>`;
+      document.getElementById('welcomeTitle').textContent = 'Catálogo listo — ' + allMaterials.length.toLocaleString() + ' materiales';
+      document.getElementById('welcomeText').textContent = 'Ingresa al menos 2 caracteres para buscar por código, nombre o descripción.';
     } catch(e) {
       bar.style.width = '100%';
       setTimeout(() => bar.style.width = '0%', 400);
@@ -388,11 +415,9 @@
     const q = document.getElementById('searchInput').value.trim().toLowerCase();
     if (q.length < 2 && !activeCategory) {
       filteredMaterials = [];
-      document.getElementById('catalogGrid').innerHTML = `
-        <div class="empty-state"><div class="icon">🔍</div>
-          <h3>Catálogo listo — ${allMaterials.length.toLocaleString()} materiales</h3>
-          <p>Ingresa al menos 2 caracteres para buscar.</p>
-        </div>`;
+      document.getElementById('catalogGrid').innerHTML = document.getElementById('welcomeState') ?
+        document.getElementById('welcomeState').outerHTML :
+        `<div class="empty-state"><div class="icon">🔍</div><h3>Catálogo listo</h3><p>Ingresa al menos 2 caracteres para buscar.</p></div>`;
         return;
     }
     filteredMaterials = allMaterials.filter(m => {
@@ -410,16 +435,17 @@
   }
 
   function buildFilterTags() {
-    const cats = [...new Set(allMaterials.map(m => m.categoria).filter(Boolean))];
+    const cats = [...new Set(allMaterials.map(m => m.categoria).filter(Boolean))].sort();
     const bar = document.getElementById('filterBar');
+    const sel = document.getElementById('categorySelect');
     if (cats.length === 0) { bar.style.display = 'none'; return; }
-    bar.innerHTML = `<span class="filter-label">Categoría:</span>` +
-      cats.map(c => `<button class="tag-btn" onclick="filterCat('${esc(c)}')">${esc(c)}</button>`).join('');
+    sel.innerHTML = '<option value="">Todas las categorías</option>' +
+      cats.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join('');
+    bar.style.display = 'flex';
   }
 
   function filterCat(cat) {
-    activeCategory = (activeCategory === cat) ? null : cat;
-    document.querySelectorAll('.tag-btn').forEach(b => { b.classList.toggle('active', b.textContent === activeCategory); });
+    activeCategory = cat || null;
     applyFilters();
   }
 
