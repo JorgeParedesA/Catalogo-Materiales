@@ -37,17 +37,22 @@
 
   body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
 
-  header { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); }
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
+  }
 
-  .header-inner { max-width: 1400px; margin: 0 auto; padding: 0 2rem; height: 72px; display: flex; align-items: center; gap: 1.5rem; }
-
-  .logos-wrap { display: flex; align-items: center; gap: 1rem; flex-shrink: 0; }
-
-  .logo-img { height: 40px; width: auto; object-fit: contain; }
-
-  .logos-separator { width: 1px; height: 28px; background: var(--border2); }
-
-  .header-divider { width: 1px; height: 34px; background: var(--border2); flex-shrink: 0; }
+  .header-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+  }
 
   .search-wrapper { flex: 1; position: relative; }
 
@@ -62,12 +67,6 @@
   .search-clear { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: var(--border2); border: none; border-radius: 50%; width: 22px; height: 22px; display: none; align-items: center; justify-content: center; cursor: pointer; font-size: 0.72rem; color: var(--text-muted); transition: background 0.15s; }
   .search-clear.visible { display: flex; }
   .search-clear:hover { background: var(--text-muted); color: #fff; }
-
-  .header-stats { flex-shrink: 0; display: flex; gap: 0.5rem; }
-
-  .stat-pill { background: var(--surface2); border: 1px solid var(--border); border-radius: 100px; padding: 0.32rem 0.9rem; font-size: 0.78rem; color: var(--text-muted); white-space: nowrap; display: flex; align-items: center; gap: 0.35rem; }
-
-  .stat-pill strong { color: var(--text); font-weight: 700; font-family: 'Outfit', sans-serif; }
 
   main { max-width: 1400px; margin: 0 auto; padding: 1.75rem 2rem 3rem; }
 
@@ -177,17 +176,18 @@
 
   .loading-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--bio-green), var(--bio-blue), var(--agr-yellow), var(--agr-red)); width: 0%; z-index: 999; transition: width 0.4s ease; }
 
-  footer { text-align: center; padding: 1.5rem 2rem; font-size: 0.75rem; color: var(--text-dim); border-top: 1px solid var(--border); background: var(--surface); margin-top: 2rem; display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-  footer img { height: 20px; opacity: 0.5; }
+  footer { text-align: center; padding: 2rem 2rem 2.5rem; border-top: 1px solid var(--border); background: var(--surface); margin-top: 2rem; }
+  .footer-logos { display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-bottom: 0.75rem; }
+  .footer-logos img { height: 36px; width: auto; object-fit: contain; opacity: 0.75; }
+  .footer-sep { width: 1px; height: 30px; background: var(--border2); }
+  .footer-label { font-size: 0.75rem; color: var(--text-dim); }
 
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
 
   @media (max-width: 700px) {
-    .header-inner { gap: 0.75rem; padding: 0 1rem; }
-    .header-stats { display: none; }
-    .logo-img { height: 28px; }
+    .header-inner { padding: 0.75rem 1rem; }
     main { padding: 1rem; }
     .modal-layout { grid-template-columns: 1fr; }
     .modal-img { border-radius: 0; min-height: 200px; }
@@ -202,20 +202,14 @@
 
 <header>
   <div class="header-inner">
-    <div class="logos-wrap">
-      <img src="https://i.postimg.cc/wTs951ZF/logo-bio.jpg" alt="Bioenergy" class="logo-img" onerror="this.style.display='none'">
-      <div class="logos-separator"></div>
-      <img src="logo_agricola.png" alt="Agrícola de los Llanos" class="logo-img" onerror="this.style.display='none'">
-    </div>
-    <div class="header-divider"></div>
-    <div class="search-wrapper">
-      <span class="search-icon">⌕</span>
-      <input type="text" id="searchInput" placeholder="Buscar por código, nombre, descripción o ubicación…" autocomplete="off">
-      <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
-    </div>
-    <div class="header-stats">
-      <div class="stat-pill">Total: <strong id="totalCount">—</strong></div>
-      <div class="stat-pill">Mostrando: <strong id="showingCount">—</strong></div>
+    <div class="search-wrapper" style="flex:1;position:relative;">
+      <span class="search-icon" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--text-dim);font-size:1.1rem;pointer-events:none;">⌕</span>
+      <input type="text" id="searchInput"
+             placeholder="Buscar por código, nombre o descripción…"
+             autocomplete="off"
+             style="width:100%;background:var(--surface2);border:1.5px solid var(--border);border-radius:12px;padding:0.85rem 3rem 0.85rem 3rem;color:var(--text);font-family:inherit;font-size:1.05rem;outline:none;">
+      <button class="search-clear" id="searchClear" onclick="clearSearch()"
+              style="position:absolute;right:14px;top:50%;transform:translateY(-50%);background:var(--border2);border:none;border-radius:50%;width:24px;height:24px;display:none;align-items:center;justify-content:center;cursor:pointer;font-size:0.75rem;">✕</button>
     </div>
   </div>
 </header>
@@ -232,9 +226,12 @@
 </main>
 
 <footer>
-  <img src="https://i.postimg.cc/wTs951ZF/logo-bio.jpg" alt="Bioenergy" onerror="this.style.display='none'">
-  <span>Catálogo Unificado de Materiales</span>
-  <img src="logo_agricola.png" alt="Agrícola de los Llanos" onerror="this.style.display='none'">
+  <div class="footer-logos">
+    <img src="https://i.postimg.cc/wTs951ZF/logo-bio.jpg" alt="Bioenergy" onerror="this.style.display='none'">
+    <div class="footer-sep"></div>
+    <img src="logo_agricola.png" alt="Agrícola de los Llanos" onerror="this.style.display='none'">
+  </div>
+  <div class="footer-label">Catálogo Unificado de Materiales</div>
 </footer>
 
 <div class="modal-overlay" id="detailModal" onclick="closeModalOutside(event)">
@@ -285,8 +282,7 @@
       allMaterials = parsed;
       filteredMaterials = [];
       buildFilterTags();
-      document.getElementById('totalCount').textContent = allMaterials.length.toLocaleString();
-      document.getElementById('showingCount').textContent = '—';
+
       document.getElementById('catalogGrid').innerHTML = `
         <div class="empty-state">
           <div class="icon">🔍</div>
@@ -397,8 +393,7 @@
           <h3>Catálogo listo — ${allMaterials.length.toLocaleString()} materiales</h3>
           <p>Ingresa al menos 2 caracteres para buscar.</p>
         </div>`;
-      document.getElementById('showingCount').textContent = '—';
-      return;
+        return;
     }
     filteredMaterials = allMaterials.filter(m => {
       const matchCat = !activeCategory || m.categoria === activeCategory;
@@ -429,8 +424,7 @@
   }
 
   function updateCounts() {
-    document.getElementById('totalCount').textContent   = allMaterials.length.toLocaleString();
-    document.getElementById('showingCount').textContent = filteredMaterials.length || '—';
+    // conteo eliminado del header
   }
 
   function openDetail(idx) {
