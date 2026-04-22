@@ -226,7 +226,7 @@
     <div class="search-wrapper" style="flex:1;position:relative;">
       <span class="search-icon" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--text-dim);font-size:1.1rem;pointer-events:none;">⌕</span>
       <input type="text" id="searchInput"
-             placeholder="Buscar por código, nombre o descripción…"
+             placeholder="Buscar por código, nombre, palabras clave… (búsqueda inteligente)"
              autocomplete="off"
              style="width:100%;background:var(--surface2);border:1.5px solid var(--border);border-radius:12px;padding:0.85rem 3rem 0.85rem 3rem;color:var(--text);font-family:inherit;font-size:1.05rem;outline:none;">
       <button class="search-clear" id="searchClear" onclick="clearSearch()"
@@ -315,7 +315,7 @@
       buildFilterTags();
 
       document.getElementById('welcomeTitle').textContent = 'Catálogo listo — ' + allMaterials.length.toLocaleString() + ' materiales';
-      document.getElementById('welcomeText').textContent = 'Ingresa al menos 2 caracteres para buscar por código, nombre o descripción.';
+      document.getElementById('welcomeText').textContent = 'Búsqueda inteligente: escribe palabras clave, fragmentos o términos similares — no necesitas escribir el nombre exacto.';
     } catch(e) {
       bar.style.width = '100%';
       setTimeout(() => bar.style.width = '0%', 400);
@@ -367,13 +367,13 @@
     return result;
   }
 
-  function renderGrid(materials) {
+  function renderGrid(materials, hint) {
     const grid = document.getElementById('catalogGrid');
     if (materials.length === 0) {
-      grid.innerHTML = `<div class="empty-state"><div class="icon">🔍</div><h3>Sin resultados</h3><p>No hay materiales que coincidan con tu búsqueda.</p></div>`;
+      grid.innerHTML = (hint || '') + `<div class="empty-state"><div class="icon">🔍</div><h3>Sin resultados</h3><p>No se encontraron materiales que coincidan. Intenta con otras palabras clave.</p></div>`;
       return;
     }
-    grid.innerHTML = materials.map((m, i) => {
+    grid.innerHTML = (hint || '') + materials.map((m, i) => {
       const idx = allMaterials.indexOf(m);
       const hasBio = m.ubicacion_bio || m.cantidad_bio;
       const hasAgr = m.ubicacion_agr || m.cantidad_agr;
@@ -412,25 +412,38 @@
   }
 
   function applyFilters() {
-    const q = document.getElementById('searchInput').value.trim().toLowerCase();
-    if (q.length < 2 && !activeCategory) {
+    const q = document.getElementById('searchInput').value.trim();
+    const hasQuery = q.length >= 2;
+
+    if (!hasQuery && !activeCategory) {
       filteredMaterials = [];
-      document.getElementById('catalogGrid').innerHTML = document.getElementById('welcomeState') ?
-        document.getElementById('welcomeState').outerHTML :
-        `<div class="empty-state"><div class="icon">🔍</div><h3>Catálogo listo</h3><p>Ingresa al menos 2 caracteres para buscar.</p></div>`;
-        return;
+      const ws = document.getElementById('welcomeState');
+      document.getElementById('catalogGrid').innerHTML = ws
+        ? ws.outerHTML
+        : `<div class="empty-state"><div class="icon">🔍</div><h3>Catálogo listo</h3><p>Ingresa al menos 2 caracteres para buscar.</p></div>`;
+      return;
     }
-    filteredMaterials = allMaterials.filter(m => {
-      const matchCat = !activeCategory || m.categoria === activeCategory;
-      const matchSearch = !q ||
-        m.codigo.toLowerCase().includes(q) ||
-        m.nombre.toLowerCase().includes(q) ||
-        m.descripcion.toLowerCase().includes(q) ||
-        m.ubicacion_bio.toLowerCase().includes(q) ||
-        m.ubicacion_agr.toLowerCase().includes(q);
-      return matchCat && matchSearch;
-    });
-    renderGrid(filteredMaterials);
+
+    // 1. Búsqueda semántica/fuzzy (devuelve ordenada por relevancia)
+    let base = hasQuery ? fuzzySearch(q) : allMaterials;
+
+    // 2. Filtro de categoría
+    if (activeCategory) {
+      base = base.filter(m => m.categoria === activeCategory);
+    }
+
+    filteredMaterials = base;
+
+    // 3. Indicador de resultados
+    const hint = hasQuery
+      ? `<div id="searchHint" style="font-size:0.75rem;color:var(--text-dim);margin-bottom:0.75rem;font-family:'Outfit',sans-serif;">
+           <span style="color:var(--bio-green-dark);font-weight:700;">${filteredMaterials.length}</span>
+           resultado${filteredMaterials.length !== 1 ? 's' : ''} para
+           <em style="color:var(--text-muted);">"${esc(q)}"</em>
+         </div>`
+      : '';
+
+    renderGrid(filteredMaterials, hint);
     updateCounts();
   }
 
@@ -505,6 +518,98 @@
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
   function esc(s) { return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  // ─── BÚSQUEDA SEMÁNTICA / FUZZY ────────────────────────────────────────────
+
+  // Normaliza texto: minúsculas, sin tildes, sin caracteres especiales
+  function normalize(s) {
+    return String(s || '').toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9\s\/]/g, ' ')
+      .replace(/\s+/g, ' ').trim();
+  }
+
+  // Distancia de Levenshtein (tolerancia tipográfica)
+  function levenshtein(a, b) {
+    if (a === b) return 0;
+    if (!a.length) return b.length;
+    if (!b.length) return a.length;
+    const dp = Array.from({length: a.length + 1}, (_, i) => [i]);
+    for (let j = 0; j <= b.length; j++) dp[0][j] = j;
+    for (let i = 1; i <= a.length; i++) {
+      for (let j = 1; j <= b.length; j++) {
+        dp[i][j] = a[i-1] === b[j-1]
+          ? dp[i-1][j-1]
+          : 1 + Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
+      }
+    }
+    return dp[a.length][b.length];
+  }
+
+  // ¿Un token del query coincide con alguna palabra del campo?
+  // Retorna peso de coincidencia (0 = no coincide)
+  function tokenWeight(token, fieldWords) {
+    if (token.length < 1) return 0;
+    for (const w of fieldWords) {
+      if (w === token)                            return 2.0;  // exacta
+      if (w.startsWith(token) && token.length>=2) return 1.7;  // prefijo
+      if (w.includes(token)   && token.length>=2) return 1.4;  // substring
+      if (token.includes(w)   && w.length>=3)     return 1.2;  // token contiene palabra
+      // Fuzzy solo para palabras largas (evita falsos positivos)
+      if (token.length >= 4 && w.length >= 4) {
+        const maxDist = token.length <= 5 ? 1 : token.length <= 8 ? 2 : 3;
+        if (levenshtein(token, w) <= maxDist)     return 0.9;  // similar
+      }
+    }
+    return 0;
+  }
+
+  // Calcula score de relevancia de un material para los tokens del query
+  function scoreMatch(m, tokens) {
+    const fields = [
+      { val: m.codigo,                                 w: 6 },
+      { val: m.nombre,                                 w: 4 },
+      { val: m.descripcion,                            w: 2 },
+      { val: m.categoria,                              w: 1 },
+      { val: m.ubicacion_bio + ' ' + m.ubicacion_agr, w: 1 },
+    ].map(f => ({ words: normalize(f.val).split(' ').filter(Boolean), w: f.w }));
+
+    let totalScore = 0;
+    let matchedCount = 0;
+
+    for (const token of tokens) {
+      let best = 0;
+      for (const f of fields) {
+        const tw = tokenWeight(token, f.words);
+        if (tw > 0) best = Math.max(best, tw * f.w);
+      }
+      if (best > 0) { matchedCount++; totalScore += best; }
+    }
+
+    // AND semántico: todos los tokens deben encontrarse
+    if (matchedCount < tokens.length) return 0;
+
+    // Bonus fuerte si la secuencia completa aparece en el nombre
+    const normNombre = normalize(m.nombre);
+    const normQuery  = tokens.join(' ');
+    if (normNombre.includes(normQuery))              totalScore += 15;
+    else if (normNombre.startsWith(tokens[0]))       totalScore += 5;
+
+    return totalScore;
+  }
+
+  // Búsqueda semántica principal — retorna materiales ordenados por relevancia
+  function fuzzySearch(query) {
+    const tokens = normalize(query).split(' ').filter(t => t.length >= 1);
+    if (!tokens.length) return [];
+    const scored = allMaterials
+      .map(mat => ({ mat, score: scoreMatch(mat, tokens) }))
+      .filter(s => s.score > 0)
+      .sort((a, b) => b.score - a.score);
+    return scored.map(s => s.mat);
+  }
+
+  // ─── FIN BÚSQUEDA SEMÁNTICA ────────────────────────────────────────────────
 
   autoLoadCSV();
 </script>
