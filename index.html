@@ -226,7 +226,7 @@
     <div class="search-wrapper" style="flex:1;position:relative;">
       <span class="search-icon" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--text-dim);font-size:1.1rem;pointer-events:none;">⌕</span>
       <input type="text" id="searchInput"
-             placeholder="Buscar por código, nombre, palabras clave… (búsqueda inteligente)"
+             placeholder="Buscar por código, nombre o descripción…"
              autocomplete="off"
              style="width:100%;background:var(--surface2);border:1.5px solid var(--border);border-radius:12px;padding:0.85rem 3rem 0.85rem 3rem;color:var(--text);font-family:inherit;font-size:1.05rem;outline:none;">
       <button class="search-clear" id="searchClear" onclick="clearSearch()"
@@ -272,346 +272,424 @@
 </div>
 
 <script>
-  let allMaterials = [];
-  let filteredMaterials = [];
-  let activeCategory = null;
+// ═══════════════════════════════════════════════════════════════════
+// CATÁLOGO OPTIMIZADO — Web Worker + Índice Invertido + Virtual Scroll
+// ═══════════════════════════════════════════════════════════════════
 
-  function imgWithFallback(src, alt, fit) {
-    fit = fit || 'cover';
-    const id = 'img_' + Math.random().toString(36).substr(2, 9);
-    setTimeout(function() {
-      const el = document.getElementById(id);
-      if (!el) return;
-      el.onerror = function() {
-        const exts = ['.jpg', '.jpeg', '.webp'];
-        const tried = this.dataset.tried ? this.dataset.tried.split(',') : [];
-        const cur = this.src;
-        const next = exts.find(function(e) { return tried.indexOf(e) < 0 && !cur.endsWith(e); });
-        if (next) {
-          this.dataset.tried = tried.concat([next]).join(',');
-          this.src = cur.replace(/\.(png|jpg|jpeg|webp)$/, next);
-        } else {
-          this.parentElement.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:0.5rem;color:#aaa;font-size:0.75rem">📦 Sin imagen</div>';
+// ── Estado global ─────────────────────────────────────────────────
+let allMaterials   = [];   // array plano de objetos (en main thread para modal)
+let currentResults = [];   // [{mat, idx}] resultado actual ordenado
+let activeCategory = null;
+let renderOffset   = 0;
+const PAGE_SIZE    = 40;
+let debounceTimer  = null;
+let sentinelObs    = null;
+let searchWorker   = null;
+let workerReady    = false;
+
+// ── Utilidades ────────────────────────────────────────────────────
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function imgWithFallback(src, alt, fit) {
+  const id = 'i' + Math.random().toString(36).slice(2,9);
+  const EXTS = ['.jpg','.jpeg','.webp'];
+  setTimeout(() => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.onerror = function() {
+      const tried = this.dataset.tried ? this.dataset.tried.split(',') : [];
+      const cur   = this.src;
+      const next  = EXTS.find(e => !tried.includes(e) && !cur.endsWith(e));
+      if (next) { this.dataset.tried = [...tried, next].join(','); this.src = cur.replace(/\.(png|jpg|jpeg|webp)$/, next); }
+      else { this.parentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#aaa;font-size:0.75rem">📦</div>'; }
+    };
+  }, 0);
+  return `<img id="${id}" src="${src}" alt="${alt}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:${fit||'cover'};display:block">`;
+}
+
+// ── Web Worker (inline Blob) ───────────────────────────────────────
+// Todo el trabajo pesado vive aquí — la UI nunca se congela
+function createWorker() {
+  const code = `
+    // Normalizar texto para búsqueda
+    function norm(s) {
+      return String(s||'').toLowerCase()
+        .normalize('NFD').replace(/[\\u0300-\\u036f]/g,'')
+        .replace(/[^a-z0-9\\/]/g,' ').replace(/\\s+/g,' ').trim();
+    }
+
+    // Parser CSV rápido
+    function splitLine(line) {
+      const r=[]; let c=''; let q=false;
+      for (let i=0; i<line.length; i++) {
+        if (line[i]==='"') q=!q;
+        else if (line[i]===',' && !q) { r.push(c); c=''; }
+        else c+=line[i];
+      }
+      r.push(c); return r;
+    }
+
+    function parseCSV(text) {
+      const lines = text.trim().split(/\\r?\\n/);
+      if (lines.length<2) return [];
+      // Limpiar BOM
+      const rawH = lines[0].replace(/^\\uFEFF/,'');
+      const H = rawH.split(',').map(h=>h.trim().toLowerCase().replace(/['"]/g,''));
+      const gi = k => H.indexOf(k);
+      const ci = { co:gi('codigo'), no:gi('nombre'), de:gi('descripcion'), un:gi('unidad'),
+                   ca:gi('categoria'), im:gi('imagen'),
+                   ub:gi('ubicacion_bio'), qb:gi('cantidad_bio'),
+                   ua:gi('ubicacion_agr'), qa:gi('cantidad_agr') };
+      const mats = [];
+      for (let i=1; i<lines.length; i++) {
+        const row = splitLine(lines[i]);
+        if (!row[0] && row.length<=1) continue;
+        const g = k => (row[ci[k]]||'').trim().replace(/^"|"$/g,'');
+        mats.push({ codigo:g('co')||'MAT-'+i, nombre:g('no')||'Sin nombre',
+          descripcion:g('de'), unidad:g('un'), categoria:g('ca'),
+          imagen:g('im'), ubicacion_bio:g('ub'), cantidad_bio:g('qb'),
+          ubicacion_agr:g('ua'), cantidad_agr:g('qa') });
+      }
+      return mats;
+    }
+
+    // Índice invertido: token → Uint32Array de índices
+    let mats=[], inv={}, cats=[];
+
+    function buildIndex(materials) {
+      mats = materials;
+      const tmp = {};
+      for (let i=0; i<mats.length; i++) {
+        const m = mats[i];
+        const text = norm(m.codigo)+' '+norm(m.nombre)+' '+norm(m.descripcion)+' '+norm(m.categoria);
+        const seen = new Set();
+        for (const tok of text.split(' ')) {
+          if (tok.length<2 || seen.has(tok)) continue;
+          seen.add(tok);
+          if (!tmp[tok]) tmp[tok]=[];
+          tmp[tok].push(i);
         }
-      };
-    }, 0);
-    return '<img id="' + id + '" src="' + src + '" alt="' + alt + '" style="width:100%;height:100%;object-fit:' + fit + ';display:block">';
+      }
+      // Convertir a Uint32Array para intersecciones rápidas
+      inv = {};
+      for (const [k,v] of Object.entries(tmp)) inv[k]=new Uint32Array(v);
+      cats = [...new Set(mats.map(m=>m.categoria).filter(Boolean))].sort();
+    }
+
+    // Levenshtein acotado (early-exit si supera maxD)
+    function lev(a,b,maxD) {
+      if (Math.abs(a.length-b.length)>maxD) return maxD+1;
+      if (a===b) return 0;
+      let prev=new Uint16Array(b.length+1), curr=new Uint16Array(b.length+1);
+      for (let j=0;j<=b.length;j++) prev[j]=j;
+      for (let i=1;i<=a.length;i++) {
+        curr[0]=i; let rowMin=i;
+        for (let j=1;j<=b.length;j++) {
+          curr[j]=a[i-1]===b[j-1]?prev[j-1]:1+Math.min(prev[j],curr[j-1],prev[j-1]);
+          if (curr[j]<rowMin) rowMin=curr[j];
+        }
+        if (rowMin>maxD) return maxD+1;
+        [prev,curr]=[curr,prev];
+      }
+      return prev[b.length];
+    }
+
+    // Intersección O(n+m) de dos Uint32Array ordenados
+    function intersect(a,b) {
+      const r=[]; let i=0,j=0;
+      while (i<a.length && j<b.length) {
+        if (a[i]===b[j]) { r.push(a[i]); i++; j++; }
+        else if (a[i]<b[j]) i++; else j++;
+      }
+      return new Uint32Array(r);
+    }
+
+    // Resolver un token: exacto → prefijo → fuzzy
+    function lookup(tok) {
+      if (inv[tok]) return inv[tok];
+      // Prefijo: buscar claves del índice que empiecen con tok
+      const set = new Set();
+      for (const k of Object.keys(inv)) {
+        if (k.startsWith(tok)) for (const idx of inv[k]) set.add(idx);
+      }
+      if (set.size) return new Uint32Array([...set].sort((a,b)=>a-b));
+      // Fuzzy solo para tokens ≥4 chars
+      if (tok.length>=4) {
+        const maxD = tok.length<=5?1:tok.length<=8?2:3;
+        for (const k of Object.keys(inv)) {
+          if (lev(tok,k,maxD)<=maxD) for (const idx of inv[k]) set.add(idx);
+        }
+      }
+      return new Uint32Array([...set].sort((a,b)=>a-b));
+    }
+
+    // Score rápido para ordenar resultados
+    function score(m, normQ, toks) {
+      const nn = norm(m.nombre);
+      if (nn===normQ)            return 100;
+      if (nn.includes(normQ))    return 80;
+      if (norm(m.codigo)===normQ) return 90;
+      let s=0;
+      for (const t of toks) {
+        if (norm(m.codigo).includes(t)) s+=10;
+        if (nn.includes(t))             s+=5;
+      }
+      return s;
+    }
+
+    // Búsqueda principal
+    function search(query, catFilter) {
+      const normQ = norm(query);
+      const toks  = normQ.split(' ').filter(t=>t.length>=1);
+      if (!toks.length) return [];
+
+      let result = lookup(toks[0]);
+      for (let i=1; i<toks.length; i++) result = intersect(result, lookup(toks[i]));
+
+      const out = [];
+      for (const idx of result) {
+        const m = mats[idx];
+        if (catFilter && m.categoria!==catFilter) continue;
+        out.push({ idx, s: score(m, normQ, toks) });
+      }
+      out.sort((a,b)=>b.s-a.s);
+      return out.map(o=>o.idx);
+    }
+
+    // Mensajes entrantes
+    self.onmessage = function(e) {
+      const {type, payload} = e.data;
+      if (type==='LOAD') {
+        postMessage({type:'PROGRESS', pct:30});
+        const m = parseCSV(payload.csv);
+        postMessage({type:'PROGRESS', pct:65});
+        buildIndex(m);
+        postMessage({type:'READY', count:m.length, cats, mats:m});
+      } else if (type==='SEARCH') {
+        const idxs = search(payload.q, payload.cat);
+        postMessage({type:'RESULTS', idxs, q:payload.q, rid:payload.rid});
+      }
+    };
+  `;
+  const blob = new Blob([code], {type:'application/javascript'});
+  return new Worker(URL.createObjectURL(blob));
+}
+
+// ── Render virtual (solo 40 cards + sentinel) ─────────────────────
+function cardHTML(m, idx, delay) {
+  const hasBio = m.ubicacion_bio || m.cantidad_bio;
+  const hasAgr = m.ubicacion_agr || m.cantidad_agr;
+  return `<div class="material-card" style="animation-delay:${delay}s" onclick="openDetail(${idx})">
+    ${m.imagen
+      ? `<div class="card-img-wrap">${imgWithFallback(esc(m.imagen),esc(m.nombre),'cover')}</div>`
+      : `<div class="no-img"><span>📦</span>Sin imagen</div>`}
+    <div class="card-accent"></div>
+    <div class="card-body">
+      <div class="card-code">${esc(m.codigo)}</div>
+      <div class="card-name">${esc(m.nombre)}</div>
+      ${m.descripcion&&m.descripcion!==m.nombre?`<div class="card-desc">${esc(m.descripcion)}</div>`:''}
+      <div class="card-societies">
+        ${hasBio?`<span class="soc-badge soc-bio">🟢 Bioenergy${m.cantidad_bio?' · '+esc(m.cantidad_bio):''}</span>`:''}
+        ${hasAgr?`<span class="soc-badge soc-agr">🟡 Agrícola${m.cantidad_agr?' · '+esc(m.cantidad_agr):''}</span>`:''}
+      </div>
+      <div class="card-meta">
+        ${m.unidad?`<span class="meta-chip">📐 ${esc(m.unidad)}</span>`:''}
+        ${m.categoria?`<span class="meta-chip">🏷 ${esc(m.categoria)}</span>`:''}
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderPage(results, query) {
+  const grid = document.getElementById('catalogGrid');
+  renderOffset = 0;
+  if (sentinelObs) { sentinelObs.disconnect(); sentinelObs=null; }
+
+  if (!results.length) {
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="icon">🔍</div><h3>Sin resultados</h3><p>Intenta con otras palabras clave.</p></div>`;
+    return;
   }
 
-  async function autoLoadCSV() {
-    const bar = document.getElementById('loadingBar');
-    bar.style.width = '40%';
-    try {
-      const res = await fetch('materiales.csv');
-      bar.style.width = '70%';
-      if (!res.ok) { showEmpty('No se encontró el archivo materiales.csv.'); bar.style.width = '100%'; return; }
-      const text = await res.text();
-      const parsed = parseCSV(text);
+  const hint = query
+    ? `<div style="grid-column:1/-1;font-size:0.75rem;color:var(--text-dim);margin-bottom:0.25rem;font-family:'Outfit',sans-serif">
+         <span style="color:var(--bio-green-dark);font-weight:700">${results.length.toLocaleString()}</span>
+         resultado${results.length!==1?'s':''} para <em>"${esc(query)}"</em>
+       </div>` : '';
+
+  const batch = results.slice(0, PAGE_SIZE);
+  renderOffset = batch.length;
+  const needSentinel = results.length > PAGE_SIZE;
+
+  requestAnimationFrame(() => {
+    grid.innerHTML = hint
+      + batch.map((idx,i) => cardHTML(allMaterials[idx], idx, Math.min(i*0.018,0.22))).join('')
+      + (needSentinel ? '<div id="sentinel" style="grid-column:1/-1;height:1px"></div>' : '');
+    if (needSentinel) {
+      sentinelObs = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) appendPage();
+      }, {rootMargin:'300px'});
+      sentinelObs.observe(document.getElementById('sentinel'));
+    }
+  });
+}
+
+function appendPage() {
+  if (renderOffset >= currentResults.length) return;
+  const grid  = document.getElementById('catalogGrid');
+  const sent  = document.getElementById('sentinel');
+  const batch = currentResults.slice(renderOffset, renderOffset + PAGE_SIZE);
+  renderOffset += batch.length;
+
+  const tmp = document.createElement('template');
+  tmp.innerHTML = batch.map(idx => cardHTML(allMaterials[idx], idx, 0)).join('');
+  grid.insertBefore(tmp.content, sent);
+
+  if (renderOffset >= currentResults.length && sent) sent.remove();
+}
+
+// ── Carga inicial ─────────────────────────────────────────────────
+async function init() {
+  const bar = document.getElementById('loadingBar');
+  bar.style.width = '8%';
+
+  searchWorker = createWorker();
+  let rid = 0;
+
+  searchWorker.onmessage = e => {
+    const d = e.data;
+    if (d.type==='PROGRESS') {
+      bar.style.width = d.pct + '%';
+    }
+    else if (d.type==='READY') {
+      allMaterials = d.mats;       // guardar en main thread para modal
       bar.style.width = '100%';
       setTimeout(() => bar.style.width = '0%', 400);
-      if (parsed.length === 0) { showEmpty('El CSV no contiene materiales.'); return; }
-      allMaterials = parsed;
-      filteredMaterials = [];
-      buildFilterTags();
-
-      document.getElementById('welcomeTitle').textContent = 'Catálogo listo — ' + allMaterials.length.toLocaleString() + ' materiales';
-      document.getElementById('welcomeText').textContent = 'Búsqueda inteligente: escribe palabras clave, fragmentos o términos similares — no necesitas escribir el nombre exacto.';
-    } catch(e) {
-      bar.style.width = '100%';
-      setTimeout(() => bar.style.width = '0%', 400);
-      showEmpty('No se pudo cargar el catálogo. Verifica que materiales.csv esté en la misma carpeta.');
+      buildFilterUI(d.cats);
+      workerReady = true;
+      document.getElementById('welcomeTitle').textContent =
+        'Catálogo listo — ' + d.count.toLocaleString() + ' materiales';
+      document.getElementById('welcomeText').textContent =
+        'Búsqueda inteligente: escribe palabras clave o fragmentos, sin necesidad del nombre exacto.';
     }
-  }
-
-  function showEmpty(msg) {
-    document.getElementById('catalogGrid').innerHTML = `
-      <div class="empty-state"><div class="icon">📦</div><h3>Sin materiales</h3><p>${msg}</p></div>`;
-    updateCounts();
-  }
-
-  function parseCSV(text) {
-    const lines = text.trim().split(/\r?\n/);
-    if (lines.length < 2) return [];
-    const headers = lines[0].split(',').map(h => h.trim().toLowerCase().replace(/['"]/g, ''));
-    const results = [];
-    for (let i = 1; i < lines.length; i++) {
-      const row = splitCSVLine(lines[i]);
-      if (row.length === 0 || (row.length === 1 && !row[0])) continue;
-      const obj = {};
-      headers.forEach((h, idx) => { obj[h] = (row[idx] || '').trim().replace(/^"|"$/g, ''); });
-      results.push({
-        codigo:        obj['codigo']        || `MAT-${i}`,
-        nombre:        obj['nombre']        || 'Sin nombre',
-        descripcion:   obj['descripcion']   || '',
-        unidad:        obj['unidad']        || '',
-        categoria:     obj['categoria']     || '',
-        imagen:        obj['imagen']        || '',
-        ubicacion_bio: obj['ubicacion_bio'] || obj['ubicacion bioenergy'] || '',
-        cantidad_bio:  obj['cantidad_bio']  || obj['cantidad bioenergy']  || '',
-        ubicacion_agr: obj['ubicacion_agr'] || obj['ubicacion agricola']  || '',
-        cantidad_agr:  obj['cantidad_agr']  || obj['cantidad agricola']   || '',
-      });
+    else if (d.type==='RESULTS') {
+      if (d.rid !== rid) return; // respuesta obsoleta — ignorar
+      currentResults = d.idxs;
+      renderPage(currentResults, d.q);
     }
-    return results;
+  };
+
+  try {
+    const res = await fetch('materiales.csv');
+    if (!res.ok) { showEmpty('No se encontró materiales.csv.'); return; }
+    bar.style.width = '18%';
+    const csv = await res.text();
+    bar.style.width = '22%';
+    searchWorker.postMessage({type:'LOAD', payload:{csv}});
+  } catch(err) {
+    bar.style.width='100%'; setTimeout(()=>bar.style.width='0%',400);
+    showEmpty('No se pudo cargar el catálogo.');
   }
 
-  function splitCSVLine(line) {
-    const result = []; let cur = ''; let inQ = false;
-    for (let i = 0; i < line.length; i++) {
-      const c = line[i];
-      if (c === '"') { inQ = !inQ; }
-      else if (c === ',' && !inQ) { result.push(cur); cur = ''; }
-      else { cur += c; }
-    }
-    result.push(cur);
-    return result;
-  }
-
-  function renderGrid(materials, hint) {
-    const grid = document.getElementById('catalogGrid');
-    if (materials.length === 0) {
-      grid.innerHTML = (hint || '') + `<div class="empty-state"><div class="icon">🔍</div><h3>Sin resultados</h3><p>No se encontraron materiales que coincidan. Intenta con otras palabras clave.</p></div>`;
-      return;
-    }
-    grid.innerHTML = (hint || '') + materials.map((m, i) => {
-      const idx = allMaterials.indexOf(m);
-      const hasBio = m.ubicacion_bio || m.cantidad_bio;
-      const hasAgr = m.ubicacion_agr || m.cantidad_agr;
-      return `
-      <div class="material-card" style="animation-delay:${Math.min(i*0.025,0.3)}s" onclick="openDetail(${idx})">
-        ${m.imagen
-          ? `<div class="card-img-wrap">${imgWithFallback(esc(m.imagen), esc(m.nombre), 'cover')}</div>`
-          : `<div class="no-img"><span>📦</span>Sin imagen</div>`}
-        <div class="card-accent"></div>
-        <div class="card-body">
-          <div class="card-code">${esc(m.codigo)}</div>
-          <div class="card-name">${esc(m.nombre)}</div>
-          ${m.descripcion ? `<div class="card-desc">${esc(m.descripcion)}</div>` : ''}
-          <div class="card-societies">
-            ${hasBio ? `<span class="soc-badge soc-bio">🟢 Bioenergy${m.cantidad_bio ? ' · ' + esc(m.cantidad_bio) : ''}</span>` : ''}
-            ${hasAgr ? `<span class="soc-badge soc-agr">🟡 Agrícola${m.cantidad_agr ? ' · ' + esc(m.cantidad_agr) : ''}</span>` : ''}
-          </div>
-          <div class="card-meta">
-            ${m.unidad    ? `<span class="meta-chip">📐 ${esc(m.unidad)}</span>` : ''}
-            ${m.categoria ? `<span class="meta-chip">🏷 ${esc(m.categoria)}</span>` : ''}
-          </div>
-        </div>
-      </div>`;
-    }).join('');
-  }
-
+  // ── Input con debounce 200ms ────────────────────────────────────
   document.getElementById('searchInput').addEventListener('input', function() {
-    document.getElementById('searchClear').classList.toggle('visible', this.value.length > 0);
-    applyFilters();
+    document.getElementById('searchClear').classList.toggle('visible', this.value.length>0);
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(applyFilters, 200);
   });
 
-  function clearSearch() {
-    document.getElementById('searchInput').value = '';
-    document.getElementById('searchClear').classList.remove('visible');
-    applyFilters();
-  }
-
   function applyFilters() {
+    if (!workerReady) return;
     const q = document.getElementById('searchInput').value.trim();
-    const hasQuery = q.length >= 2;
-
-    if (!hasQuery && !activeCategory) {
-      filteredMaterials = [];
-      const ws = document.getElementById('welcomeState');
-      document.getElementById('catalogGrid').innerHTML = ws
-        ? ws.outerHTML
+    if (q.length<2 && !activeCategory) {
+      currentResults=[];
+      const ws=document.getElementById('welcomeState');
+      document.getElementById('catalogGrid').innerHTML = ws ? ws.outerHTML
         : `<div class="empty-state"><div class="icon">🔍</div><h3>Catálogo listo</h3><p>Ingresa al menos 2 caracteres para buscar.</p></div>`;
       return;
     }
-
-    // 1. Búsqueda semántica/fuzzy (devuelve ordenada por relevancia)
-    let base = hasQuery ? fuzzySearch(q) : allMaterials;
-
-    // 2. Filtro de categoría
-    if (activeCategory) {
-      base = base.filter(m => m.categoria === activeCategory);
-    }
-
-    filteredMaterials = base;
-
-    // 3. Indicador de resultados
-    const hint = hasQuery
-      ? `<div id="searchHint" style="font-size:0.75rem;color:var(--text-dim);margin-bottom:0.75rem;font-family:'Outfit',sans-serif;">
-           <span style="color:var(--bio-green-dark);font-weight:700;">${filteredMaterials.length}</span>
-           resultado${filteredMaterials.length !== 1 ? 's' : ''} para
-           <em style="color:var(--text-muted);">"${esc(q)}"</em>
-         </div>`
-      : '';
-
-    renderGrid(filteredMaterials, hint);
-    updateCounts();
+    rid++;
+    searchWorker.postMessage({type:'SEARCH', payload:{q, cat:activeCategory, rid}});
   }
+  window.applyFilters = applyFilters; // exponer para filterCat
 
-  function buildFilterTags() {
-    const cats = [...new Set(allMaterials.map(m => m.categoria).filter(Boolean))].sort();
-    const bar = document.getElementById('filterBar');
+  function buildFilterUI(cats) {
+    if (!cats||!cats.length) return;
     const sel = document.getElementById('categorySelect');
-    if (cats.length === 0) { bar.style.display = 'none'; return; }
-    sel.innerHTML = '<option value="">Todas las categorías</option>' +
-      cats.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join('');
-    bar.style.display = 'flex';
+    sel.innerHTML = '<option value="">Todas las categorías</option>'
+      + cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
+    document.getElementById('filterBar').style.display='flex';
   }
+}
 
-  function filterCat(cat) {
-    activeCategory = cat || null;
-    applyFilters();
-  }
-
-  function updateCounts() {
-    // conteo eliminado del header
-  }
-
-  function openDetail(idx) {
-    const m = allMaterials[idx];
-    const hasBio = m.ubicacion_bio || m.cantidad_bio;
-    const hasAgr = m.ubicacion_agr || m.cantidad_agr;
-    document.getElementById('modalContent').innerHTML = `
-      <button class="modal-close" onclick="closeModal()">✕</button>
-      <div class="modal-accent"></div>
-      <div class="modal-layout">
-        <div class="modal-img">
-          ${m.imagen ? imgWithFallback(esc(m.imagen), esc(m.nombre), 'contain') : '📦'}
-        </div>
-        <div class="modal-body">
-          <div class="modal-code">${esc(m.codigo)}</div>
-          <div class="modal-name">${esc(m.nombre)}</div>
-          ${m.unidad ? `<div class="modal-unit">Unidad de medida: <strong>${esc(m.unidad)}</strong></div>` : ''}
-          <hr class="modal-divider">
-          ${m.descripcion ? `<div class="modal-section-label">Descripción</div><div class="modal-desc">${esc(m.descripcion)}</div>` : ''}
-          <div class="modal-section-label">Existencias por sociedad</div>
-          <div class="modal-societies">
-            <div class="soc-panel bio">
-              <div class="soc-panel-header">
-                <img src="https://i.postimg.cc/wTs951ZF/logo-bio.jpg" class="soc-panel-logo" alt="Bioenergy" onerror="this.style.display='none'">
-                <span class="soc-panel-name">Bioenergy</span>
-              </div>
-              ${hasBio ? `
-                ${m.ubicacion_bio ? `<div class="soc-field"><div class="soc-field-label">Ubicación</div><div class="soc-field-value">${esc(m.ubicacion_bio)}</div></div>` : ''}
-                ${m.cantidad_bio  ? `<div class="soc-field"><div class="soc-field-label">Stock aprox.</div><div class="soc-field-value qty">${esc(m.cantidad_bio)}</div></div>` : ''}
-              ` : '<div class="soc-na">Sin registros</div>'}
+// ── Modal ─────────────────────────────────────────────────────────
+function openDetail(idx) {
+  const m = allMaterials[idx];
+  if (!m) return;
+  const hasBio = m.ubicacion_bio||m.cantidad_bio;
+  const hasAgr = m.ubicacion_agr||m.cantidad_agr;
+  document.getElementById('modalContent').innerHTML = `
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-accent"></div>
+    <div class="modal-layout">
+      <div class="modal-img">${m.imagen?imgWithFallback(esc(m.imagen),esc(m.nombre),'contain'):'📦'}</div>
+      <div class="modal-body">
+        <div class="modal-code">${esc(m.codigo)}</div>
+        <div class="modal-name">${esc(m.nombre)}</div>
+        ${m.unidad?`<div class="modal-unit">Unidad de medida: <strong>${esc(m.unidad)}</strong></div>`:''}
+        <hr class="modal-divider">
+        ${m.descripcion&&m.descripcion!==m.nombre?`<div class="modal-section-label">Descripción</div><div class="modal-desc">${esc(m.descripcion)}</div>`:''}
+        <div class="modal-section-label">Existencias por sociedad</div>
+        <div class="modal-societies">
+          <div class="soc-panel bio">
+            <div class="soc-panel-header">
+              <img src="https://i.postimg.cc/wTs951ZF/logo-bio.jpg" class="soc-panel-logo" alt="Bioenergy" loading="lazy" onerror="this.style.display='none'">
+              <span class="soc-panel-name">Bioenergy</span>
             </div>
-            <div class="soc-panel agr">
-              <div class="soc-panel-header">
-                <img src="logo_agricola.png" class="soc-panel-logo" alt="Agrícola" onerror="this.style.display='none'">
-                <span class="soc-panel-name">Agrícola de los Llanos</span>
-              </div>
-              ${hasAgr ? `
-                ${m.ubicacion_agr ? `<div class="soc-field"><div class="soc-field-label">Ubicación</div><div class="soc-field-value">${esc(m.ubicacion_agr)}</div></div>` : ''}
-                ${m.cantidad_agr  ? `<div class="soc-field"><div class="soc-field-label">Stock aprox.</div><div class="soc-field-value qty">${esc(m.cantidad_agr)}</div></div>` : ''}
-              ` : '<div class="soc-na">Sin registros</div>'}
-            </div>
+            ${hasBio?`
+              ${m.ubicacion_bio?`<div class="soc-field"><div class="soc-field-label">Ubicación</div><div class="soc-field-value">${esc(m.ubicacion_bio)}</div></div>`:''}
+              ${m.cantidad_bio?`<div class="soc-field"><div class="soc-field-label">Stock aprox.</div><div class="soc-field-value qty">${esc(m.cantidad_bio)}</div></div>`:''}
+            `:'<div class="soc-na">Sin registros</div>'}
           </div>
-          ${m.categoria ? `<div class="modal-field-row"><div class="modal-field"><div class="modal-field-label">Categoría</div><div class="modal-field-value">${esc(m.categoria)}</div></div></div>` : ''}
+          <div class="soc-panel agr">
+            <div class="soc-panel-header">
+              <img src="logo_agricola.png" class="soc-panel-logo" alt="Agrícola" loading="lazy" onerror="this.style.display='none'">
+              <span class="soc-panel-name">Agrícola de los Llanos</span>
+            </div>
+            ${hasAgr?`
+              ${m.ubicacion_agr?`<div class="soc-field"><div class="soc-field-label">Ubicación</div><div class="soc-field-value">${esc(m.ubicacion_agr)}</div></div>`:''}
+              ${m.cantidad_agr?`<div class="soc-field"><div class="soc-field-label">Stock aprox.</div><div class="soc-field-value qty">${esc(m.cantidad_agr)}</div></div>`:''}
+            `:'<div class="soc-na">Sin registros</div>'}
+          </div>
         </div>
-      </div>`;
-    document.getElementById('detailModal').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
+        ${m.categoria?`<div class="modal-field-row"><div class="modal-field"><div class="modal-field-label">Categoría</div><div class="modal-field-value">${esc(m.categoria)}</div></div></div>`:''}
+      </div>
+    </div>`;
+  document.getElementById('detailModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
 
-  function closeModal() { document.getElementById('detailModal').classList.remove('open'); document.body.style.overflow = ''; }
-  function closeModalOutside(e) { if (e.target === document.getElementById('detailModal')) closeModal(); }
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+function showEmpty(msg) {
+  document.getElementById('catalogGrid').innerHTML =
+    `<div class="empty-state"><div class="icon">📦</div><h3>Sin materiales</h3><p>${msg}</p></div>`;
+}
+function clearSearch() {
+  document.getElementById('searchInput').value='';
+  document.getElementById('searchClear').classList.remove('visible');
+  if (window.applyFilters) window.applyFilters();
+}
+function filterCat(cat) {
+  activeCategory = cat||null;
+  if (window.applyFilters) window.applyFilters();
+}
+function closeModal() { document.getElementById('detailModal').classList.remove('open'); document.body.style.overflow=''; }
+function closeModalOutside(e) { if(e.target===document.getElementById('detailModal')) closeModal(); }
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
 
-  function esc(s) { return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function updateCounts() {}
 
-  // ─── BÚSQUEDA SEMÁNTICA / FUZZY ────────────────────────────────────────────
-
-  // Normaliza texto: minúsculas, sin tildes, sin caracteres especiales
-  function normalize(s) {
-    return String(s || '').toLowerCase()
-      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-      .replace(/[^a-z0-9\s\/]/g, ' ')
-      .replace(/\s+/g, ' ').trim();
-  }
-
-  // Distancia de Levenshtein (tolerancia tipográfica)
-  function levenshtein(a, b) {
-    if (a === b) return 0;
-    if (!a.length) return b.length;
-    if (!b.length) return a.length;
-    const dp = Array.from({length: a.length + 1}, (_, i) => [i]);
-    for (let j = 0; j <= b.length; j++) dp[0][j] = j;
-    for (let i = 1; i <= a.length; i++) {
-      for (let j = 1; j <= b.length; j++) {
-        dp[i][j] = a[i-1] === b[j-1]
-          ? dp[i-1][j-1]
-          : 1 + Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
-      }
-    }
-    return dp[a.length][b.length];
-  }
-
-  // ¿Un token del query coincide con alguna palabra del campo?
-  // Retorna peso de coincidencia (0 = no coincide)
-  function tokenWeight(token, fieldWords) {
-    if (token.length < 1) return 0;
-    for (const w of fieldWords) {
-      if (w === token)                            return 2.0;  // exacta
-      if (w.startsWith(token) && token.length>=2) return 1.7;  // prefijo
-      if (w.includes(token)   && token.length>=2) return 1.4;  // substring
-      if (token.includes(w)   && w.length>=3)     return 1.2;  // token contiene palabra
-      // Fuzzy solo para palabras largas (evita falsos positivos)
-      if (token.length >= 4 && w.length >= 4) {
-        const maxDist = token.length <= 5 ? 1 : token.length <= 8 ? 2 : 3;
-        if (levenshtein(token, w) <= maxDist)     return 0.9;  // similar
-      }
-    }
-    return 0;
-  }
-
-  // Calcula score de relevancia de un material para los tokens del query
-  function scoreMatch(m, tokens) {
-    const fields = [
-      { val: m.codigo,                                 w: 6 },
-      { val: m.nombre,                                 w: 4 },
-      { val: m.descripcion,                            w: 2 },
-      { val: m.categoria,                              w: 1 },
-      { val: m.ubicacion_bio + ' ' + m.ubicacion_agr, w: 1 },
-    ].map(f => ({ words: normalize(f.val).split(' ').filter(Boolean), w: f.w }));
-
-    let totalScore = 0;
-    let matchedCount = 0;
-
-    for (const token of tokens) {
-      let best = 0;
-      for (const f of fields) {
-        const tw = tokenWeight(token, f.words);
-        if (tw > 0) best = Math.max(best, tw * f.w);
-      }
-      if (best > 0) { matchedCount++; totalScore += best; }
-    }
-
-    // AND semántico: todos los tokens deben encontrarse
-    if (matchedCount < tokens.length) return 0;
-
-    // Bonus fuerte si la secuencia completa aparece en el nombre
-    const normNombre = normalize(m.nombre);
-    const normQuery  = tokens.join(' ');
-    if (normNombre.includes(normQuery))              totalScore += 15;
-    else if (normNombre.startsWith(tokens[0]))       totalScore += 5;
-
-    return totalScore;
-  }
-
-  // Búsqueda semántica principal — retorna materiales ordenados por relevancia
-  function fuzzySearch(query) {
-    const tokens = normalize(query).split(' ').filter(t => t.length >= 1);
-    if (!tokens.length) return [];
-    const scored = allMaterials
-      .map(mat => ({ mat, score: scoreMatch(mat, tokens) }))
-      .filter(s => s.score > 0)
-      .sort((a, b) => b.score - a.score);
-    return scored.map(s => s.mat);
-  }
-
-  // ─── FIN BÚSQUEDA SEMÁNTICA ────────────────────────────────────────────────
-
-  autoLoadCSV();
+init();
 </script>
 </body>
 </html>
