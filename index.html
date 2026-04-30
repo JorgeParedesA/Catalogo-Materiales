@@ -363,8 +363,31 @@ function createWorker() {
       const tmp = {};
       for (let i=0; i<mats.length; i++) {
         const m = mats[i];
-        const text = norm(m.codigo)+' '+norm(m.nombre)+' '+norm(m.descripcion)+' '+norm(m.categoria);
+        const text = norm(m.nombre)+' '+norm(m.descripcion)+' '+norm(m.categoria);
         const seen = new Set();
+        const cod = norm(m.codigo);
+
+        // Indexar código con 3 estrategias para cubrir todos los casos:
+        // 1. Sufijos literales de 4+ chars (quien escribe "300000024958" o "0000024958")
+        for (let s=0; s<=cod.length-4; s++) {
+          const suf = cod.slice(s);
+          if (!seen.has(suf)) { seen.add(suf); if (!tmp[suf]) tmp[suf]=[]; tmp[suf].push(i); }
+        }
+        // 2. Últimos 2-8 dígitos (quien escribe "24958", "4958", "0017", "000017")
+        for (let n=2; n<=Math.min(8,cod.length); n++) {
+          const suf = cod.slice(-n);
+          if (!seen.has(suf)) { seen.add(suf); if (!tmp[suf]) tmp[suf]=[]; tmp[suf].push(i); }
+        }
+        // 3. Parte significativa: desde el primer dígito no-cero después del prefijo
+        for (let s=3; s<cod.length; s++) {
+          if (cod[s]!=='0') {
+            const sig = cod.slice(s);
+            if (sig.length>=2 && !seen.has(sig)) { seen.add(sig); if (!tmp[sig]) tmp[sig]=[]; tmp[sig].push(i); }
+            break;
+          }
+        }
+
+        // Indexar tokens de nombre, descripción, categoría
         for (const tok of text.split(' ')) {
           if (tok.length<2 || seen.has(tok)) continue;
           seen.add(tok);
@@ -427,14 +450,17 @@ function createWorker() {
 
     // Score rápido para ordenar resultados
     function score(m, normQ, toks) {
+      const nc = norm(m.codigo);
       const nn = norm(m.nombre);
-      if (nn===normQ)            return 100;
-      if (nn.includes(normQ))    return 80;
-      if (norm(m.codigo)===normQ) return 90;
+      if (nc===normQ)         return 110; // código exacto
+      if (nc.endsWith(normQ)) return 105; // sufijo exacto del código
+      if (nc.includes(normQ)) return 100; // código contiene query
+      if (nn===normQ)         return 90;
+      if (nn.includes(normQ)) return 80;
       let s=0;
       for (const t of toks) {
-        if (norm(m.codigo).includes(t)) s+=10;
-        if (nn.includes(t))             s+=5;
+        if (nc.includes(t)) s+=12;
+        if (nn.includes(t)) s+=5;
       }
       return s;
     }
