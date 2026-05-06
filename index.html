@@ -126,6 +126,8 @@
   .soc-badge { border-radius: 6px; padding: 0.18rem 0.55rem; font-size: 0.67rem; font-weight: 700; font-family: 'Outfit', sans-serif; display: flex; align-items: center; gap: 0.25rem; }
   .soc-bio { background: var(--bio-green-light); border: 1px solid rgba(114,182,38,0.3); color: var(--bio-green-dark); }
   .soc-agr { background: var(--agr-yellow-light); border: 1px solid rgba(245,166,35,0.3); color: var(--agr-yellow-dark); }
+  .badge-mrp { background: #e8f0fe; border: 1px solid #4285f4; color: #1a56cc; border-radius: 6px; padding: 0.18rem 0.55rem; font-size: 0.67rem; font-weight: 800; font-family: 'Outfit', sans-serif; display: inline-flex; align-items: center; gap: 0.25rem; letter-spacing: 0.04em; }
+  .modal-mrp { display: inline-flex; align-items: center; gap: 0.4rem; background: #e8f0fe; border: 1.5px solid #4285f4; color: #1a56cc; border-radius: 8px; padding: 0.3rem 0.8rem; font-size: 0.8rem; font-weight: 800; font-family: 'Outfit', sans-serif; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
 
   .card-meta { display: flex; gap: 0.4rem; flex-wrap: wrap; }
 
@@ -241,6 +243,11 @@
     <select id="categorySelect" onchange="filterCat(this.value)">
       <option value="">Todas las categorías</option>
     </select>
+    <button id="btnMrp" onclick="toggleMrp()"
+      style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.45rem 1rem;border-radius:8px;border:1.5px solid #4285f4;background:white;color:#1a56cc;font-size:0.78rem;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer;transition:all 0.2s;letter-spacing:0.03em"
+      onmouseover="this.style.background='#e8f0fe'" onmouseout="if(!mrpOnly)this.style.background='white'">
+      ⟳ Solo MRP
+    </button>
   </div>
   <div id="catalogGrid">
     <div class="empty-state" id="welcomeState">
@@ -280,6 +287,7 @@
 let allMaterials   = [];   // array plano de objetos (en main thread para modal)
 let currentResults = [];   // [{mat, idx}] resultado actual ordenado
 let activeCategory = null;
+  let mrpOnly = false;
 let renderOffset   = 0;
 const PAGE_SIZE    = 40;
 let debounceTimer  = null;
@@ -341,7 +349,7 @@ function createWorker() {
       const ci = { co:gi('codigo'), no:gi('nombre'), de:gi('descripcion'), un:gi('unidad'),
                    ca:gi('categoria'), im:gi('imagen'),
                    ub:gi('ubicacion_bio'), qb:gi('cantidad_bio'),
-                   ua:gi('ubicacion_agr'), qa:gi('cantidad_agr') };
+                   ua:gi('ubicacion_agr'), qa:gi('cantidad_agr'), mr:gi('mrp') };
       const mats = [];
       for (let i=1; i<lines.length; i++) {
         const row = splitLine(lines[i]);
@@ -350,7 +358,8 @@ function createWorker() {
         mats.push({ codigo:g('co')||'MAT-'+i, nombre:g('no')||'Sin nombre',
           descripcion:g('de'), unidad:g('un'), categoria:g('ca'),
           imagen:g('im'), ubicacion_bio:g('ub'), cantidad_bio:g('qb'),
-          ubicacion_agr:g('ua'), cantidad_agr:g('qa') });
+          ubicacion_agr:g('ua'), cantidad_agr:g('qa'),
+          mrp:g('mr') });
       }
       return mats;
     }
@@ -507,13 +516,14 @@ function createWorker() {
 function cardHTML(m, idx, delay) {
   const hasBio = m.ubicacion_bio || m.cantidad_bio;
   const hasAgr = m.ubicacion_agr || m.cantidad_agr;
+  const isMrp  = m.mrp && (m.mrp.trim()==='1'||m.mrp.trim().toUpperCase()==='SI'||m.mrp.trim().toUpperCase()==='MRP');
   return `<div class="material-card" style="animation-delay:${delay}s" onclick="openDetail(${idx})">
     ${m.imagen
       ? `<div class="card-img-wrap">${imgWithFallback(esc(m.imagen),esc(m.nombre),'cover')}</div>`
       : `<div class="no-img"><span>📦</span>Sin imagen</div>`}
     <div class="card-accent"></div>
     <div class="card-body">
-      <div class="card-code">${esc(m.codigo)}</div>
+      <div class="card-code">${esc(m.codigo)}${isMrp?'<span class="badge-mrp" style="float:right;margin-left:0.3rem">⟳ MRP</span>':''}</div>
       <div class="card-name">${esc(m.nombre)}</div>
       ${m.descripcion&&m.descripcion!==m.nombre?`<div class="card-desc">${esc(m.descripcion)}</div>`:''}
       <div class="card-societies">
@@ -601,7 +611,12 @@ async function init() {
     }
     else if (d.type==='RESULTS') {
       if (d.rid !== rid) return; // respuesta obsoleta — ignorar
-      currentResults = d.idxs;
+      let idxs = d.idxs;
+      if (mrpOnly) idxs = idxs.filter(i => {
+        const m = allMaterials[i];
+        return m.mrp && (m.mrp.trim()==='1'||m.mrp.trim().toUpperCase()==='SI'||m.mrp.trim().toUpperCase()==='MRP');
+      });
+      currentResults = idxs;
       renderPage(currentResults, d.q);
     }
   };
@@ -655,6 +670,7 @@ function openDetail(idx) {
   if (!m) return;
   const hasBio = m.ubicacion_bio||m.cantidad_bio;
   const hasAgr = m.ubicacion_agr||m.cantidad_agr;
+  const isMrp  = m.mrp && (m.mrp.trim()==='1'||m.mrp.trim().toUpperCase()==='SI'||m.mrp.trim().toUpperCase()==='MRP');
   document.getElementById('modalContent').innerHTML = `
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal-accent"></div>
@@ -663,6 +679,7 @@ function openDetail(idx) {
       <div class="modal-body">
         <div class="modal-code">${esc(m.codigo)}</div>
         <div class="modal-name">${esc(m.nombre)}</div>
+        ${isMrp?'<div class="modal-mrp">⟳ MRP — Material de Reposición Automática</div>':''}
         ${m.unidad?`<div class="modal-unit">Unidad de medida: <strong>${esc(m.unidad)}</strong></div>`:''}
         <hr class="modal-divider">
         ${m.descripcion&&m.descripcion!==m.nombre?`<div class="modal-section-label">Descripción</div><div class="modal-desc">${esc(m.descripcion)}</div>`:''}
@@ -707,6 +724,13 @@ function clearSearch() {
 }
 function filterCat(cat) {
   activeCategory = cat||null;
+  if (window.applyFilters) window.applyFilters();
+}
+function toggleMrp() {
+  mrpOnly = !mrpOnly;
+  const btn = document.getElementById('btnMrp');
+  btn.style.background = mrpOnly ? '#e8f0fe' : 'white';
+  btn.style.borderColor = mrpOnly ? '#1a56cc' : '#4285f4';
   if (window.applyFilters) window.applyFilters();
 }
 function closeModal() { document.getElementById('detailModal').classList.remove('open'); document.body.style.overflow=''; }
