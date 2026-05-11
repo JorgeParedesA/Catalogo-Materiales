@@ -324,6 +324,131 @@ function imgWithFallback(src, alt, fit) {
 // Todo el trabajo pesado vive aquí — la UI nunca se congela
 function createWorker() {
   const code = `
+
+    // ── Diccionario español → inglés (basado en términos reales del catálogo) ──
+    const SINONIMOS = {
+      // Tubería y conducción
+      'tubo':['pipe','tube','hose','nipple'],
+      'tuberia':['pipe','tube','hose','nipple'],
+      'tubos':['pipe','tube','hose'],
+      'manguera':['hose','tube'],
+      'conducto':['pipe','tube','conduit'],
+      'niple':['nipple'],
+
+      // Sellos y empaques
+      'sello':['seal','gasket','ring','strip'],
+      'empaque':['gasket','seal','packing','ring'],
+      'junta':['gasket','seal','joint','union'],
+      'oring':['ring','seal'],
+      'anillo':['ring','seal'],
+      'reten':['seal','ring'],
+
+      // Sujetadores
+      'perno':['bolt','pin','screw'],
+      'tornillo':['bolt','screw','pin'],
+      'tuerca':['nut','bearing nut'],
+      'arandela':['washer'],
+      'grapa':['clamp','bracket','clip'],
+      'abrazadera':['clamp','bracket'],
+      'pin':['pin','bolt'],
+      'pasador':['pin','bolt'],
+
+      // Rodamientos y transmisión
+      'rodamiento':['bearing','bushing'],
+      'chumacera':['bearing','bushing','flange'],
+      'buje':['bushing','bush','sleeve'],
+      'manga':['sleeve','bushing'],
+      'acoplamiento':['coupling','union','joint'],
+      'eje':['shaft','axle','rod'],
+      'flecha':['shaft','axle'],
+      'polea':['pulley','wheel','sheave'],
+      'correa':['belt','chain'],
+      'cadena':['chain','belt'],
+      'engranaje':['gear'],
+      'piñon':['gear','pin'],
+      'resorte':['spring'],
+      'muelle':['spring'],
+
+      // Filtros y fluidos
+      'filtro':['filter','screen','mesh'],
+      'malla':['mesh','screen','filter'],
+      'aceite':['oil','fluid','grease'],
+      'grasa':['grease','lubricant'],
+      'fluido':['fluid','oil'],
+
+      // Válvulas y control
+      'valvula':['valve','switch','relay'],
+      'interruptor':['switch','breaker','relay'],
+      'rele':['relay','switch'],
+      'sensor':['sensor','gauge','probe','transducer'],
+      'manometro':['gauge','meter'],
+      'sonda':['probe','sensor','transducer'],
+
+      // Bombas y motores
+      'bomba':['pump','motor'],
+      'motor':['motor','engine'],
+      'ventilador':['fan','blower'],
+      'compresor':['compressor','pump'],
+      'pistón':['piston','cylinder'],
+      'piston':['piston','cylinder'],
+      'cilindro':['cylinder','piston'],
+
+      // Estructura y soporte
+      'placa':['plate','panel','cover'],
+      'tapa':['cover','cap','plug'],
+      'cubierta':['cover','housing','guard'],
+      'soporte':['bracket','beam','rack'],
+      'carcasa':['housing','cover','shell'],
+      'guarda':['guard','cover','shield'],
+
+      // Eléctrico
+      'cable':['cable','wire','lead'],
+      'alambre':['wire','cable'],
+      'conector':['connector','plug','socket'],
+      'enchufe':['plug','connector','socket'],
+      'fusible':['fuse','breaker'],
+      'tablero':['panel','board'],
+      'breaker':['breaker','fuse'],
+
+      // Herramientas y kits
+      'kit':['kit','set','repair'],
+      'juego':['kit','set'],
+      'repuesto':['kit','repair','service'],
+      'mantenimiento':['service','kit','repair','overhaul'],
+      'reparacion':['repair','kit','overhaul','rebuild'],
+
+      // Mecánica general
+      'reduccion':['reducer','bushing','adapter'],
+      'adaptador':['adapter','coupling','fitting'],
+      'union':['union','coupling','fitting','connector'],
+      'codo':['elbow','fitting'],
+      'te':['tee','fitting'],
+      'brida':['flange','coupling'],
+      'rosca':['thread','fitting'],
+      'tapon':['plug','cap','cover'],
+      'tapa':['cap','cover','plug'],
+      'camisa':['liner','sleeve','bushing'],
+      'vastago':['rod','shaft','stem'],
+      'barra':['bar','rod','beam'],
+
+      // Frenos y desgaste
+      'disco':['disc','plate','drum'],
+      'tambor':['drum','disc'],
+      'zapata':['shoe','pad','liner'],
+      'pastilla':['pad','disc','shoe'],
+
+      // Otros comunes
+      'pantalla':['screen','display','panel'],
+      'cinta':['tape','strip','belt'],
+      'pintura':['paint','coating','primer'],
+      'brocha':['brush','roller'],
+      'rodillo':['roller','drum'],
+      'balde':['bowl','cup','bucket'],
+      'bandeja':['tray','rack'],
+      'gancho':['hook','latch'],
+      'seguro':['lock','latch','clip'],
+    };
+
     // Normalizar texto para búsqueda
     function norm(s) {
       return String(s||'').toLowerCase()
@@ -477,14 +602,34 @@ function createWorker() {
       return s;
     }
 
-    // Búsqueda principal
+    // Expande un token con sus sinónimos del diccionario
+    function expandToken(tok) {
+      const syns = SINONIMOS[tok];
+      if (!syns) return [tok];
+      return [tok, ...syns];
+    }
+
+    // Búsqueda principal con expansión de sinónimos
     function search(query, catFilter) {
       const normQ = norm(query);
       const toks  = normQ.split(' ').filter(t=>t.length>=1);
       if (!toks.length) return [];
 
-      let result = lookup(toks[0]);
-      for (let i=1; i<toks.length; i++) result = intersect(result, lookup(toks[i]));
+      // Para cada token, hacer OR entre el token y sus sinónimos
+      // luego AND entre los distintos tokens de la query
+      let result = null;
+      for (const tok of toks) {
+        const variants = expandToken(tok);
+        // Unión (OR) de todos los sinónimos para este token
+        const setForToken = new Set();
+        for (const variant of variants) {
+          for (const idx of lookup(variant)) setForToken.add(idx);
+        }
+        const arr = new Uint32Array([...setForToken].sort((a,b)=>a-b));
+        result = result === null ? arr : intersect(result, arr);
+      }
+
+      if (!result) return [];
 
       const out = [];
       for (const idx of result) {
