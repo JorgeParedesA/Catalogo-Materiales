@@ -766,15 +766,24 @@ async function init() {
       bar.style.width = d.pct + '%';
     }
     else if (d.type==='READY') {
+      const isFirstLoad = !workerReady;
       allMaterials = d.mats;       // guardar en main thread para modal
       bar.style.width = '100%';
       setTimeout(() => bar.style.width = '0%', 400);
       buildFilterUI(d.cats);
       workerReady = true;
-      document.getElementById('welcomeTitle').textContent =
-        'Catálogo listo — ' + d.count.toLocaleString() + ' materiales';
-      document.getElementById('welcomeText').textContent =
-        'Búsqueda inteligente: escribe palabras clave o fragmentos, sin necesidad del nombre exacto.';
+      if (isFirstLoad) {
+        document.getElementById('welcomeTitle').textContent =
+          'Catálogo listo — ' + d.count.toLocaleString() + ' materiales';
+        document.getElementById('welcomeText').textContent =
+          'Búsqueda inteligente: escribe palabras clave o fragmentos, sin necesidad del nombre exacto.';
+      } else {
+        // Refresh en segundo plano — mostrar toast y re-aplicar filtros si hay búsqueda activa
+        showRefreshToast();
+        if (document.getElementById('searchInput').value.trim().length >= 2 || activeCategory || mrpOnly) {
+          if (window.applyFilters) window.applyFilters();
+        }
+      }
     }
     else if (d.type==='RESULTS') {
       if (d.rid !== rid) return; // respuesta obsoleta — ignorar
@@ -923,6 +932,57 @@ function closeModalOutside(e) { if(e.target===document.getElementById('detailMod
 document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
 
 function updateCounts() {}
+
+// ── Auto-refresh: recarga el CSV en segundo plano cada 5 minutos ──────────
+const REFRESH_INTERVAL_MS = 5 * 60 * 1000; // 5 minutos
+let lastCSVText = null; // para detectar si el archivo cambió realmente
+
+async function refreshData() {
+  if (!workerReady) return;
+  // Si el usuario está escribiendo, esperar al siguiente ciclo
+  const q = document.getElementById('searchInput').value.trim();
+  if (q.length > 0) return;
+
+  try {
+    const res = await fetch('materiales.csv?v=' + Date.now());
+    if (!res.ok) return;
+    const csv = await res.text();
+
+    // Solo recargar si el contenido realmente cambió
+    if (csv === lastCSVText) return;
+    lastCSVText = csv;
+
+    // Recargar en el worker sin interrumpir la UI
+    searchWorker.postMessage({type:'LOAD', payload:{csv}});
+    showRefreshToast();
+  } catch(err) {
+    // Silencioso — no mostrar error al usuario si falla el refresh
+  }
+}
+
+function showRefreshToast() {
+  let toast = document.getElementById('refreshToast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'refreshToast';
+    toast.style.cssText = `
+      position:fixed;bottom:1.5rem;right:1.5rem;
+      background:#1e293b;color:white;
+      padding:0.6rem 1.1rem;border-radius:10px;
+      font-size:0.75rem;font-family:'Outfit',sans-serif;font-weight:500;
+      display:flex;align-items:center;gap:0.5rem;
+      box-shadow:0 4px 20px rgba(0,0,0,0.2);
+      opacity:0;transition:opacity 0.3s;z-index:9999;
+    `;
+    document.body.appendChild(toast);
+  }
+  toast.innerHTML = '✅ Catálogo actualizado';
+  toast.style.opacity = '1';
+  setTimeout(() => toast.style.opacity = '0', 3000);
+}
+
+// Arrancar el ciclo de refresh (sin tocar onmessage — ya lo maneja init)
+setInterval(refreshData, REFRESH_INTERVAL_MS);
 
 init();
 </script>
