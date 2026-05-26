@@ -247,7 +247,7 @@
 300000000247,FILTRO AIRE SECUNDARIO RE196945 JD O GEN,FILTRO AIRE SECUNDARIO RE196945 JD O GEN,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000000247.png, , ,C202C06*MB,2, 
 300000000248,FILTRO PF7889 BALDWIN,FILTRO PF7889 BALDWIN,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000000248.png, , ,C202C07*,13, 
 300000000249,FILTRO H9047 BALDWIN,FILTRO H9047 BALDWIN,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000000249.png, , ,C202C08*,2, 
-300000000250,FILTRO COMBUS ABP/ N122-BF9898-0,FILTRO COMBUS ABP/ N122-BF9898-1,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000000250.png,ALP-9-R-2,1,C202C09*,2, 
+300000000250,FILTRO COMBUS ABP/ N122-BF9898-0,FILTRO COMBUS ABP/ N122-BF9898-1,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000000250.png,ALP-9-R-2,1,C202C09*,2,SI
 300000000251,FILTRO COMBUSTIBLE RE541922 JD,FILTRO COMBUSTIBLE RE541922 JD,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000000251.png, , ,C202C10*, , 
 300000000252,FILTRO COMBUSTIBLE 26561118 PERKINS,FILTRO COMBUSTIBLE 26561118 PERKINS,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000000252.png, , ,C202C11*,6, 
 300000000253,FILTRO COMBUSTIBLE 299-8229 CAT,FILTRO COMBUSTIBLE 299-8229 CAT,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000000253.png, , ,C202C12*,2, 
@@ -1199,10 +1199,10 @@
 300000001354,FILTRO DE COMBUSTIBLE REF: 20801-02171,FILTRO DE COMBUSTIBLE REF: 20801-02172,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000001354.png,ALP-9-R-4, , , ,SI
 300000001355,FILTRO ACEITE SERVO FHG-FHD R.15943-8259,FILTRO ACEITE SERVO FHG-FHD R.15943-8260,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000001355.png,ALP-9-Q-2,4, , ,SI
 300000001356,FILTRO COMBUSTIBLE REF: AK450CP,FILTRO COMBUSTIBLE REF: AK450CP,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000001356.png,ALP-9-R-3,2, , , 
-300000001357,FILTRO COMBUSTIBLE PRIMARIO REF: 1R0762,FILTRO COMBUSTIBLE PRIMARIO REF: 1R0763,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000001357.png,ALP-9-R-3,1, , , 
-300000001358,FILTRO COMBUSTIBLE SEPARADOR 3261644,FILTRO COMBUSTIBLE SEPARADOR 3261645,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000001358.png,ALP-9-R-4,8, , , 
-300000001359,FILTRO DE AIRE PRIMARIO REF: 2453818,FILTRO DE AIRE PRIMARIO REF: 2453819,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000001359.png,ALP-9-R-P,6, , , 
-300000001360,FILTRO DE AIRE SECUNDARIO REF: 2453819,FILTRO DE AIRE SECUNDARIO REF: 2453820,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000001360.png,ALP-9-Q-4,7, , , 
+300000001357,FILTRO COMBUSTIBLE PRIMARIO REF: 1R0762,FILTRO COMBUSTIBLE PRIMARIO REF: 1R0763,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000001357.png,ALP-9-R-3,1, , ,SI
+300000001358,FILTRO COMBUSTIBLE SEPARADOR 3261644,FILTRO COMBUSTIBLE SEPARADOR 3261645,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000001358.png,ALP-9-R-4,8, , ,SI
+300000001359,FILTRO DE AIRE PRIMARIO REF: 2453818,FILTRO DE AIRE PRIMARIO REF: 2453819,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000001359.png,ALP-9-R-P,6, , ,SI
+300000001360,FILTRO DE AIRE SECUNDARIO REF: 2453819,FILTRO DE AIRE SECUNDARIO REF: 2453820,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000001360.png,ALP-9-Q-4,7, , ,SI
 300000001364,EJE CENTRAL ABONADOR SEMBRADORA SERMAG,EJE CENTRAL ABONADOR SEMBRADORA SERMAG,UN,G-20 / Aceros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000001364.png, , ,PATALMA*, , 
 300000001365,TANQUE COMBUSTIBLE RE268731,TANQUE COMBUSTIBLE RE268732,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/300000001365.png, , , , , 
 300000001366,TAPA R194892,TAPA R194893,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/300000001366.png, , , , , 
@@ -2368,7 +2368,7 @@
 300000006517,CONJUNTO PIÑON DOBLE CADENA,CONJUNTO PIÑON DOBLE CADENA,UN,G-19 / Cadenas. Rodillos. Bandas.Correas,https://ik.imagekit.io/7ypnvn8as/materiales/300000006517.png, , ,C301B60*,2, 
 300000006518,ACOPLE MACHO CONJUNTO PIÑON DOBLE CADENA,ACOPLE MACHO CONJUNTO PIÑON DOBLE CADENA,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/300000006518.png, , , , , 
 300000006520,SONDA PH-ELECTRODO DE PH  REF.HI1131B,SONDA PH-ELECTRODO DE PH  REF.HI1131B,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/300000006520.png, , , , , 
-300000006529,FILTRO AIRE ACONDICIONADO REF: 7X-6041,FILTRO AIRE ACONDICIONADO REF: 7X-6042,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000006529.png,ALP-9-S-2,10, , , 
+300000006529,FILTRO AIRE ACONDICIONADO REF: 7X-6041,FILTRO AIRE ACONDICIONADO REF: 7X-6042,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000006529.png,ALP-9-S-2,10, , ,SI
 300000006531,SWITCH MASTER 241-8368 CAT,SWITCH MASTER 241-8368 CAT,UN,G-7 / Materiales Electricos,https://ik.imagekit.io/7ypnvn8as/materiales/300000006531.png, , , , , 
 300000006532,TORNILLO INYECTOR M2 106,TORNILLO INYECTOR M2 107,UN,G-9 / Tornilleria,https://ik.imagekit.io/7ypnvn8as/materiales/300000006532.png, , , , , 
 300000006541,FRENOS PARA BORNERA. REF: 037511.,FRENOS PARA BORNERA. REF: 037511.,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/300000006541.png,ALP-3-D-1, , , , 
@@ -2571,7 +2571,7 @@
 300000006811,PASADOR CON CABEZA SEMBRADORA SERMAG,PASADOR CON CABEZA SEMBRADORA SERMAG,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/300000006811.png, , , , , 
 300000006812,PASADOR PIN SEMBRADORA SERMAG,PASADOR PIN SEMBRADORA SERMAG,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/300000006812.png, , , , , 
 300000006813,CONJUNTO PIN FUSIBLE SEMBRADORA SERMAG,CONJUNTO PIN FUSIBLE SEMBRADORA SERMAG,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/300000006813.png, , ,PATC3D2*,1, 
-300000006816,FILTRO ACEITE DE MOTOR REF: 1R1808,FILTRO ACEITE DE MOTOR REF: 1R1809,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000006816.png,ALP-9-Q-5,5, , , 
+300000006816,FILTRO ACEITE DE MOTOR REF: 1R1808,FILTRO ACEITE DE MOTOR REF: 1R1809,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000006816.png,ALP-9-Q-5,5, , ,SI
 300000006817,KIT REP. BOMBA MP 30 REF.101-5026 0080,KIT REP. BOMBA MP 30 REF.101-5026 0081,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/300000006817.png, , ,C302D38*,3, 
 300000006818,CARDAN COMPLETO GUADAÑA MECANICA,CARDAN COMPLETO GUADAÑA MECANICA,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/300000006818.png, , , , , 
 300000006819,LLANTA TIPO PIÑA 14.9 x 24 x 3,LLANTA TIPO PIÑA 14.9 x 24 x 4,UN,G-14 / Llantas Y Neumaticos ,https://ik.imagekit.io/7ypnvn8as/materiales/300000006819.png, , , , , 
@@ -5239,11 +5239,11 @@
 300000012426,FILTRO DE ACEITE PH3614,FILTRO DE ACEITE PH3615,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000012426.png,ALP-9-N-5,1, , , 
 300000012427,FILTRO DE COMBUSTIBLE 20801-02172,FILTRO DE COMBUSTIBLE 20801-02173,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000012427.png,ALP-9-R-2,2, , ,SI
 300000012428,FILTRO DE AIRE P828889,FILTRO DE AIRE P828890,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000012428.png,ALP-9-S-P,2, , ,SI
-300000012429,FILTRO ACEITE A4571840125,FILTRO ACEITE A4571840125,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000012429.png,ALP-9-Q-2, , , , 
-300000012430,FILTRO DE AIRE PA5418,FILTRO DE AIRE PA5419,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000012430.png,ALP-9-S-2,1, , , 
+300000012429,FILTRO ACEITE A4571840125,FILTRO ACEITE A4571840125,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000012429.png,ALP-9-Q-2, , , ,SI
+300000012430,FILTRO DE AIRE PA5418,FILTRO DE AIRE PA5419,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000012430.png,ALP-9-S-2,1, , ,SI
 300000012431,FILTRO AIRE DE CABINA P614547,FILTRO AIRE DE CABINA P614548,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000012431.png,ALP-9-S-2, , , ,SI
 300000012432,FILTRO AIRE DE CABINA RABP N10G36000006,FILTRO AIRE DE CABINA RABP N10G36000007,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000012432.png,ALP-9-S-2,6, , , 
-300000012433,FILTRO DE AIRE P607965,FILTRO DE AIRE P607966,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000012433.png,ALP-9-Q-5,4,, , 
+300000012433,FILTRO DE AIRE P607965,FILTRO DE AIRE P607966,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000012433.png,ALP-9-Q-5,4,, ,SI
 300000012434,FILTRO DE ACEITE  LF689,FILTRO DE ACEITE  LF690,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000012434.png,ALP-9-R-4,7, , , 
 300000012435,FILTRO SEPARADOR COMBUSTIBLE/AGUA FS1006,FILTRO SEPARADOR COMBUSTIBLE/AGUA FS1007,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000012435.png,ALP-9-R-1,2, , , 
 300000012436,FILTRO REFRIGERANTE WF2076,FILTRO REFRIGERANTE WF2077,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000012436.png,ALP-9-S-4,2, , , 
@@ -6173,7 +6173,7 @@
 300000014071,EMPAQUETADURA CIL ESTABILIZADORES 397518,EMPAQUETADURA CIL ESTABILIZADORES 397519,UN,G-5 / Sellos y empaquetadu,https://ik.imagekit.io/7ypnvn8as/materiales/300000014071.png, , , , , 
 300000014072,EMPAQUETADURA CIL. GIIRO CAT 420E 377935,EMPAQUETADURA CIL. GIIRO CAT 420E 377936,UN,G-5 / Sellos y empaquetadu,https://ik.imagekit.io/7ypnvn8as/materiales/300000014072.png, , , , , 
 300000014073,INYECTOR CAT C4.4 420E 3200677/2645A746,INYECTOR CAT C4.4 420E 3200677/2645A747,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/300000014073.png, , ,, , 
-300000014075,FILTRO COMBUSTIBLE 1R-0749,FILTRO COMBUSTIBLE 1R-0750,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000014075.png,ALP-9-R-3,4, , , 
+300000014075,FILTRO COMBUSTIBLE 1R-0749,FILTRO COMBUSTIBLE 1R-0750,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000014075.png,ALP-9-R-3,4, , ,SI
 300000014076,FILTRO DE ACEITE HIDRÁULICO 465-6506,FILTRO DE ACEITE HIDRÁULICO 465-6507,UN,G-11 / Filtros ,https://ik.imagekit.io/7ypnvn8as/materiales/300000014076.png,ALP-9-Q-4,5, , ,SI
 300000014077,RAYPA TUBO 42X300 PARA ALCOTEST,RAYPA TUBO 42X300 PARA ALCOTEST,UN,G-6 / Materiales De Laboratorios Y Metrologia,https://ik.imagekit.io/7ypnvn8as/materiales/300000014077.png,ALP-3-E-4, , , , 
 300000014079,DIAFRAGMA PARCOL PCV NEBO SEV.003/A 65SH,DIAFRAGMA PARCOL PCV NEBO SEV.003/A 65SH,UN,G-5 / Sellos y empaquetadu,https://ik.imagekit.io/7ypnvn8as/materiales/300000014079.png,ALP-4-F-P, , , , 
@@ -11586,7 +11586,7 @@
 300000020750,TOBERA CERAMICA TIG GAS LENS #8 FILTRO,TOBERA CERAMICA TIG GAS LENS #8 FILTRO,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/300000020750.png,ALP-9-H-3,40, , ,SI
 300000020751,TOBERA CERAMICA TIG GAS LENS #10 FILTRO,TOBERA CERAMICA TIG GAS LENS #10 FILTRO,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/300000020751.png,ALP-9-H-3, , , , 
 300000020752,CAP - CAPUCHON CORTO ANTORCHA TIG,CAP - CAPUCHON CORTO ANTORCHA TIG,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/300000020752.png,ALP-9-H-3, , , , 
-300000020753,FIJA ELECTRODO ANTORCHA TIG 3/32,FIJA ELECTRODO ANTORCHA TIG 3/33,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/300000020753.png,ALP-9-H-2,7, , , 
+300000020753,FIJA ELECTRODO ANTORCHA TIG 3/32,FIJA ELECTRODO ANTORCHA TIG 3/33,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/300000020753.png,ALP-9-H-2,7, , ,SI
 300000020754,FIJA ELECTRODO SOLDAR TIG 1/8,FIJA ELECTRODO SOLDAR TIG 1/9,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/300000020754.png,ALP-9-H-2, ,, , 
 300000020755,ELECTROD TUGSTENO SOLDA TIG PUNT GRI3/32,ELECTROD TUGSTENO SOLDA TIG PUNT GRI3/33,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/300000020755.png,ALP-9-I-2, ,, , 
 300000020756,FILTRO 3/32 TOBERA CERAMICA TIG GRANDE,FILTRO 3/32 TOBERA CERAMICA TIG GRANDE,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/300000020756.png,ALP-9-H-2,40, , , 
@@ -15982,7 +15982,7 @@
 500000001481,NEUMÁTICO PARA LLANTA 13000X24,NEUMÁTICO PARA LLANTA 13000X25,UN,G-14 / Llantas Y Neumaticos ,https://ik.imagekit.io/7ypnvn8as/materiales/500000001481.png, , ,C109P05*,1, 
 500000001482,NIPLE GALVANIZADO ½  X 5 CM,NIPLE GALVANIZADO ½  X 5 CM,UN,G-20 / Aceros ,https://ik.imagekit.io/7ypnvn8as/materiales/500000001482.png,, ,, , 
 500000001483,OXIDO NITROSO ABSORCIÓN ATÓMICA,OXIDO NITROSO ABSORCIÓN ATÓMICA,KG,G-23 / Gases ,https://ik.imagekit.io/7ypnvn8as/materiales/500000001483.png,, ,, , 
-500000001484,OXIGENO GASEOSO INDUSTRIAL,OXIGENO GASEOSO INDUSTRIAL,M3,G-23 / Gases ,https://ik.imagekit.io/7ypnvn8as/materiales/500000001484.png,GASES,84.5,PATC2*,29.5, 
+500000001484,OXIGENO GASEOSO INDUSTRIAL,OXIGENO GASEOSO INDUSTRIAL,M3,G-23 / Gases ,https://ik.imagekit.io/7ypnvn8as/materiales/500000001484.png,GASES,84.5,PATC2*,29.5,SI
 500000001485,PARCHE VIPAL RAC 10,PARCHE VIPAL RAC 10,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/500000001485.png, , ,C109C03*,30, 
 500000001486,PARCHE VIPAL RAC 12,PARCHE VIPAL RAC 12,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000001486.png, , ,C109C03*,23, 
 500000001487,PARCHE VIPAL RAC 14,PARCHE VIPAL RAC 14,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000001487.png,ALP-9-G-3,9,C109C03*,58, 
@@ -16022,11 +16022,11 @@
 500000001522,CODO 3'' 45° PVC,CODO 3'' 45° PVC,UN,G-8 / Tuberia Y Accesorios ,https://ik.imagekit.io/7ypnvn8as/materiales/500000001522.png,ALP-2-A-2,1,, , 
 500000001523,SEPARADOR DE BOQUILLA DE FUMIGADORA,SEPARADOR DE BOQUILLA DE FUMIGADORA,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/500000001523.png, , ,C303F01*,80, 
 500000001524,SILICONA ULTRA GREY X 70 ML,SILICONA ULTRA GREY X 70 ML,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000001524.png,ALP-9-E-1,29,C109A06*,49,SI
-500000001525,SOLDADURA.1/8''.6010.LINCOLN,SOLDADURA.1/8''.6010.LINCOLN,KG,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000001525.png,ALP-9-B-3,1071,, , 
+500000001525,SOLDADURA.1/8''.6010.LINCOLN,SOLDADURA.1/8''.6010.LINCOLN,KG,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000001525.png,ALP-9-B-3,1071,, ,SI
 500000001528,SOLDADURA  6011 1/8   PK X 1 KG,SOLDADURA  6011 1/8   PK X 1 KG,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000001528.png,ALP-2-A-3, ,C107P02*,345,SI
 500000001530,SOLDADURA LINEA MEGRIWELD W-SUGAR 380,SOLDADURA LINEA MEGRIWELD W-SUGAR 381,KG,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000001530.png,ALP-9-F-P, ,, , 
 500000001531,CONECTOR PARA BOMBILLO H4 EN LOZA,CONECTOR PARA BOMBILLO H4 EN LOZA,UN,G-7 / Materiales Electricos,https://ik.imagekit.io/7ypnvn8as/materiales/500000001531.png, , ,, , 
-500000001534,SILICONA ROJA 50 ML REF. 285959 LOCTITE,SILICONA ROJA 50 ML REF. 285959 LOCTITE,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000001534.png,ALP-9-E-2,20,C109A07*,22, 
+500000001534,SILICONA ROJA 50 ML REF. 285959 LOCTITE,SILICONA ROJA 50 ML REF. 285959 LOCTITE,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000001534.png,ALP-9-E-2,20,C109A07*,22,SI
 500000001535,CODO.1''.22.5°.SS.BW.WP304L.SCH 10S.B16.9,CODO.1''.22.5°.SS.BW.WP304L.SCH 10S.B16.10,UN,G-20 / Aceros ,https://ik.imagekit.io/7ypnvn8as/materiales/500000001535.png,ALP-3-E-1, ,, , 
 500000001536,TERMINAL DE 1/2,TERMINAL DE 1/3,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/500000001536.png, , ,, , 
 500000001537,TERMINAL DE BATERIA 150 AMPERIOS,TERMINAL DE BATERIA 150 AMPERIOS,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/500000001537.png, , ,C107C02*, , 
@@ -16310,7 +16310,7 @@
 500000001964,TUBO PRESION 3'' RDE 26 GERFOR CAMPANA,TUBO PRESION 3'' RDE 26 GERFOR CAMPANA,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/500000001964.png, , ,, , 
 500000001965,UNION 3'' PVC,UNION 3'' PVC,UN,G-8 / Tuberia Y Accesorios ,https://ik.imagekit.io/7ypnvn8as/materiales/500000001965.png,ALP-3-D-3,21,C304D01*,5, 
 500000001966,UNION 4'' PVC,UNION 4'' PVC,UN,G-8 / Tuberia Y Accesorios ,https://ik.imagekit.io/7ypnvn8as/materiales/500000001966.png,ALP-2-A-3,6,, , 
-500000001967,SOLDADURA W.A 6013X1/8,SOLDADURA W.A 6013X1/9,KG,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000001967.png,ALP-9-B-1,50,C107D05*,5, 
+500000001967,SOLDADURA W.A 6013X1/8,SOLDADURA W.A 6013X1/9,KG,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000001967.png,ALP-9-B-1,50,C107D05*,5,SI
 500000001968,ESCOBA INDUSTRIAL TIPO CEPILLO,ESCOBA INDUSTRIAL TIPO CEPILLO,UN,G-24 / Aseo y Cafetería,https://ik.imagekit.io/7ypnvn8as/materiales/500000001968.png,ALP-1-A-P,55,C106P03*,4, 
 500000001969,DETERGENTE X KILOGRAMO,DETERGENTE X KILOGRAMO,UN,G-24 / Aseo y Cafetería,https://ik.imagekit.io/7ypnvn8as/materiales/500000001969.png,ALP-1-A-1,66,C106P01*,16, 
 500000001970,USAR 500000003751,USAR 500000003751,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000001970.png,ALP-9-H-1, ,C108D05*,1, 
@@ -16432,7 +16432,7 @@
 500000002131,GUANTES DE NITRILO TALLA L,GUANTES DE NITRILO TALLA L,CJ,G-17 / Dotacion Y Sst ,https://ik.imagekit.io/7ypnvn8as/materiales/500000002131.png,ALP-1-H-3,227,DOTACION2*,24, 
 500000002132,TAPABOCAS DESECHABLES CJ X 50 UN,TAPABOCAS DESECHABLES CJ X 50 UN,CJ,G-17 / Dotacion Y Sst ,https://ik.imagekit.io/7ypnvn8as/materiales/500000002132.png,ALP-1-I-2,199,, , 
 500000002134,PINTURA ANTICORROSIVO GRIS X GALON,PINTURA ANTICORROSIVO GRIS X GALON,GLS,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000002134.png,ALP-TECHAD,28,, , 
-500000002135,BROCHA 2'' MONA,BROCHA 2'' MONA,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000002135.png,ALP-9-H-1,278,C109C03*,12, 
+500000002135,BROCHA 2'' MONA,BROCHA 2'' MONA,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000002135.png,ALP-9-H-1,278,C109C03*,12,SI
 500000002139,SPATULA MANGO MADERA Y PALA ACERO 15CM,SPATULA MANGO MADERA Y PALA ACERO 15CM,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/500000002139.png,ALP-C2-2B3,6, , , 
 500000002145,SOLDADURA 1/8'' BRONCE,SOLDADURA 1/8'' BRONCE,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000002145.png,ALP-9-G-1, ,C108C12*,9, 
 500000002147,CODO 2'' 45° PVC,CODO 2'' 45° PVC,UN,G-8 / Tuberia Y Accesorios ,https://ik.imagekit.io/7ypnvn8as/materiales/500000002147.png,ALP-2-A-2,2,, , 
@@ -16462,7 +16462,7 @@
 500000002190,PARCHE VIPAL 45,PARCHE VIPAL 46,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/500000002190.png, , ,C109C04*,38, 
 500000002191,NÚMERO EN  REFLECTIVO  DE 4 X 4 CM,NÚMERO EN  REFLECTIVO  DE 4 X 4 CM,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000002191.png, , ,, , 
 500000002192,CODO.3/4''.90°.SS.BW.WP316L.SCH 10S.B16.9,CODO.3/4''.90°.SS.BW.WP316L.SCH 10S.B16.10,UN,G-20 / Aceros ,https://ik.imagekit.io/7ypnvn8as/materiales/500000002192.png,ALP-3-H-1,4,, , 
-500000002193,ESCOBA IMPERIAL,ESCOBA IMPERIAL,UN,G-24 / Aseo y Cafetería,https://ik.imagekit.io/7ypnvn8as/materiales/500000002193.png,ALP-1-A-P, ,C106P03*, , 
+500000002193,ESCOBA IMPERIAL,ESCOBA IMPERIAL,UN,G-24 / Aseo y Cafetería,https://ik.imagekit.io/7ypnvn8as/materiales/500000002193.png,ALP-1-A-P, ,C106P03*, ,SI
 500000002194,TRAPERO,TRAPERO,UN,G-24 / Aseo y Cafetería,https://ik.imagekit.io/7ypnvn8as/materiales/500000002194.png,ALP-1-A-P,34,, , 
 500000002195,JABON REY,JABON REY,UN,G-24 / Aseo y Cafetería,https://ik.imagekit.io/7ypnvn8as/materiales/500000002195.png,ALP-1-A-2,80,, , 
 500000002196,LOGOTIPO DE BIOENERGY DE 45 X 10 CM,LOGOTIPO DE BIOENERGY DE 45 X 10 CM,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000002196.png, , ,, , 
@@ -16538,7 +16538,7 @@
 500000002289,TUBO RECTANGULAR 6M 4X1.1/2 CL 16'',TUBO RECTANGULAR 6M 4X1.1/2 CL 16'',UN,G-20 / Aceros ,https://ik.imagekit.io/7ypnvn8as/materiales/500000002289.png,ALP-FONDO, , , , 
 500000002290,PIEDRAS  MOTORTOOL X 12 UN,PIEDRAS  MOTORTOOL X 12 UN,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000002290.png,ALP-9-L-3,23,, , 
 500000002291,PLIEGO DE LIJA 100,PLIEGO DE LIJA 101,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000002291.png,ALP-9-L-2,476,C109C01*,364, 
-500000002292,DISCO DE PULIR 41/2'' x 1/4'' x 7/8'',DISCO DE PULIR 41/2'' x 1/4'' x 7/8'',UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000002292.png,ALP-9-F-5,347,C108A05*,153, 
+500000002292,DISCO DE PULIR 41/2'' x 1/4'' x 7/8'',DISCO DE PULIR 41/2'' x 1/4'' x 7/8'',UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000002292.png,ALP-9-F-5,347,C108A05*,153,SI
 500000002293,BROCAS DE 1.1/16 A 1/2,BROCAS DE 1.1/16 A 1/3,UN,G-22 / Herramienta,https://ik.imagekit.io/7ypnvn8as/materiales/500000002293.png,ALP-5-B-5,2,C108C01*,2, 
 500000002294,PORTA ELECTRODO PARA 500 AMP,PORTA ELECTRODO PARA 500 AMP,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000002294.png,ALP-9-G-2, ,C108D08*,6, 
 500000002295,GRATA PULIDORA ROSCA  5/8 X 4.1/2 PLANA,GRATA PULIDORA ROSCA  5/8 X 4.1/2 PLANA,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/500000002295.png, , ,C108D05*, , 
@@ -16571,7 +16571,7 @@
 500000002328,RESMA TAMAÑO OFICIO,RESMA TAMAÑO OFICIO,UN,G-25 / Papeleria,https://ik.imagekit.io/7ypnvn8as/materiales/500000002328.png,ALP-9-E-5, ,, , 
 500000002329,VASOS PLÁSTICOS DE 7 ONZ X 4000 UNIDADES,VASOS PLÁSTICOS DE 7 ONZ X 4000 UNIDADES,PK,G-17 / Dotacion Y Sst ,https://ik.imagekit.io/7ypnvn8as/materiales/500000002329.png, , ,, , 
 500000002331,ALCOHOL ANTISEPTICO 70% x 700 ML,ALCOHOL ANTISEPTICO 70% x 700 ML,FR,G-6 / Materiales De Laboratorios Y Metrologia,https://ik.imagekit.io/7ypnvn8as/materiales/500000002331.png,ALP-C2-2DP,6,, , 
-500000002332,CINTA ENMASCARAR 1'' x 40M,CINTA ENMASCARAR 1'' x 40M,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000002332.png,ALP-9-G-3,33,C107C06*,49, 
+500000002332,CINTA ENMASCARAR 1'' x 40M,CINTA ENMASCARAR 1'' x 40M,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000002332.png,ALP-9-G-3,33,C107C06*,49,SI
 500000002333,CLORO LIQUIDO MARCA CLOROX X 3800 ML,CLORO LIQUIDO MARCA CLOROX X 3800 ML,UN,G-24 / Aseo y Cafetería,https://ik.imagekit.io/7ypnvn8as/materiales/500000002333.png,ALP-1-A-2,3,, , 
 500000002335,COPITOS DE ALGODÓN x 100 UN,COPITOS DE ALGODÓN x 100 UN,CJ,G-17 / Dotacion Y Sst ,https://ik.imagekit.io/7ypnvn8as/materiales/500000002335.png, , ,, , 
 500000002336,ATOMIZADOR CON ENVASE PLASTICO DE 1 LT,ATOMIZADOR CON ENVASE PLASTICO DE 1 LT,UN,G-6 / Materiales De Laboratorios Y Metrologia,https://ik.imagekit.io/7ypnvn8as/materiales/500000002336.png,, , , , 
@@ -16591,7 +16591,7 @@
 500000002359,GRATA COPA BRONCE 4'',GRATA COPA BRONCE 4'',UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000002359.png,ALP-9-I-1,2, , , 
 500000002361,LAMINA GALVANIZADA 4x8 CAL 14,LAMINA GALVANIZADA 4x8 CAL 15,UN,G-20 / Aceros ,https://ik.imagekit.io/7ypnvn8as/materiales/500000002361.png,ALP-PATIO,2, , , 
 500000002362,PAÑO LIMPIEZA ROL X 88 PAÑOS  42 X 28 CM,PAÑO LIMPIEZA ROL X 88 PAÑOS  42 X 28 CM,ROL,G-6 / Materiales De Laboratorios Y Metrologia,https://ik.imagekit.io/7ypnvn8as/materiales/500000002362.png,ALP-3-A-4, , , , 
-500000002363,PAPEL VINIPEL PLAST STRECH CAL6 12''X450M,PAPEL VINIPEL PLAST STRECH CAL6 12''X450M,ROL,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000002363.png,ALP-9-G-5,21,C107B07*,13, 
+500000002363,PAPEL VINIPEL PLAST STRECH CAL6 12''X450M,PAPEL VINIPEL PLAST STRECH CAL6 12''X450M,ROL,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000002363.png,ALP-9-G-5,21,C107B07*,13,SI
 500000002364,VINIPEL PLAST STRECH CAL6 4''X200M,VINIPEL PLAST STRECH CAL6 4''X200M,ROL,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000002364.png,ALP-9-G-5,5,C109A04*,13, 
 500000002365,PLASTICO POLIET 1.5M A 3M CAL6 ROLX 100M,PLASTICO POLIET 1.5M A 3M CAL6 ROLX 100M,ROL,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000002365.png,, ,, , 
 500000002366,BROCAS AR 1/16'' A 1/2''SET 15Pzs1495 Izar,BROCAS AR 1/16'' A 1/2''SET 15Pzs1495 Izar,SET,G-22 / Herramienta,https://ik.imagekit.io/7ypnvn8as/materiales/500000002366.png,ALP-9-H-2,5,, , 
@@ -16605,7 +16605,7 @@
 500000002374,ACEITE AEROSOL  REF.459117 FR X 240 ML,ACEITE AEROSOL  REF.459117 FR X 240 ML,FR,G-3 / Lubricantes ,https://ik.imagekit.io/7ypnvn8as/materiales/500000002374.png,, , , , 
 500000002375,JUEGO POLIN BASE MADERA RETROEXCAVADORA,JUEGO POLIN BASE MADERA RETROEXCAVADORA,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000002375.png, , ,, , 
 500000002376,PAPEL ALUMINIO  ROLLO X 40 METROS,PAPEL ALUMINIO  ROLLO X 40 METROS,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000002376.png,ALP-C2-2D2,47, , , 
-500000002377,PILAS AAA (PAQUETE 2 UNIDADES),PILAS AAA (PAQUETE 2 UNIDADES),UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000002377.png,ALP-9-J-3,16,C107C06*,5, 
+500000002377,PILAS AAA (PAQUETE 2 UNIDADES),PILAS AAA (PAQUETE 2 UNIDADES),UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000002377.png,ALP-9-J-3,16,C107C06*,5,SI
 500000002378,TELA ESMERIL GRAN. 220 24'' X 12 MTS,TELA ESMERIL GRAN. 220 24'' X 12 MTS,ROL,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000002378.png,ALP-9-L-1, , , , 
 500000002379,TELA ESMERIL GRAN. 400 24'' X 12 MTS,TELA ESMERIL GRAN. 400 24'' X 12 MTS,ROL,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000002379.png,, , , , 
 500000002380,CINTA ADHESIVA TRANSPARENTE ANCHA,CINTA ADHESIVA TRANSPARENTE ANCHA,ROL,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000002380.png,ALP-9-D-3, ,, , 
@@ -17398,7 +17398,7 @@
 500000003710,NIVEL PROFESIONAL 3 GOTAS - 24'' METALICA,NIVEL PROFESIONAL 3 GOTAS - 24'' METALICA,UN,G-22 / Herramienta,https://ik.imagekit.io/7ypnvn8as/materiales/500000003710.png,ALP-2-B-3, , , , 
 500000003711,ALICATE PARA ELECTRICÍSTA J268G,ALICATE PARA ELECTRICÍSTA J268G,UN,G-22 / Herramienta,https://ik.imagekit.io/7ypnvn8as/materiales/500000003711.png,ALP-2-C-1, ,, , 
 500000003712,MARTILLO EN BRONCE 3.45 LBS. J1432G,MARTILLO EN BRONCE 3.45 LBS. J1432G,UN,G-22 / Herramienta,https://ik.imagekit.io/7ypnvn8as/materiales/500000003712.png,ALP-2-A-5,4,C108E07*,3, 
-500000003713,FLEXOMETRO 5 MTS  30615,FLEXOMETRO 5 MTS  30616,UN,G-22 / Herramienta,https://ik.imagekit.io/7ypnvn8as/materiales/500000003713.png,ALP-2-B-4,5,, , 
+500000003713,FLEXOMETRO 5 MTS  30615,FLEXOMETRO 5 MTS  30616,UN,G-22 / Herramienta,https://ik.imagekit.io/7ypnvn8as/materiales/500000003713.png,ALP-2-B-4,5,, ,SI
 500000003715,PALUSTRE MANGO PLASTICO 8'',PALUSTRE MANGO PLASTICO 8'',UN,G-22 / Herramienta,https://ik.imagekit.io/7ypnvn8as/materiales/500000003715.png,ALP-9-J-1, ,C108D09*, , 
 500000003720,CAJA FS 2X4.,CAJA FS 2X4.,UN,G-7 / Materiales Electricos,https://ik.imagekit.io/7ypnvn8as/materiales/500000003720.png, , ,, , 
 500000003721,TOMA DOBLE DE INCRUSTAR (NARANJA) 120 V,TOMA DOBLE DE INCRUSTAR (NARANJA) 120 V,UN,G-7 / Materiales Electricos,https://ik.imagekit.io/7ypnvn8as/materiales/500000003721.png,, ,, , 
@@ -17426,7 +17426,7 @@
 500000003746,CALIBR. P/REY 8''. 0-300. 0.000''/0.05MM,CALIBR. P/REY 8''. 0-300. 0.000''/0.05MM,UN,G-22 / Herramienta,https://ik.imagekit.io/7ypnvn8as/materiales/500000003746.png,ALP-9-H-2, , , , 
 500000003747,JUEGO (6) DESTORNILLADORES PROFESIONALES,JUEGO (6) DESTORNILLADORES PROFESIONALES,UN,G-22 / Herramienta,https://ik.imagekit.io/7ypnvn8as/materiales/500000003747.png,ALP-2-C-1,1,, , 
 500000003749,BROCHA 1'',BROCHA 1'',UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000003749.png,ALP-9-H-1,338,, , 
-500000003751,BROCHA 3'',BROCHA 3'',UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000003751.png,ALP-9-H-1,150,, , 
+500000003751,BROCHA 3'',BROCHA 3'',UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000003751.png,ALP-9-H-1,150,, ,SI
 500000003752,BROCHA PROFESIONAL CERDA 100% NATURA 4'',BROCHA PROFESIONAL CERDA 100% NATURA 4'',UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000003752.png,ALP-9-H-1,40,C109C03*,6, 
 500000003754,CINTA DE DEMARCACION PELIGRO,CINTA DE DEMARCACION PELIGRO,UN,G-17 / Dotacion Y Sst ,https://ik.imagekit.io/7ypnvn8as/materiales/500000003754.png,ALP-1-J-P,25,C104D05*,10, 
 500000003755,CONO PVC 30 CM CINTA REFLECTIVA,CONO PVC 30 CM CINTA REFLECTIVA,UN,G-16 / Materiales De Comunicaciones,https://ik.imagekit.io/7ypnvn8as/materiales/500000003755.png,ALP-5-B-5, , , , 
@@ -17479,7 +17479,7 @@
 500000003860,GLUCONATO DE SODIO X 1 KG,GLUCONATO DE SODIO X 1 KG,FR,G-6 / Materiales De Laboratorios Y Metrologia,https://ik.imagekit.io/7ypnvn8as/materiales/500000003860.png,ALP-C2-1B5, , , , 
 500000003861,ACIDO GLUCONICO X 1 L,ACIDO GLUCONICO X 1 L,FR,G-6 / Materiales De Laboratorios Y Metrologia,https://ik.imagekit.io/7ypnvn8as/materiales/500000003861.png,ALP-C2-2DP, , , , 
 500000003869,TANQUE BAJITO 500 LITROS COLEMPAQUES,TANQUE BAJITO 500 LITROS COLEMPAQUES,UN,G-6 / Materiales De Laboratorios Y Metrologia,https://ik.imagekit.io/7ypnvn8as/materiales/500000003869.png,, ,, , 
-500000003870,WAIPE INDUSTRIAL COSIDO (TRAPO),WAIPE INDUSTRIAL COSIDO (TRAPO),BTO,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000003870.png,ALP-2-B-2,5,C202P31*, , 
+500000003870,WAIPE INDUSTRIAL COSIDO (TRAPO),WAIPE INDUSTRIAL COSIDO (TRAPO),BTO,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000003870.png,ALP-2-B-2,5,C202P31*, ,SI
 500000003871,LLAVES DE PASO 1,LLAVES DE PASO 1,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000003871.png, , ,C304C01*,1, 
 500000003872,ACOPLE  1 SALIDA TANQUE PLÁSTICO DE PVC,ACOPLE  1 SALIDA TANQUE PLÁSTICO DE PVC,UN,G-6 / Materiales De Laboratorios Y Metrologia,https://ik.imagekit.io/7ypnvn8as/materiales/500000003872.png, , ,, , 
 500000003873,TANQUE 200 LT CON TAPA ROSCADA,TANQUE 200 LT CON TAPA ROSCADA,UN,G-6 / Materiales De Laboratorios Y Metrologia,https://ik.imagekit.io/7ypnvn8as/materiales/500000003873.png, , ,, , 
@@ -17677,7 +17677,7 @@
 500000004151,PAPEL WYPALL DE KIMBERLY-CLARK -L 40,PAPEL WYPALL DE KIMBERLY-CLARK -L 41,ROL,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000004151.png,ALP-9-H-5, , , , 
 500000004152,EMBUDO PLÁSTICO 5/16'',EMBUDO PLÁSTICO 5/16'',UN,G-6 / Materiales De Laboratorios Y Metrologia,https://ik.imagekit.io/7ypnvn8as/materiales/500000004152.png,ALP-C2-2D1,1, , , 
 500000004153,EMBUDO PLÁSTICO 3/8,EMBUDO PLÁSTICO 3/8,UN,G-6 / Materiales De Laboratorios Y Metrologia,https://ik.imagekit.io/7ypnvn8as/materiales/500000004153.png,ALP-C2-2D1,1, , , 
-500000004160,LUBRICANTE ANTIOXIDANTE SUPER LUB LB8608,LUBRICANTE ANTIOXIDANTE SUPER LUB LB8609,UN,G-3 / Lubricantes ,https://ik.imagekit.io/7ypnvn8as/materiales/500000004160.png,ALP-JAULA,93,, , 
+500000004160,LUBRICANTE ANTIOXIDANTE SUPER LUB LB8608,LUBRICANTE ANTIOXIDANTE SUPER LUB LB8609,UN,G-3 / Lubricantes ,https://ik.imagekit.io/7ypnvn8as/materiales/500000004160.png,ALP-JAULA,93,, ,SI
 500000004161,ESPATULA 3'' BELLOTA,ESPATULA 3'' BELLOTA,UN,G-22 / Herramienta,https://ik.imagekit.io/7ypnvn8as/materiales/500000004161.png,ALP-9-H-1,9, , , 
 500000004162,SUPER BONDER LOCTITE 495. 28GR. 1 OZ,SUPER BONDER LOCTITE 495. 28GR. 1 OZ,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000004162.png,ALP-9-E-3,23,, , 
 500000004164,GRATA DE ALAMBRE - MOTOR TOOL DE ALAMBRE,GRATA DE ALAMBRE - MOTOR TOOL DE ALAMBRE,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000004164.png,ALP-9-H-4, , , , 
@@ -18960,7 +18960,7 @@
 500000006266,NIPLE.PIPE.FS.1-1/4''x3''.SXS.MTH.A106 GB,NIPLE.PIPE.FS.1-1/4''x3''.SXS.MTH.A106 GB,UN,G-20 / Aceros ,https://ik.imagekit.io/7ypnvn8as/materiales/500000006266.png,ALP-9-J-2, , , , 
 500000006267,NIPLE.PIPE.FS.1-1/4''x4''.SXS.MTH.A106 GB,NIPLE.PIPE.FS.1-1/4''x4''.SXS.MTH.A106 GB,UN,G-20 / Aceros ,https://ik.imagekit.io/7ypnvn8as/materiales/500000006267.png,, , , , 
 500000006269,ACEITE DE MONTAJE LHMF 300./5,ACEITE DE MONTAJE LHMF 300./6,UN,G-3 / Lubricantes ,https://ik.imagekit.io/7ypnvn8as/materiales/500000006269.png,ALP-INSUMO, , , , 
-500000006270,DISCO CORTE  METAL ACERO INOXIDABLE4.1/2,DISCO CORTE  METAL ACERO INOXIDABLE4.1/3,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000006270.png,ALP-9-I-2, ,, , 
+500000006270,DISCO CORTE  METAL ACERO INOXIDABLE4.1/2,DISCO CORTE  METAL ACERO INOXIDABLE4.1/3,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000006270.png,ALP-9-I-2, ,, ,SI
 500000006271,NIPLE.PIPE.FS.2''x4''.SXS.MTH.A106 GB GALV,NIPLE.PIPE.FS.2''x4''.SXS.MTH.A106 GB GALV,UN,G-20 / Aceros ,https://ik.imagekit.io/7ypnvn8as/materiales/500000006271.png,, , , , 
 500000006272,ESPARRAGO.1/2''x200mm.R.O.B7.SIN TUERCA,ESPARRAGO.1/2''x200mm.R.O.B7.SIN TUERCA,UN,G-9 / Tornilleria,https://ik.imagekit.io/7ypnvn8as/materiales/500000006272.png,ALP-8B-E-2, , , , 
 500000006274,PLUG.1/2''.FS.FTH.3M.A105 GALV.B16.11,PLUG.1/2''.FS.FTH.3M.A105 GALV.B16.12,UN,G-20 / Aceros ,https://ik.imagekit.io/7ypnvn8as/materiales/500000006274.png,, , , , 
@@ -19176,7 +19176,7 @@
 500000006698,LLAVE IMPACTO DE 3/4 DE PULGADA  LARGA,LLAVE IMPACTO DE 3/4 DE PULGADA  LARGA,UN,G-22 / Herramienta,https://ik.imagekit.io/7ypnvn8as/materiales/500000006698.png,, , , , 
 500000006699,LLAVE MIXTA 1-15/16'' PUL PR-1250 PROTO,LLAVE MIXTA 1-15/16'' PUL PR-1250 PROTO,UN,G-22 / Herramienta,https://ik.imagekit.io/7ypnvn8as/materiales/500000006699.png,, , , , 
 500000006700,LLAVE MIXTA.2-5/16'',LLAVE MIXTA.2-5/16'',UN,G-22 / Herramienta,https://ik.imagekit.io/7ypnvn8as/materiales/500000006700.png,ALP-2-D-1, , , , 
-500000006701,LUBRICANTE 5-56 PENETRANTE 180 O 235CC,LUBRICANTE 5-56 PENETRANTE 180 O 235CC,UN,G-3 / Lubricantes ,https://ik.imagekit.io/7ypnvn8as/materiales/500000006701.png,ALP-JAULA,157,, , 
+500000006701,LUBRICANTE 5-56 PENETRANTE 180 O 235CC,LUBRICANTE 5-56 PENETRANTE 180 O 235CC,UN,G-3 / Lubricantes ,https://ik.imagekit.io/7ypnvn8as/materiales/500000006701.png,ALP-JAULA,157,, ,SI
 500000006702,MACETA DE BRONCE MANGO LARGO DE 14 LBS,MACETA DE BRONCE MANGO LARGO DE 14 LBS,UN,G-22 / Herramienta,https://ik.imagekit.io/7ypnvn8as/materiales/500000006702.png,ALP-2-H-1, , , , 
 500000006707,MACHO DE ROSCAR M20,MACHO DE ROSCAR M21,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000006707.png,, , , , 
 500000006710,MACHO DE ROSCAR UNC 1/2-13,MACHO DE ROSCAR UNC 1/2-14,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000006710.png,, , , , 
@@ -19524,7 +19524,7 @@
 500000007254,FUSIBLE MEDIA TENSION 15 kV 7A,FUSIBLE MEDIA TENSION 15 kV 7A,UN,G-7 / Materiales Electricos,https://ik.imagekit.io/7ypnvn8as/materiales/500000007254.png,ALP-9-J-5,6, , , 
 500000007255,NIPLE.PIPE.FS.1-1/4''x4''.S80.MTH.A106 GB,NIPLE.PIPE.FS.1-1/4''x4''.S80.MTH.A106 GB,UN,G-8 / Tuberia Y Accesorios ,https://ik.imagekit.io/7ypnvn8as/materiales/500000007255.png,, , , , 
 500000007256,FUSIBLE MEDIA TENSION 15 kV 40A,FUSIBLE MEDIA TENSION 15 kV 40A,UN,G-7 / Materiales Electricos,https://ik.imagekit.io/7ypnvn8as/materiales/500000007256.png,ALP-9-J-5,6, , , 
-500000007257,AMARRES PLASTICAS  20 CMTS PAQ. X 100,AMARRES PLASTICAS  20 CMTS PAQ. X 101,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000007257.png,ALP-9-J-1,13,CAST-VERDE,2, 
+500000007257,AMARRES PLASTICAS  20 CMTS PAQ. X 100,AMARRES PLASTICAS  20 CMTS PAQ. X 100,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000007257.png,ALP-9-J-1,13,CAST-VERDE,2,SI
 500000007258,BUJIA CJ8 CHAMPION,BUJIA CJ8 CHAMPION,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/500000007258.png,ALP-9-J-4,23, , , 
 500000007259,PRENSAESTOPA  1/2'',PRENSAESTOPA  1/2'',UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/500000007259.png,ALP-9-G-2, , , , 
 500000007260,CINTA BANDIT 1/2'' ROLLO X 30 M,CINTA BANDIT 1/2'' ROLLO X 30 M,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000007260.png,ALP-3-A-2, , , , 
@@ -19648,7 +19648,7 @@
 500000007412,LLAVE EXPANSIVA N° 42,LLAVE EXPANSIVA N° 43,UN,G-22 / Herramienta,https://ik.imagekit.io/7ypnvn8as/materiales/500000007412.png, , ,, , 
 500000007413,LLAVE PARA TUBO N° 42,LLAVE PARA TUBO N° 43,UN,G-22 / Herramienta,https://ik.imagekit.io/7ypnvn8as/materiales/500000007413.png, , ,, , 
 500000007415,SOLDADURA.TIG.1/16''.APORTE.INOX 308L,SOLDADURA.TIG.1/16''.APORTE.INOX 308L,KG,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000007415.png,ALP-9-A-2,35,, , 
-500000007416,SOLDADURA.TIG.1/8''.APORTE.INOX 308L,SOLDADURA.TIG.1/8''.APORTE.INOX 308L,KG,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000007416.png,ALP-9-A-3,192,, , 
+500000007416,SOLDADURA.TIG.1/8''.APORTE.INOX 308L,SOLDADURA.TIG.1/8''.APORTE.INOX 308L,KG,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000007416.png,ALP-9-A-3,192,, ,SI
 500000007417,SOLDADURA.TIG.1/16x36''.APORTE.AC.CARBONO,SOLDADURA.TIG.1/16x36''.APORTE.AC.CARBONO,KG,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000007417.png,ALP-9-A-2,5, , , 
 500000007418,SOLDADURA.TIG.3/32.APORTE.AC.CARBONO,SOLDADURA.TIG.3/32.APORTE.AC.CARBONO,KG,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000007418.png,ALP-9-A-2, , , , 
 500000007419,SOLDADURA TIG 1/8x36'' APORTE.AC.CARBONO,SOLDADURA TIG 1/8x36'' APORTE.AC.CARBONO,KG,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000007419.png,ALP-9-A-3,50,, , 
@@ -19778,7 +19778,7 @@
 500000007661,TAPA-DESECADOR EXT.395 INT.300 ALTO.140,TAPA-DESECADOR EXT.395 INT.300 ALTO.141,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000007661.png,, , , , 
 500000007662,LLAVE SUPERIOR PARA TAPA DE DESECADOR,LLAVE SUPERIOR PARA TAPA DE DESECADOR,UN,G-22 / Herramienta,https://ik.imagekit.io/7ypnvn8as/materiales/500000007662.png,ALP-C2-2C2, , , , 
 500000007665,TEE (CONEXIONES HEMBRA) DE 1'' NPT EN AC,TEE (CONEXIONES HEMBRA) DE 1'' NPT EN AC,UN,G-20 / Aceros ,https://ik.imagekit.io/7ypnvn8as/materiales/500000007665.png,ALP-3-G-1,1, , , 
-500000007668,AMARRE PLASTICO NEGRO 30CMS PQ X 100UND,AMARRE PLASTICO NEGRO 30CMS PQ X 100UND,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000007668.png,ALP-9-J-1,3, , , 
+500000007668,AMARRE PLASTICO NEGRO 30CMS PQ X 100UND,AMARRE PLASTICO NEGRO 30CMS PQ X 100UND,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000007668.png,ALP-9-J-1,3, , ,SI
 500000007670,CABLE INST. 1X(2X16 AWG),CABLE INST. 1X(2X16 AWG),M,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000007670.png,SHELTER,4000, , , 
 500000007671,RODAMIENTO DE RODILLOS 22210 E/C3,RODAMIENTO DE RODILLOS 22210 E/C4,UN,G-10 / Rodamientos,https://ik.imagekit.io/7ypnvn8as/materiales/500000007671.png,ALP-5-B-1,6, , , 
 500000007672,RODAMIENTO DE DOS HILERAS 3310 A/C3,RODAMIENTO DE DOS HILERAS 3310 A/C4,UN,G-10 / Rodamientos,https://ik.imagekit.io/7ypnvn8as/materiales/500000007672.png,ALP-5-A-1,1, , , 
@@ -20059,8 +20059,8 @@
 500000009287,UNIVERSAL SOLD X SOLD 1''CPVC ASTM F2467,UNIVERSAL SOLD X SOLD 1''CPVC ASTM F2468,UN,G-8 / Tuberia Y Accesorios ,https://ik.imagekit.io/7ypnvn8as/materiales/500000009287.png,, , , , 
 500000009290,SOLDADURA CPVC SCH 80,SOLDADURA CPVC SCH 81,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000009290.png,ALP-9-J-1, , , , 
 500000009292,ADHESIVO REF. HERNON® REACT® 727,ADHESIVO REF. HERNON® REACT® 728,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000009292.png,ALP-9-E-1, , , , 
-500000009294,LIJA AL AGUA IMPERIAL GRANO #600 ABRACOL,LIJA AL AGUA IMPERIAL GRANO #600 ABRACOL,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000009294.png,ALP-9-L-2,104,, , 
-500000009295,AMARRE PLASTICO DE 10CM X 100 UNIDADES,AMARRE PLASTICO DE 10CM X 100 UNIDADES,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000009295.png,ALP-9-J-P,237,, , 
+500000009294,LIJA AL AGUA IMPERIAL GRANO #600 ABRACOL,LIJA AL AGUA IMPERIAL GRANO #600 ABRACOL,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000009294.png,ALP-9-L-2,104,, ,SI
+500000009295,AMARRE PLASTICO DE 10CM X 100 UNIDADES,AMARRE PLASTICO DE 10CM X 100 UNIDADES,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000009295.png,ALP-9-J-P,237,, ,SI
 500000009297,DESECADOR EN VIDRIO Ø INT 300MM + LLAVE,DESECADOR EN VIDRIO Ø INT 300MM + LLAVE,UN,G-6 / Materiales De Laboratorios Y Metrologia,https://ik.imagekit.io/7ypnvn8as/materiales/500000009297.png,, , , , 
 500000009298,PIPE DN1/2''X6M PVC SCH 80 ASTM D 1785,PIPE DN1/2''X6M PVC SCH 80 ASTM D 1786,M,G-8 / Tuberia Y Accesorios ,https://ik.imagekit.io/7ypnvn8as/materiales/500000009298.png,SHELTER, , , , 
 500000009300,TUBERIA DN 1''X6M PVC SCH 80 ASTM D 1785,TUBERIA DN 1''X6M PVC SCH 80 ASTM D 1786,M,G-8 / Tuberia Y Accesorios ,https://ik.imagekit.io/7ypnvn8as/materiales/500000009300.png,SHELTER, , , , 
@@ -20145,10 +20145,10 @@
 500000009560,PREFILTRO D CARBON ACTIVADO GRANULAR. F,PREFILTRO D CARBON ACTIVADO GRANULAR. F,UN,G-6 / Materiales De Laboratorios Y Metrologia,https://ik.imagekit.io/7ypnvn8as/materiales/500000009560.png,ALP-C2-2B2, , , , 
 500000009561,SOLUCION CLORURO FERRICO - SULFURICO,SOLUCION CLORURO FERRICO - SULFURICO,UN,G-6 / Materiales De Laboratorios Y Metrologia,https://ik.imagekit.io/7ypnvn8as/materiales/500000009561.png,ALP-C2-1A4,14, , , 
 500000009562,HIDROCLORURO DE HIDROXYLAMINA X 100 ML,HIDROCLORURO DE HIDROXYLAMINA X 100 ML,UN,G-6 / Materiales De Laboratorios Y Metrologia,https://ik.imagekit.io/7ypnvn8as/materiales/500000009562.png,ALP-C2-1A4,4, , , 
-500000009565,DISCO CARBOFLAP 180X22MM (7''X7/8'')G0040,DISCO CARBOFLAP 180X22MM (7''X7/8'')G0040,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000009565.png,ALP-9-F-1, ,, , 
+500000009565,DISCO CARBOFLAP 180X22MM (7''X7/8'')G0040,DISCO CARBOFLAP 180X22MM (7''X7/8'')G0040,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000009565.png,ALP-9-F-1, ,, ,SI
 500000009566,DISCO CARBOFLAP 180X22MM (7''X7/8'')G0120,DISCO CARBOFLAP 180X22MM (7''X7/8'')G0120,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000009566.png,ALP-9-F-3,14,, , 
 500000009567,DISCO CARBOFLAP (500000009568),DISCO CARBOFLAP (500000009568),UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000009567.png,ALP-9-F-1, , , , 
-500000009568,DISCO CARBOFLAP 115X22MM,DISCO CARBOFLAP 115X22MM,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000009568.png,ALP-9-F-4, ,, , 
+500000009568,DISCO CARBOFLAP 115X22MM,DISCO CARBOFLAP 115X22MM,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000009568.png,ALP-9-F-4, ,, ,SI
 500000009569,GRAVA DE CUARZO ASTM C33 TAMAÑOS 2 A 6MM,GRAVA DE CUARZO ASTM C33 TAMAÑOS 2 A 6MM,M3,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000009569.png,, , , , 
 500000009570,ACEITE PARA SISTEMAS HIDRAHULICOS DTE 10,ACEITE PARA SISTEMAS HIDRAHULICOS DTE 11,GLS,G-3 / Lubricantes ,https://ik.imagekit.io/7ypnvn8as/materiales/500000009570.png,TECHADO,5, , , 
 500000009571,ACEITE PARA TRANSMISIONES MAQ PESADA,ACEITE PARA TRANSMISIONES MAQ PESADA,GLS,G-3 / Lubricantes ,https://ik.imagekit.io/7ypnvn8as/materiales/500000009571.png,TECHADO,155, , , 
@@ -20465,7 +20465,7 @@
 500000010014,PROTECTOR AUDITIVO TIPO TAPON 3 MEMBRANA,PROTECTOR AUDITIVO TIPO TAPON 3 MEMBRANA,UN,G-17 / Dotacion Y Sst ,https://ik.imagekit.io/7ypnvn8as/materiales/500000010014.png,, ,, , 
 500000010015,SOLDADURA LINCOLN 7018 1/8'' x KILO,SOLDADURA LINCOLN 7018 1/8'' x KILO,KG,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000010015.png,ALP-9-B-1,660,C107P1*,240,SI
 500000010016,LAMPARA REPUESTO VIDEO PROYECTOR,LAMPARA REPUESTO VIDEO PROYECTOR,UN,G-16 / Materiales De Comunicaciones,https://ik.imagekit.io/7ypnvn8as/materiales/500000010016.png,, ,, , 
-500000010017,ACETILENO GASEOSO IND PARA CORTE,ACETILENO GASEOSO IND PARA CORTE,KG,G-23 / Gases ,https://ik.imagekit.io/7ypnvn8as/materiales/500000010017.png,GASES,21,, , 
+500000010017,ACETILENO GASEOSO IND PARA CORTE,ACETILENO GASEOSO IND PARA CORTE,KG,G-23 / Gases ,https://ik.imagekit.io/7ypnvn8as/materiales/500000010017.png,GASES,21,, ,SI
 500000010022,ETIQUETAS MUESTRAS-TANQUES PK X 1000,ETIQUETAS MUESTRAS-TANQUES PK X 1001,PK,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000010022.png,, , , , 
 500000010026,SULFATO DE ALUMINIO IMPALPABLE SACO X 25,SULFATO DE ALUMINIO IMPALPABLE SACO X 26,BTO,G-2 / Insumos ,https://ik.imagekit.io/7ypnvn8as/materiales/500000010026.png,ALP-C2-CP,1,, , 
 500000010027,ELECTRODO DE PH/CTA ROSS 8157BNUMD,ELECTRODO DE PH/CTA ROSS 8157BNUMD,UN,G-6 / Materiales De Laboratorios Y Metrologia,https://ik.imagekit.io/7ypnvn8as/materiales/500000010027.png,ALP-C2-1D4, , , , 
@@ -20490,7 +20490,7 @@
 500000010053,BOTAS CAÑA ALTA TALLA 35 REF: 8604,BOTAS CAÑA ALTA TALLA 35 REF: 8605,UN,G-17 / Dotacion Y Sst ,https://ik.imagekit.io/7ypnvn8as/materiales/500000010053.png,SANTA ANA, , , , 
 500000010056,TIMSEN DESINFECTANTE X 1 KG,TIMSEN DESINFECTANTE X 1 KG,KG,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/500000010056.png,, ,, , 
 500000010057,ANGULO.3''x3/8''x6 Mts.ACERO AL CARBON,ANGULO.3''x3/8''x6 Mts.ACERO AL CARBON,UN,G-20 / Aceros ,https://ik.imagekit.io/7ypnvn8as/materiales/500000010057.png,PATIO,55, , , 
-500000010058,ARGON GRADO INDUSTRIAL CILINDRO,ARGON GRADO INDUSTRIAL CILINDRO,M3,G-23 / Gases ,https://ik.imagekit.io/7ypnvn8as/materiales/500000010058.png,GASES,52,, , 
+500000010058,ARGON GRADO INDUSTRIAL CILINDRO,ARGON GRADO INDUSTRIAL CILINDRO,M3,G-23 / Gases ,https://ik.imagekit.io/7ypnvn8as/materiales/500000010058.png,GASES,52,, ,SI
 500000010059,AZADON BELLOTA,AZADON BELLOTA,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000010059.png,, ,PATC2*,61, 
 500000010060,MACHETE BELLOTA 18'' CON FUNDA,MACHETE BELLOTA 18'' CON FUNDA,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000010060.png,ALP-2-A-5,9,CAST-VERDE,7, 
 500000010061,BOTA TP TENI REF: 9307 WESTLAND TALLA 34,BOTA TP TENI REF: 9307 WESTLAND TALLA 34,UN,G-17 / Dotacion Y Sst ,https://ik.imagekit.io/7ypnvn8as/materiales/500000010061.png,, ,, , 
@@ -20884,7 +20884,7 @@
 500000010635,TUBO ACERO CARBON 1/2'' SCH 40 S/C,TUBO ACERO CARBON 1/2'' SCH 40 S/C,M,G-20 / Aceros ,https://ik.imagekit.io/7ypnvn8as/materiales/500000010635.png,PATIO-TUBO,6, , , 
 500000010636,GATE VALVE .25DN.1500#.SA182 F22.SW 1'',GATE VALVE .25DN.1500#.SA182 F22.SW 1'',UN,G-18 / Valvulas,https://ik.imagekit.io/7ypnvn8as/materiales/500000010636.png,ALP-3-H-2, , , , 
 500000010637,VÁLVULA GLOBO MANUAL. ANSI 1500# SA105,VÁLVULA GLOBO MANUAL. ANSI 1500# SA106,UN,G-18 / Valvulas,https://ik.imagekit.io/7ypnvn8as/materiales/500000010637.png,, , , , 
-500000010638,RODILLO FELPA DE 9'',RODILLO FELPA DE 9'',UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000010638.png,ALP-9-G-1,181,C108D05*,1, 
+500000010638,RODILLO FELPA DE 9'',RODILLO FELPA DE 9'',UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000010638.png,ALP-9-G-1,181,C108D05*,1,SI
 500000010639,ARGON DE ALTA PUREZA,ARGON DE ALTA PUREZA,M3,G-23 / Gases ,https://ik.imagekit.io/7ypnvn8as/materiales/500000010639.png,, , , , 
 500000010640,MANGUERA HIDRÁULIC GEMELA HYTORC 090175S,MANGUERA HIDRÁULIC GEMELA HYTORC 090175S,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/500000010640.png,, , , , 
 500000010641,TORQUIMETRO HIDRAULI HYTORC HY-STEALTH-2,TORQUIMETRO HIDRAULI HYTORC HY-STEALTH-3,UN,G-22 / Herramienta,https://ik.imagekit.io/7ypnvn8as/materiales/500000010641.png,, , , , 
@@ -22284,7 +22284,7 @@
 500000012766,GAVETERO MODULAR ABIERTO 07. 35x20x15 CM,GAVETERO MODULAR ABIERTO 07. 35x20x15 CM,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000012766.png,, ,, , 
 500000012767,GAVETERO MODULAR ABIERTO 08. 45x30x20 CM,GAVETERO MODULAR ABIERTO 08. 45x30x20 CM,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000012767.png,ALP-5-H-6, ,, , 
 500000012768,TAG RF ID,TAG RF ID,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/500000012768.png,, ,C107P01*,130, 
-500000012770,THINNER EXTRAFINO,THINNER EXTRAFINO,GLS,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000012770.png,TECHADO,87,PATC2*,5, 
+500000012770,THINNER EXTRAFINO,THINNER EXTRAFINO,GLS,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000012770.png,TECHADO,87,PATC2*,5,SI
 500000012771,BATERIA AGM 12V  7 AH REF: NPW36-12,BATERIA AGM 12V  7 AH REF: NPW36-13,UN,G-7 / Materiales Electricos,https://ik.imagekit.io/7ypnvn8as/materiales/500000012771.png,, ,, , 
 500000012772,PERNO HEXAGONAL 1 1/4'' x 3 1/2'' GRADO 5,PERNO HEXAGONAL 1 1/4'' x 3 1/2'' GRADO 6,UN,G-9 / Tornilleria,https://ik.imagekit.io/7ypnvn8as/materiales/500000012772.png,, , , , 
 500000012773,TUERCA HEXAGONAL 1 1/4'' 7 UNC GRADO 5,TUERCA HEXAGONAL 1 1/4'' 7 UNC GRADO 6,UN,G-9 / Tornilleria,https://ik.imagekit.io/7ypnvn8as/materiales/500000012773.png,ALP-PASILL,82, , , 
@@ -22625,7 +22625,7 @@
 500000013246,MANOMETRO 2-1/2 1009SW 300 INF 1/4NPT,MANOMETRO 2-1/2 1009SW 300 INF 1/4NPT,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/500000013246.png,CLI-1-H-2, , , , 
 500000013247,RTD PT100 . BULBO LP = 1''. DP = 1/4'',RTD PT100 . BULBO LP = 1''. DP = 1/4'',UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/500000013247.png,CLI-1-G-1,23, , , 
 500000013249,ETIQUETA ETANOL ANHIDRO DESNATURALIZADO,ETIQUETA ETANOL ANHIDRO DESNATURALIZADO,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000013249.png,ALP-9-G-3, , , , 
-500000013250,PILAS (BATERIAS) AA,PILAS (BATERIAS) AA,PAA,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000013250.png,ALP-9-J-3,178,, , 
+500000013250,PILAS (BATERIAS) AA,PILAS (BATERIAS) AA,PAA,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000013250.png,ALP-9-J-3,178,, ,SI
 500000013256,VISOR EN POLICARBONATO ROCKET IR 5.O,VISOR EN POLICARBONATO ROCKET IR 5.O,UN,G-17 / Dotacion Y Sst ,https://ik.imagekit.io/7ypnvn8as/materiales/500000013256.png,, , , , 
 500000013259,EMPAQUE.CORDON.9/16''.PTFE,EMPAQUE.CORDON.9/16''.PTFE,UN,G-5 / Sellos y empaquetadu,https://ik.imagekit.io/7ypnvn8as/materiales/500000013259.png,, , , , 
 500000013260,EMPAQUE.CORDON.1/2''.PTFE,EMPAQUE.CORDON.1/2''.PTFE,UN,G-5 / Sellos y empaquetadu,https://ik.imagekit.io/7ypnvn8as/materiales/500000013260.png,, , , , 
@@ -22843,8 +22843,8 @@
 500000013588,BOQUILLA ROTATIVA 1/2 HIDROLAVADORA,BOQUILLA ROTATIVA 1/2 HIDROLAVADORA,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/500000013588.png,, , , , 
 500000013591,ORGANIZADORÂ PORTA ESCOBA 4 PUESTOS,ORGANIZADORÂ PORTA ESCOBA 4 PUESTOS,UN,G-24 / Aseo y Cafetería,https://ik.imagekit.io/7ypnvn8as/materiales/500000013591.png, , ,, , 
 500000013592,INSERTO PARA TORNEADO TNMG 160408,INSERTO PARA TORNEADO TNMG 160409,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000013592.png,ALP-9-M-3,10, , , 
-500000013594,PLIEGO DE LIJA 1000,PLIEGO DE LIJA 1000,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000013594.png,ALP-9-L-2,25,C109C01*,23, 
-500000013595,PLIEGO DE LIJA 2000,PLIEGO DE LIJA 2000,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000013595.png,ALP-9-L-2,105,, , 
+500000013594,PLIEGO DE LIJA 1000,PLIEGO DE LIJA 1000,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000013594.png,ALP-9-L-2,25,C109C01*,23,SI
+500000013595,PLIEGO DE LIJA 2000,PLIEGO DE LIJA 2000,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000013595.png,ALP-9-L-2,105,, ,SI
 500000013600,ADAPTADOR MACHO RECTO  3/8 NPT X 3/4 JIC,ADAPTADOR MACHO RECTO  3/8 NPT X 3/4 JIC,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/500000013600.png,GAVETA-ROJ,18, , , 
 500000013601,ADAPTADOR MACHO  90°  3/8 NPT X 3/4 JIC,ADAPTADOR MACHO  90°  3/8 NPT X 3/4 JIC,UN,G-20 / Aceros ,https://ik.imagekit.io/7ypnvn8as/materiales/500000013601.png,,20, , , 
 500000013606,DISCO DIAMANTADO PARA CONCRETO DE 4 1/2'',DISCO DIAMANTADO PARA CONCRETO DE 4 1/2'',UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000013606.png,ALP-9-F-3,5, , , 
@@ -23174,7 +23174,7 @@
 500000014237,CODO.16''.90Â°.RL.SS.SCH 40.BW.WPS.B16.9,CODO.16''.90Â°.RL.SS.SCH 40.BW.WPS.B16.10,UN,G-20 / Aceros ,https://ik.imagekit.io/7ypnvn8as/materiales/500000014237.png,ALP-PATIO,1, , , 
 500000014238,PLATINA DE 1.1/2''x1/4''x6Mts LAMINA A-36,PLATINA DE 1.1/2''x1/4''x6Mts LAMINA A-37,UN,G-20 / Aceros ,https://ik.imagekit.io/7ypnvn8as/materiales/500000014238.png,, , , , 
 500000014239,LAMINA 3mm x1.2x2.4 MtsACERO INOX 304,LAMINA 3mm x1.2x2.4 MtsACERO INOX 305,UN,G-20 / Aceros ,https://ik.imagekit.io/7ypnvn8as/materiales/500000014239.png,,1, , , 
-500000014240,SOLDADURA INOX 1/8'' AWS ER309. ER309L,SOLDADURA INOX 1/8'' AWS ER309. ER309L,KG,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000014240.png,ALP-9-A-4,3,, , 
+500000014240,SOLDADURA INOX 1/8'' AWS ER309. ER309L,SOLDADURA INOX 1/8'' AWS ER309. ER309L,KG,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000014240.png,ALP-9-A-4,3,, ,SI
 500000014241,SOLDADURA 7018 3/32'' X KILO,SOLDADURA 7018 3/32'' X KILO,KG,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000014241.png,ALP-9-A-4,35, , , 
 500000014242,PIPE.4''.SS.SCH 40S.A312 TP304.B36.19,PIPE.4''.SS.SCH 40S.A312 TP304.B36.20,M,G-20 / Aceros ,https://ik.imagekit.io/7ypnvn8as/materiales/500000014242.png,ALP-PATIO,5.8, , , 
 500000014243,CODO.4''.90°.S40.BW.A403-WP 304.B16.9,CODO.4''.90°.S40.BW.A403-WP 304.B16.10,UN,G-20 / Aceros ,https://ik.imagekit.io/7ypnvn8as/materiales/500000014243.png,SHELTER,5, , , 
@@ -23782,7 +23782,7 @@
 500000015798,PEINE PARA SERPENTINES REFRIGERACIÃN,PEINE PARA SERPENTINES REFRIGERACIÃN,UN,G-20 / Aceros ,https://ik.imagekit.io/7ypnvn8as/materiales/500000015798.png,, , , , 
 500000015799,JUEGO DE COPAS SIERRA PARA METAL,JUEGO DE COPAS SIERRA PARA METAL,UN,G-22 / Herramienta,https://ik.imagekit.io/7ypnvn8as/materiales/500000015799.png,ALP-2-C-4,2, , , 
 500000015800,BOMBA DE VACÍO 110VAC 1HP 12CFM REFRIGER,BOMBA DE VACÍO 110VAC 1HP 12CFM REFRIGER,UN,G-12 / Bombas,https://ik.imagekit.io/7ypnvn8as/materiales/500000015800.png,, , , , 
-500000015801,ESPUMA EXPANSIVA POLIURETANO,ESPUMA EXPANSIVA POLIURETANO,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000015801.png,ALP-9-E-5,65,, , 
+500000015801,ESPUMA EXPANSIVA POLIURETANO,ESPUMA EXPANSIVA POLIURETANO,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000015801.png,ALP-9-E-5,65,, ,SI
 500000015802,TOMACORRIENTE USO GENERAL. MONOFÁSICO. 1,TOMACORRIENTE USO GENERAL. MONOFÁSICO. 2,UN,G-22 / Herramienta,https://ik.imagekit.io/7ypnvn8as/materiales/500000015802.png, , ,, , 
 500000015803,MANGUERA AIRE ACOND CATERPILLAR 243-7104,MANGUERA AIRE ACOND CATERPILLAR 243-7104,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/500000015803.png,, , , , 
 500000015804,MANGUERA AIRE ACOND CATERPILLAR 243-7107,MANGUERA AIRE ACOND CATERPILLAR 243-7107,UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/500000015804.png,, , , , 
@@ -23911,7 +23911,7 @@
 500000015993,BOQUILLA SJV DE CONO HUECO CAP SIZE 5,BOQUILLA SJV DE CONO HUECO CAP SIZE 6,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000015993.png,, , , , 
 500000015994,FILTRO EN Y 2'' INOX MESH 30 CLASS 800,FILTRO EN Y 2'' INOX MESH 30 CLASS 801,UN,G-20 / Aceros ,https://ik.imagekit.io/7ypnvn8as/materiales/500000015994.png,ALP-3-E-1, , , , 
 500000015997,ELECTRODO PARA PHMETRO,ELECTRODO PARA PHMETRO,UN,G-6 / Materiales De Laboratorios Y Metrologia,https://ik.imagekit.io/7ypnvn8as/materiales/500000015997.png,, , , , 
-500000015999,RODILLO FELPA 3'',RODILLO FELPA 3'',UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000015999.png,ALP-9-G-2,177,, , 
+500000015999,RODILLO FELPA 3'',RODILLO FELPA 3'',UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000015999.png,ALP-9-G-2,177,, ,SI
 500000016000,MANGUERA SALIDA CON TUERCA 305 EX (1345),MANGUERA SALIDA CON TUERCA 305 EX (1345),UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/500000016000.png, , ,C302A40*,10, 
 500000016001,ABRAZADERA TUBO BOMBA 818X (1551),ABRAZADERA TUBO BOMBA 818X (1551),UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/500000016001.png, , ,C302B54*,19, 
 500000016002,TUBO SALIDA RECIPIENTE 120 X (1533),TUBO SALIDA RECIPIENTE 120 X (1533),UN,G-15 / Repuestos,https://ik.imagekit.io/7ypnvn8as/materiales/500000016002.png, , ,C302B40*,9, 
@@ -24592,7 +24592,7 @@
 500000016873,UNIDAD CD DVD EXTERNA USB 3.0,UNIDAD CD DVD EXTERNA USB 3.1,UN,G-16 / Materiales De Comunicaciones,https://ik.imagekit.io/7ypnvn8as/materiales/500000016873.png,CLI-1-G-2, , , , 
 500000016874,CABLE ESPIRALADO ACELERÓMET 780C,CABLE ESPIRALADO ACELERÓMET 780C,UN,G-16 / Materiales De Comunicaciones,https://ik.imagekit.io/7ypnvn8as/materiales/500000016874.png,, , , , 
 500000016875,BATERIAS / VIBRACHECK 100-200,BATERIAS / VIBRACHECK 100-201,PK,G-22 / Herramienta,https://ik.imagekit.io/7ypnvn8as/materiales/500000016875.png,, , , , 
-500000016876,PILAS AAA,PILAS AAA,PAA,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000016876.png,ALP-9-J-3,178, , , 
+500000016876,PILAS AAA,PILAS AAA,PAA,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000016876.png,ALP-9-J-3,178, , ,SI
 500000016877,BROCA DE ACERO 3/8'',BROCA DE ACERO 3/8'',UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000016877.png,ALP-9-K-4,5, , , 
 500000016879,FERTILIZANTE FOLIAR,FERTILIZANTE FOLIAR,L,G-2 / Insumos ,https://ik.imagekit.io/7ypnvn8as/materiales/500000016879.png, , , , , 
 500000016880,FERTILIZANTE FOLIAR TRIADMIN,FERTILIZANTE FOLIAR TRIADMIN,L,G-2 / Insumos ,https://ik.imagekit.io/7ypnvn8as/materiales/500000016880.png, , , , , 
@@ -25458,7 +25458,7 @@
 500000018055,UNION ACERADA EMT DE 3/4'',UNION ACERADA EMT DE 3/4'',UN,G-7 / Materiales Electricos,https://ik.imagekit.io/7ypnvn8as/materiales/500000018055.png,ALP-9-N-2,31,CAST-VERDE,20, 
 500000018056,TERMINAL ACERADA EMT DE 3/4'',TERMINAL ACERADA EMT DE 3/4'',UN,G-7 / Materiales Electricos,https://ik.imagekit.io/7ypnvn8as/materiales/500000018056.png,ALP-9-H-3,52,C109D03*,50, 
 500000018057,CABLE ENCAUCHETADO 3 X 10 AWG,CABLE ENCAUCHETADO 3 X 10 AWG,M,G-7 / Materiales Electricos,https://ik.imagekit.io/7ypnvn8as/materiales/500000018057.png,, ,, , 
-500000018058,CINTA AUTOFUNDENTE SUPER 23 3M,CINTA AUTOFUNDENTE SUPER 23 3M,UN,G-7 / Materiales Electricos,https://ik.imagekit.io/7ypnvn8as/materiales/500000018058.png,ALP-9-G-3, ,, , 
+500000018058,CINTA AUTOFUNDENTE SUPER 23 3M,CINTA AUTOFUNDENTE SUPER 23 3M,UN,G-7 / Materiales Electricos,https://ik.imagekit.io/7ypnvn8as/materiales/500000018058.png,ALP-9-G-3, ,, ,SI
 500000018059,MINIBREKAER DE 2 X 32A,MINIBREKAER DE 2 X 32A,UN,G-7 / Materiales Electricos,https://ik.imagekit.io/7ypnvn8as/materiales/500000018059.png, , ,, , 
 500000018060,CHASO PVC DE 1/4'',CHASO PVC DE 1/4'',UN,G-9 / Tornilleria,https://ik.imagekit.io/7ypnvn8as/materiales/500000018060.png, , ,, , 
 500000018061,CHASO PVC DE 5/16'',CHASO PVC DE 5/16'',UN,G-9 / Tornilleria,https://ik.imagekit.io/7ypnvn8as/materiales/500000018061.png, , ,, , 
@@ -27631,7 +27631,7 @@
 500000020701,MEZCLA SAL DE WESSON'S X 2 KG,MEZCLA SAL DE WESSON'S X 2 KG,FR,G-6 / Materiales De Laboratorios Y Metrologia,https://ik.imagekit.io/7ypnvn8as/materiales/500000020701.png, , ,, , 
 500000020702,ROLLO DE IMPRESORA TERMICA 57X15 MM,ROLLO DE IMPRESORA TERMICA 57X15 MM,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000020702.png,, ,C107D05*,43, 
 500000020703,MARCADOR PARA METAL AZUL,MARCADOR PARA METAL AZUL,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000020703.png,, ,, , 
-500000020704,MARCADOR PARA METAL BLANCO,MARCADOR PARA METAL BLANCO,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000020704.png,ALP-9-J-1,18,, , 
+500000020704,MARCADOR PARA METAL BLANCO,MARCADOR PARA METAL BLANCO,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000020704.png,ALP-9-J-1,18,, ,SI
 500000020705,MARCADOR PARA METAL ROJO,MARCADOR PARA METAL ROJO,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000020705.png,, ,, , 
 500000020706,RIEL EN U PARA PUERTA DE CORREDEDA,RIEL EN U PARA PUERTA DE CORREDEDA,M,G-20 / Aceros ,https://ik.imagekit.io/7ypnvn8as/materiales/500000020706.png,PASIL-FOND,30, , , 
 500000020707,RUBATEX DE 3/4''X1/2 PARA TUBERIA,RUBATEX DE 3/4''X1/2 PARA TUBERIA,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000020707.png,ALP-3-A-P,60, , , 
@@ -27853,7 +27853,7 @@
 500000020923,LAMINA A36 7.94mm. 6FT X 20FT,LAMINA A36 7.94mm. 6FT X 20FT,UN,G-20 / Aceros ,https://ik.imagekit.io/7ypnvn8as/materiales/500000020923.png,EXTERIOR,28, , , 
 500000020924,GABINETE ESTACION ETIQUETADO Y BLOQUEO,GABINETE ESTACION ETIQUETADO Y BLOQUEO,UN,G-17 / Dotacion Y Sst ,https://ik.imagekit.io/7ypnvn8as/materiales/500000020924.png,ALP-1-H-2,8, , , 
 500000020925,CHLORANTRANILIPROLE  G/L + INSECTICIDA,CHLORANTRANILIPROLE  G/L + INSECTICIDA,L,G-2 / Insumos ,https://ik.imagekit.io/7ypnvn8as/materiales/500000020925.png, , , , , 
-500000020926,MARCADOR PARA METAL AMARILLO,MARCADOR PARA METAL AMARILLO,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000020926.png,, ,, , 
+500000020926,MARCADOR PARA METAL AMARILLO,MARCADOR PARA METAL AMARILLO,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000020926.png,, ,, ,SI
 500000020927,VASO PRECIPITADO FORMA BAJA DURAN,VASO PRECIPITADO FORMA BAJA DURAN,UN,G-6 / Materiales De Laboratorios Y Metrologia,https://ik.imagekit.io/7ypnvn8as/materiales/500000020927.png,ALP-C2-2C1, , , , 
 500000020928,PERNO HEXAGONAL 3/8'' x 6'' GALV GRADO 8,PERNO HEXAGONAL 3/8'' x 6'' GALV GRADO 9,UN,G-9 / Tornilleria,https://ik.imagekit.io/7ypnvn8as/materiales/500000020928.png,, , , , 
 500000020929,PERNO HEXAGONAL 3/8'' x 3'' GALV GRADO 8,PERNO HEXAGONAL 3/8'' x 3'' GALV GRADO 9,UN,G-9 / Tornilleria,https://ik.imagekit.io/7ypnvn8as/materiales/500000020929.png,, , , , 
@@ -28029,7 +28029,7 @@
 500000021099,CARRUSEL 8 POS. ESPECTRO GENESYS 150,CARRUSEL 8 POS. ESPECTRO GENESYS 151,UN,G-6 / Materiales De Laboratorios Y Metrologia,https://ik.imagekit.io/7ypnvn8as/materiales/500000021099.png, , , , , 
 500000021100,NEUTRALIZADOR DE GASES SCRUBBER,NEUTRALIZADOR DE GASES SCRUBBER,UN,G-6 / Materiales De Laboratorios Y Metrologia,https://ik.imagekit.io/7ypnvn8as/materiales/500000021100.png, , , , , 
 500000021101,KIT SISTEMA SEPTICO 2000 L + TRAMPA 95L,KIT SISTEMA SEPTICO 2000 L + TRAMPA 95L,KIT,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000021101.png,INSUMOS, , , , 
-500000021102,CINTA DE ENMASCARAR DE 2'' 3M,CINTA DE ENMASCARAR DE 2'' 3M,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000021102.png,ALP-9-G-4,64,C109D01*,10, 
+500000021102,CINTA DE ENMASCARAR DE 2'' 3M,CINTA DE ENMASCARAR DE 2'' 3M,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000021102.png,ALP-9-G-4,64,C109D01*,10,SI
 500000021103,BIDON DIESEL 5.3 GL,BIDON DIESEL 5.3 GL,UN,G-1 / Materiales consumibles,https://ik.imagekit.io/7ypnvn8as/materiales/500000021103.png,, ,, , 
 500000021104,LLAVE COMBINADA 75MM BT14176 ROCKFORCE,LLAVE COMBINADA 75MM BT14176 ROCKFORCE,UN,G-22 / Herramienta,https://ik.imagekit.io/7ypnvn8as/materiales/500000021104.png, , , , , 
 500000021105,ACEITE MOTOR 4T 10W30,ACEITE MOTOR 4T 10W31,UN,G-3 / Lubricantes ,https://ik.imagekit.io/7ypnvn8as/materiales/500000021105.png, , ,SANTANA*,8, 
