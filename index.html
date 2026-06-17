@@ -127,6 +127,44 @@
   .soc-bio { background: var(--bio-green-light); border: 1px solid rgba(114,182,38,0.3); color: var(--bio-green-dark); }
   .soc-agr { background: var(--agr-yellow-light); border: 1px solid rgba(245,166,35,0.3); color: var(--agr-yellow-dark); }
   .badge-mrp { background: #e8f0fe; border: 1px solid #4285f4; color: #1a56cc; border-radius: 6px; padding: 0.18rem 0.55rem; font-size: 0.67rem; font-weight: 800; font-family: 'Outfit', sans-serif; display: inline-flex; align-items: center; gap: 0.25rem; letter-spacing: 0.04em; }
+
+  /* ── Copiar código ────────────────────────────────────────────────── */
+  .copy-btn { display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:6px; border:1px solid var(--border); background:var(--surface); color:var(--text-dim); cursor:pointer; vertical-align:middle; margin-left:0.4rem; transition:all 0.15s; flex-shrink:0; }
+  .copy-btn:hover { background:var(--bio-blue-light); border-color:var(--bio-blue); color:var(--bio-blue-dark); }
+  .copy-btn.copied { background:var(--bio-green-light); border-color:var(--bio-green); color:var(--bio-green-dark); }
+  .card-code-row { display:flex; align-items:center; justify-content:space-between; gap:0.4rem; margin-bottom:0.3rem; }
+  .card-code-left { display:flex; align-items:center; gap:0.1rem; min-width:0; }
+
+  /* ── Comparar materiales ──────────────────────────────────────────── */
+  .compare-check { position:absolute; top:10px; left:10px; width:26px; height:26px; border-radius:50%; background:rgba(255,255,255,0.95); border:1.5px solid var(--border2); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:5; font-size:0.8rem; color:transparent; transition:all 0.15s; box-shadow:var(--shadow-sm); }
+  .compare-check:hover { border-color:var(--bio-blue); }
+  .compare-check.checked { background:var(--bio-blue); border-color:var(--bio-blue); color:#fff; }
+  .material-card { position:relative; }
+  .material-card.in-compare { border-color:var(--bio-blue); box-shadow:0 0 0 3px rgba(26,178,232,0.15); }
+
+  .compare-bar { position:fixed; bottom:0; left:0; right:0; background:var(--text); color:#fff; padding:0.9rem 1.5rem; display:flex; align-items:center; justify-content:center; gap:1rem; z-index:500; transform:translateY(100%); transition:transform 0.25s ease; box-shadow:0 -8px 30px rgba(0,0,0,0.2); flex-wrap:wrap; }
+  .compare-bar.visible { transform:translateY(0); }
+  .compare-bar-label { font-family:'Outfit',sans-serif; font-size:0.85rem; font-weight:600; }
+  .compare-bar-thumbs { display:flex; gap:0.5rem; }
+  .compare-bar-thumb { width:38px; height:38px; border-radius:8px; background:var(--surface2); overflow:hidden; position:relative; border:1.5px solid rgba(255,255,255,0.25); }
+  .compare-bar-thumb img { width:100%; height:100%; object-fit:cover; }
+  .compare-bar-thumb .x { position:absolute; top:-6px; right:-6px; width:16px; height:16px; border-radius:50%; background:var(--agr-red); color:#fff; font-size:0.6rem; display:flex; align-items:center; justify-content:center; cursor:pointer; }
+  .compare-btn-action { padding:0.55rem 1.3rem; border-radius:9px; border:none; font-family:'Outfit',sans-serif; font-weight:700; font-size:0.82rem; cursor:pointer; transition:all 0.15s; }
+  .compare-btn-go { background:var(--bio-blue); color:#fff; }
+  .compare-btn-go:hover { background:var(--bio-blue-dark); }
+  .compare-btn-go:disabled { background:#555; color:#999; cursor:not-allowed; }
+  .compare-btn-clear { background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.3); }
+  .compare-btn-clear:hover { background:rgba(255,255,255,0.1); }
+
+  .compare-modal { max-width:1100px; }
+  .compare-table-wrap { overflow-x:auto; padding:2.5rem 1.5rem 1.5rem; }
+  .compare-table { width:100%; border-collapse:collapse; font-family:'Outfit',sans-serif; }
+  .compare-table th, .compare-table td { padding:0.7rem 1rem; border-bottom:1px solid var(--border); text-align:left; vertical-align:top; font-size:0.85rem; }
+  .compare-table th { background:var(--surface2); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-muted); font-weight:700; white-space:nowrap; }
+  .compare-table td.field-label { font-size:0.68rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-dim); font-weight:700; white-space:nowrap; background:var(--surface2); }
+  .compare-table .col-img { width:90px; height:90px; border-radius:10px; overflow:hidden; background:var(--surface2); display:flex; align-items:center; justify-content:center; }
+  .compare-table .col-img img { width:100%; height:100%; object-fit:contain; }
+  .compare-table .mismatch { background:var(--agr-yellow-light); font-weight:700; }
   .modal-mrp { display: inline-flex; align-items: center; gap: 0.4rem; background: #e8f0fe; border: 1.5px solid #4285f4; color: #1a56cc; border-radius: 8px; padding: 0.3rem 0.8rem; font-size: 0.8rem; font-weight: 800; font-family: 'Outfit', sans-serif; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
 
   .card-meta { display: flex; gap: 0.4rem; flex-wrap: wrap; }
@@ -278,6 +316,12 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="compareModal" onclick="closeCompareModalOutside(event)">
+  <div class="modal compare-modal" id="modalContent2">
+    <button class="modal-close" onclick="closeCompareModal()">✕</button>
+  </div>
+</div>
+
 <script>
 window.__MATERIALES_DATA__ = []; // fallback — datos vienen del CSV externo
 </script>
@@ -291,6 +335,7 @@ let allMaterials   = [];   // array plano de objetos (en main thread para modal)
 let currentResults = [];   // [{mat, idx}] resultado actual ordenado
 let activeCategory = null;
   let mrpOnly = false;
+  let compareList = []; // índices de materiales seleccionados para comparar (máx 3)
 let renderOffset   = 0;
 const PAGE_SIZE    = 40;
 let debounceTimer  = null;
@@ -684,13 +729,21 @@ function cardHTML(m, idx, delay) {
   const hasBio = m.ubicacion_bio || m.cantidad_bio;
   const hasAgr = m.ubicacion_agr || m.cantidad_agr;
   const isMrp  = m.mrp && (m.mrp.trim()==='1'||m.mrp.trim().toUpperCase()==='SI'||m.mrp.trim().toUpperCase()==='MRP');
-  return `<div class="material-card" style="animation-delay:${delay}s" onclick="openDetail(${idx})">
+  const inCmp  = compareList.includes(idx);
+  return `<div class="material-card ${inCmp?'in-compare':''}" data-idx="${idx}" style="animation-delay:${delay}s" onclick="openDetail(${idx})">
+    <div class="compare-check ${inCmp?'checked':''}" title="Agregar a comparar" onclick="event.stopPropagation(); toggleCompare(${idx}, this)">✓</div>
     ${m.imagen
       ? `<div class="card-img-wrap">${imgWithFallback(esc(m.imagen),esc(m.nombre),'cover')}</div>`
       : `<div class="no-img"><span>📦</span>Sin imagen</div>`}
     <div class="card-accent"></div>
     <div class="card-body">
-      <div class="card-code">${esc(m.codigo)}${isMrp?'<span class="badge-mrp" style="float:right;margin-left:0.3rem">⟳ MRP</span>':''}</div>
+      <div class="card-code-row">
+        <div class="card-code-left">
+          <span class="card-code" style="margin-bottom:0">${esc(m.codigo)}</span>
+          <span class="copy-btn" title="Copiar código" onclick="event.stopPropagation(); copyCode('${esc(m.codigo)}', this)">📋</span>
+        </div>
+        ${isMrp?'<span class="badge-mrp">⟳ MRP</span>':''}
+      </div>
       <div class="card-name">${esc(m.nombre)}</div>
       ${m.descripcion&&m.descripcion!==m.nombre?`<div class="card-desc">${esc(m.descripcion)}</div>`:''}
       <div class="card-societies">
@@ -929,7 +982,173 @@ function toggleMrp() {
 }
 function closeModal() { document.getElementById('detailModal').classList.remove('open'); document.body.style.overflow=''; }
 function closeModalOutside(e) { if(e.target===document.getElementById('detailModal')) closeModal(); }
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') { closeModal(); closeCompareModal(); } });
+
+// ── Copiar código al portapapeles ──────────────────────────────────────
+function copyCode(codigo, btnEl) {
+  const doFeedback = () => {
+    if (!btnEl) return;
+    const original = btnEl.textContent;
+    btnEl.textContent = '✓';
+    btnEl.classList.add('copied');
+    setTimeout(() => { btnEl.textContent = original; btnEl.classList.remove('copied'); }, 1300);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(codigo).then(doFeedback).catch(() => fallbackCopy(codigo, doFeedback));
+  } else {
+    fallbackCopy(codigo, doFeedback);
+  }
+}
+function fallbackCopy(text, cb) {
+  const ta = document.createElement('textarea');
+  ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); } catch(e) {}
+  document.body.removeChild(ta);
+  if (cb) cb();
+}
+
+// ── Comparar materiales ─────────────────────────────────────────────────
+const MAX_COMPARE = 3;
+
+function toggleCompare(idx, btnEl) {
+  const pos = compareList.indexOf(idx);
+  if (pos >= 0) {
+    compareList.splice(pos, 1);
+  } else {
+    if (compareList.length >= MAX_COMPARE) {
+      showRefreshToastCustom(`Máximo ${MAX_COMPARE} materiales para comparar`);
+      return;
+    }
+    compareList.push(idx);
+  }
+  // Actualizar UI del checkbox y borde de la tarjeta sin re-renderizar todo
+  const card = btnEl ? btnEl.closest('.material-card') : document.querySelector(`.material-card[data-idx="${idx}"]`);
+  const checked = compareList.includes(idx);
+  if (card) {
+    card.classList.toggle('in-compare', checked);
+    const chk = card.querySelector('.compare-check');
+    if (chk) chk.classList.toggle('checked', checked);
+  }
+  updateCompareBar();
+}
+
+function removeFromCompare(idx) {
+  const pos = compareList.indexOf(idx);
+  if (pos>=0) compareList.splice(pos,1);
+  const card = document.querySelector(`.material-card[data-idx="${idx}"]`);
+  if (card) {
+    card.classList.remove('in-compare');
+    const chk = card.querySelector('.compare-check');
+    if (chk) chk.classList.remove('checked');
+  }
+  updateCompareBar();
+}
+
+function clearCompare() {
+  compareList.slice().forEach(idx => removeFromCompare(idx));
+}
+
+function updateCompareBar() {
+  let bar = document.getElementById('compareBar');
+  if (!bar) {
+    bar = document.createElement('div');
+    bar.id = 'compareBar';
+    bar.className = 'compare-bar';
+    document.body.appendChild(bar);
+  }
+  if (compareList.length === 0) {
+    bar.classList.remove('visible');
+    return;
+  }
+  const thumbs = compareList.map(idx => {
+    const m = allMaterials[idx];
+    return `<div class="compare-bar-thumb">
+      ${m.imagen ? `<img src="${esc(m.imagen)}" alt="">` : '📦'}
+      <div class="x" onclick="removeFromCompare(${idx})">✕</div>
+    </div>`;
+  }).join('');
+  const canCompare = compareList.length >= 2;
+  bar.innerHTML = `
+    <span class="compare-bar-label">${compareList.length} seleccionado${compareList.length!==1?'s':''}${!canCompare?' · elige al menos 2':''}</span>
+    <div class="compare-bar-thumbs">${thumbs}</div>
+    <button class="compare-btn-action compare-btn-go" ${!canCompare?'disabled':''} onclick="openCompareModal()">Comparar</button>
+    <button class="compare-btn-action compare-btn-clear" onclick="clearCompare()">Limpiar</button>
+  `;
+  bar.classList.add('visible');
+}
+
+function showRefreshToastCustom(msg) {
+  let toast = document.getElementById('refreshToast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'refreshToast';
+    toast.style.cssText = `position:fixed;bottom:5.5rem;right:1.5rem;background:#1e293b;color:white;padding:0.6rem 1.1rem;border-radius:10px;font-size:0.75rem;font-family:'Outfit',sans-serif;font-weight:500;box-shadow:0 4px 20px rgba(0,0,0,0.2);opacity:0;transition:opacity 0.3s;z-index:9999;`;
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.style.opacity = '1';
+  setTimeout(() => toast.style.opacity = '0', 2200);
+}
+
+function openCompareModal() {
+  if (compareList.length < 2) return;
+  const mats = compareList.map(idx => allMaterials[idx]);
+
+  const rows = [
+    { label: 'Imagen', render: m => `<div class="col-img">${m.imagen ? imgWithFallback(esc(m.imagen),esc(m.nombre),'contain') : '📦'}</div>` },
+    { label: 'Código', render: m => esc(m.codigo) },
+    { label: 'Nombre', render: m => esc(m.nombre) },
+    { label: 'Descripción', render: m => esc(m.descripcion || '—') },
+    { label: 'Unidad', render: m => esc(m.unidad || '—') },
+    { label: 'Categoría', render: m => esc(m.categoria || '—') },
+    { label: 'MRP', render: m => { const v=(m.mrp||'').trim().toUpperCase(); return (v==='1'||v==='SI'||v==='MRP') ? '⟳ Sí' : 'No'; } },
+    { label: 'Ubic. Bioenergy', render: m => esc(m.ubicacion_bio || '—') },
+    { label: 'Stock Bioenergy', render: m => esc(m.cantidad_bio || '—') },
+    { label: 'Ubic. Agrícola', render: m => esc(m.ubicacion_agr || '—') },
+    { label: 'Stock Agrícola', render: m => esc(m.cantidad_agr || '—') },
+  ];
+
+  // Detectar filas donde los valores difieren entre materiales (para resaltar)
+  function valuesDiffer(label) {
+    if (['Imagen'].includes(label)) return false;
+    const vals = mats.map(m => {
+      const row = rows.find(r=>r.label===label);
+      const tmp = document.createElement('div'); tmp.innerHTML = row.render(m);
+      return tmp.textContent;
+    });
+    return new Set(vals).size > 1;
+  }
+
+  const tableRows = rows.map(r => {
+    const differs = valuesDiffer(r.label) && r.label!=='Código' && r.label!=='Nombre';
+    return `<tr>
+      <td class="field-label">${r.label}</td>
+      ${mats.map(m => `<td class="${differs?'mismatch':''}">${r.render(m)}</td>`).join('')}
+    </tr>`;
+  }).join('');
+
+  document.getElementById('modalContent2').innerHTML = `
+    <button class="modal-close" onclick="closeCompareModal()">✕</button>
+    <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead><tr><th></th>${mats.map((m,i)=>`<th>Material ${i+1}</th>`).join('')}</tr></thead>
+        <tbody>${tableRows}</tbody>
+      </table>
+    </div>
+  `;
+  document.getElementById('compareModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCompareModal() {
+  document.getElementById('compareModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeCompareModalOutside(e) {
+  if (e.target === document.getElementById('compareModal')) closeCompareModal();
+}
+
 
 function updateCounts() {}
 
