@@ -507,6 +507,15 @@ function createWorker() {
         .replace(/[^a-z0-9\\/]/g,' ').replace(/\\s+/g,' ').trim();
     }
 
+    // Normaliza ubicaciones a una clave compacta (solo letras y números, sin
+    // espacios ni guiones) para que "ALP-9-J-2", "ALP 9-J-2" y "alp9j2"
+    // se traten como la misma ubicación al buscar.
+    function normLoc(s) {
+      return String(s||'').toLowerCase()
+        .normalize('NFD').replace(/[\\u0300-\\u036f]/g,'')
+        .replace(/[^a-z0-9]/g,'');
+    }
+
     // Parser CSV rápido
     function splitLine(line) {
       const r=[]; let c=''; let q=false;
@@ -551,6 +560,8 @@ function createWorker() {
       const tmp = {};
       for (let i=0; i<mats.length; i++) {
         const m = mats[i];
+        m._locBio = normLoc(m.ubicacion_bio);
+        m._locAgr = normLoc(m.ubicacion_agr);
         const text = norm(m.nombre)+' '+norm(m.descripcion)+' '+norm(m.categoria)+' '+norm(m.ubicacion_bio)+' '+norm(m.ubicacion_agr);
         const seen = new Set();
         const cod = norm(m.codigo);
@@ -637,9 +648,13 @@ function createWorker() {
     }
 
     // Score rápido para ordenar resultados
-    function score(m, normQ, toks) {
+    function score(m, normQ, toks, qLoc) {
       const nc = norm(m.codigo);
       const nn = norm(m.nombre);
+      if (qLoc && qLoc.length>=3) {
+        if (m._locBio===qLoc || m._locAgr===qLoc) return 120; // ubicación exacta
+        if ((m._locBio&&m._locBio.includes(qLoc)) || (m._locAgr&&m._locAgr.includes(qLoc))) return 108; // ubicación parcial
+      }
       if (nc===normQ)         return 110; // código exacto
       if (nc.endsWith(normQ)) return 105; // sufijo exacto del código
       if (nc.includes(normQ)) return 100; // código contiene query
@@ -664,7 +679,7 @@ function createWorker() {
     function search(query, catFilter) {
       const normQ = norm(query);
       const toks  = normQ.split(' ').filter(t=>t.length>=1);
-      if (!toks.length) return [];
+      const qLoc  = normLoc(query);
 
       // Para cada token, hacer OR entre el token y sus sinónimos
       // luego AND entre los distintos tokens de la query
@@ -680,13 +695,24 @@ function createWorker() {
         result = result === null ? arr : intersect(result, arr);
       }
 
-      if (!result) return [];
+      // Conjunto combinado: coincidencias normales + coincidencias de
+      // ubicación (compara ignorando espacios/guiones, ej: "alp-9-j-2")
+      const merged = new Set(result || []);
+      if (qLoc.length>=3) {
+        for (let i=0; i<mats.length; i++) {
+          const m = mats[i];
+          if ((m._locBio && m._locBio.includes(qLoc)) || (m._locAgr && m._locAgr.includes(qLoc))) {
+            merged.add(i);
+          }
+        }
+      }
+      if (!merged.size) return [];
 
       const out = [];
-      for (const idx of result) {
+      for (const idx of merged) {
         const m = mats[idx];
         if (catFilter && m.categoria!==catFilter) continue;
-        out.push({ idx, s: score(m, normQ, toks) });
+        out.push({ idx, s: score(m, normQ, toks, qLoc) });
       }
       out.sort((a,b)=>b.s-a.s);
       return out.map(o=>o.idx);
