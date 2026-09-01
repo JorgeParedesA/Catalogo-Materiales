@@ -286,6 +286,11 @@
       onmouseover="this.style.background='#e8f0fe'" onmouseout="if(!mrpOnly)this.style.background='white'">
       ⟳ Solo MRP
     </button>
+    <button id="btnStock" onclick="toggleStock()"
+      style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.45rem 1rem;border-radius:8px;border:1.5px solid #1a8c4a;background:white;color:#0f6e39;font-size:0.78rem;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer;transition:all 0.2s;letter-spacing:0.03em"
+      onmouseover="this.style.background='#e5f6ec'" onmouseout="if(!stockOnly)this.style.background='white'">
+      📦 Solo con stock
+    </button>
   </div>
   <div id="catalogGrid">
     <div class="empty-state" id="welcomeState">
@@ -335,6 +340,7 @@ let allMaterials   = [];   // array plano de objetos (en main thread para modal)
 let currentResults = [];   // [{mat, idx}] resultado actual ordenado
 let activeCategory = null;
   let mrpOnly = false;
+  let stockOnly = false;
   let compareList = []; // índices de materiales seleccionados para comparar (máx 3)
 let renderOffset   = 0;
 const PAGE_SIZE    = 40;
@@ -833,7 +839,7 @@ async function init() {
       } else {
         // Refresh en segundo plano — mostrar toast y re-aplicar filtros si hay búsqueda activa
         showRefreshToast();
-        if (document.getElementById('searchInput').value.trim().length >= 2 || activeCategory || mrpOnly) {
+        if (document.getElementById('searchInput').value.trim().length >= 2 || activeCategory || mrpOnly || stockOnly) {
           if (window.applyFilters) window.applyFilters();
         }
       }
@@ -845,8 +851,9 @@ async function init() {
         const v = (allMaterials[i].mrp||'').trim().toUpperCase();
         return v==='1'||v==='SI'||v==='MRP';
       });
+      if (stockOnly) idxs = idxs.filter(i => hasStock(allMaterials[i]));
       currentResults = idxs;
-      const label = d.q || (mrpOnly ? 'MRP' : '');
+      const label = d.q || (mrpOnly ? 'MRP' : '') || (stockOnly ? 'Con stock' : '');
       renderPage(currentResults, label);
     }
   };
@@ -883,7 +890,7 @@ async function init() {
     if (!workerReady) return;
     const q = document.getElementById('searchInput').value.trim();
     const hasQuery = q.length >= 2;
-    const hasFilter = activeCategory || mrpOnly;
+    const hasFilter = activeCategory || mrpOnly || stockOnly;
 
     if (!hasQuery && !hasFilter) {
       currentResults=[];
@@ -978,6 +985,19 @@ function toggleMrp() {
   const btn = document.getElementById('btnMrp');
   btn.style.background = mrpOnly ? '#e8f0fe' : 'white';
   btn.style.borderColor = mrpOnly ? '#1a56cc' : '#4285f4';
+  if (window.applyFilters) window.applyFilters();
+}
+// Un material "tiene stock" si la cantidad en Bioenergy o en Agrícola es > 0
+function hasStock(m) {
+  const qb = parseFloat((m.cantidad_bio||'0').toString().replace(',','.'));
+  const qa = parseFloat((m.cantidad_agr||'0').toString().replace(',','.'));
+  return (!isNaN(qb) && qb>0) || (!isNaN(qa) && qa>0);
+}
+function toggleStock() {
+  stockOnly = !stockOnly;
+  const btn = document.getElementById('btnStock');
+  btn.style.background = stockOnly ? '#e5f6ec' : 'white';
+  btn.style.borderColor = stockOnly ? '#0f6e39' : '#1a8c4a';
   if (window.applyFilters) window.applyFilters();
 }
 function closeModal() { document.getElementById('detailModal').classList.remove('open'); document.body.style.overflow=''; }
