@@ -551,7 +551,7 @@ function createWorker() {
       const tmp = {};
       for (let i=0; i<mats.length; i++) {
         const m = mats[i];
-        const text = norm(m.nombre)+' '+norm(m.descripcion)+' '+norm(m.categoria);
+        const text = norm(m.nombre)+' '+norm(m.descripcion)+' '+norm(m.categoria)+' '+norm(m.ubicacion_bio)+' '+norm(m.ubicacion_agr);
         const seen = new Set();
         const cod = norm(m.codigo);
 
