@@ -70,7 +70,7 @@
 
   main { max-width: 1400px; margin: 0 auto; padding: 1.75rem 2rem 3rem; }
 
-  .filter-bar { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; }
+  .filter-bar { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
 
   .filter-label { font-size: 0.72rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Outfit', sans-serif; flex-shrink: 0; }
 
@@ -255,6 +255,10 @@
     .modal-img { border-radius: 0; min-height: 200px; }
     .modal-societies { grid-template-columns: 1fr; }
     .modal-field-row { grid-template-columns: 1fr; }
+    .filter-bar { gap: 0.6rem; }
+    .filter-label { width: 100%; }
+    #categorySelect { flex: 1 1 100%; width: 100%; }
+    .filter-bar .toggle-btn { flex: 1 1 auto; justify-content: center; text-align: center; }
   }
 </style>
 </head>
@@ -282,12 +286,12 @@
     <select id="categorySelect" onchange="filterCat(this.value)">
       <option value="">Todas las categorías</option>
     </select>
-    <button id="btnMrp" onclick="toggleMrp()"
+    <button id="btnMrp" class="toggle-btn" onclick="toggleMrp()"
       style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.45rem 1rem;border-radius:8px;border:1.5px solid #4285f4;background:white;color:#1a56cc;font-size:0.78rem;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer;transition:all 0.2s;letter-spacing:0.03em"
       onmouseover="this.style.background='#e8f0fe'" onmouseout="if(!mrpOnly)this.style.background='white'">
       ⟳ Solo MRP
     </button>
-    <button id="btnStock" onclick="toggleStock()"
+    <button id="btnStock" class="toggle-btn" onclick="toggleStock()"
       style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.45rem 1rem;border-radius:8px;border:1.5px solid #1a8c4a;background:white;color:#0f6e39;font-size:0.78rem;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer;transition:all 0.2s;letter-spacing:0.03em"
       onmouseover="this.style.background='#e5f6ec'" onmouseout="if(!stockOnly)this.style.background='white'">
       📦 Solo con stock
