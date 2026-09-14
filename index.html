@@ -226,6 +226,7 @@
   .soc-panel.bio .soc-field-value.qty { color: var(--bio-green-dark); }
   .soc-panel.agr .soc-field-value.qty { color: var(--agr-yellow-dark); }
   .soc-na { font-size: 0.8rem; color: var(--text-dim); font-style: italic; }
+  .stock-warning { display: flex; align-items: center; gap: 0.5rem; background: #fff8e1; border: 1.5px solid #f0c94a; color: #7a5c00; border-radius: 8px; padding: 0.55rem 0.85rem; font-size: 0.76rem; font-weight: 600; line-height: 1.35; margin-bottom: 0.9rem; }
 
   .modal-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
   .modal-field { background: var(--surface2); border-radius: 10px; padding: 0.75rem 1rem; border: 1px solid var(--border); }
@@ -972,7 +973,7 @@ function openDetail(idx) {
             </div>
             ${hasBio?`
               ${m.ubicacion_bio?`<div class="soc-field"><div class="soc-field-label">Ubicación</div><div class="soc-field-value">${esc(m.ubicacion_bio)}</div></div>`:''}
-              ${m.cantidad_bio?`<div class="soc-field"><div class="soc-field-label">Stock aprox.</div><div class="soc-field-value qty">${esc(m.cantidad_bio)}</div></div>`:''}
+              ${m.cantidad_bio?`<div class="soc-field"><div class="soc-field-label">Stock Aproximado</div><div class="soc-field-value qty">${esc(m.cantidad_bio)}</div></div>`:''}
             `:'<div class="soc-na">Sin registros</div>'}
           </div>
           <div class="soc-panel agr">
@@ -982,10 +983,11 @@ function openDetail(idx) {
             </div>
             ${hasAgr?`
               ${m.ubicacion_agr?`<div class="soc-field"><div class="soc-field-label">Ubicación</div><div class="soc-field-value">${esc(m.ubicacion_agr)}</div></div>`:''}
-              ${m.cantidad_agr?`<div class="soc-field"><div class="soc-field-label">Stock aprox.</div><div class="soc-field-value qty">${esc(m.cantidad_agr)}</div></div>`:''}
+              ${m.cantidad_agr?`<div class="soc-field"><div class="soc-field-label">Stock Aproximado</div><div class="soc-field-value qty">${esc(m.cantidad_agr)}</div></div>`:''}
             `:'<div class="soc-na">Sin registros</div>'}
           </div>
         </div>
+        <div class="stock-warning">⚠️ Catálogo de consulta: el stock puede variar. Verifique cantidades exactas en SAP.</div>
         ${m.categoria?`<div class="modal-field-row"><div class="modal-field"><div class="modal-field-label">Categoría</div><div class="modal-field-value">${esc(m.categoria)}</div></div></div>`:''}
       </div>
     </div>`;
