@@ -74,7 +74,7 @@
 
   .filter-label { font-size: 0.72rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Outfit', sans-serif; flex-shrink: 0; }
 
-  #categorySelect {
+  #categorySelect, #stockSelect, #viewSelect {
     flex: 1;
     max-width: 340px;
     background: var(--surface);
@@ -94,7 +94,8 @@
     transition: border-color 0.2s, box-shadow 0.2s;
   }
 
-  #categorySelect:focus { border-color: var(--bio-blue); box-shadow: 0 0 0 3px rgba(26,178,232,0.12); }
+  #categorySelect:focus, #stockSelect:focus, #viewSelect:focus { border-color: var(--bio-blue); box-shadow: 0 0 0 3px rgba(26,178,232,0.12); }
+  #stockSelect, #viewSelect { flex: 0 1 auto; max-width: 230px; }
 
   #catalogGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.25rem; }
 
@@ -195,7 +196,8 @@
 
   .modal-body { padding: 1.75rem; overflow-y: auto; }
 
-  .modal-code { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; color: var(--bio-green-dark); text-transform: uppercase; margin-bottom: 0.4rem; font-family: 'Outfit', sans-serif; }
+  .modal-code { font-size: 1.25rem; font-weight: 800; letter-spacing: 0.04em; color: var(--bio-green-dark); text-transform: uppercase; margin-bottom: 0.3rem; font-family: 'Outfit', sans-serif; }
+  .modal-code .fav-star { font-size: 1.4rem; margin-left: 0.5rem; vertical-align: -2px; }
 
   .modal-name { font-size: 1.35rem; font-weight: 800; line-height: 1.2; margin-bottom: 0.4rem; color: var(--text); font-family: 'Outfit', sans-serif; }
 
@@ -226,8 +228,24 @@
   .soc-panel.bio .soc-field-value.qty { color: var(--bio-green-dark); }
   .soc-panel.agr .soc-field-value.qty { color: var(--agr-yellow-dark); }
   .soc-na { font-size: 0.8rem; color: var(--text-dim); font-style: italic; }
+  .fav-star { cursor: pointer; font-size: 1.05rem; color: #b8b8b2; margin-left: 0.35rem; user-select: none; line-height: 1; }
+  .fav-star.on { color: #f5a623; }
+  .badge-dup { display: inline-block; margin-top: 0.3rem; background: #fff3e0; border: 1px solid #f0b45a; color: #8a5200; border-radius: 6px; padding: 0.1rem 0.45rem; font-size: 0.68rem; font-weight: 700; }
+  .dup-list { background: #fff3e0; border: 1.5px solid #f0b45a; color: #8a5200; border-radius: 8px; padding: 0.5rem 0.85rem; font-size: 0.76rem; line-height: 1.4; margin-bottom: 0.9rem; }
+  .dup-list a { color: #8a5200; font-weight: 700; }
+  .report-btn { display: inline-block; background: white; border: 1.5px solid #c0392b; color: #a52a1f; border-radius: 8px; padding: 0.45rem 0.9rem; font-size: 0.78rem; font-weight: 700; text-decoration: none; margin-bottom: 0.4rem; }
+  .report-note, .footer-report { font-size: 0.72rem; color: var(--text-dim); line-height: 1.4; margin-bottom: 0.9rem; }
+  .footer-report { margin: 0.6rem 0 0; text-align: center; }
   .stock-warning { display: flex; align-items: center; gap: 0.5rem; background: #fff8e1; border: 1.5px solid #f0c94a; color: #7a5c00; border-radius: 8px; padding: 0.55rem 0.85rem; font-size: 0.76rem; font-weight: 600; line-height: 1.35; margin-bottom: 0.9rem; }
 
+  .modal-societies { margin-bottom: 0.6rem; }
+  .modal-cat { display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 0.5rem 0.85rem; margin-bottom: 0.6rem; }
+  .modal-cat .modal-field-label { margin: 0; }
+  .stock-warning { padding: 0.45rem 0.75rem; margin-bottom: 0.6rem; }
+  .dup-list { margin-bottom: 0.6rem; }
+  .report-row { display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap; }
+  .report-row .report-btn { margin: 0; padding: 0.4rem 0.8rem; }
+  .report-row .report-note { margin: 0; flex: 1 1 200px; }
   .modal-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
   .modal-field { background: var(--surface2); border-radius: 10px; padding: 0.75rem 1rem; border: 1px solid var(--border); }
   .modal-field-label { font-size: 0.63rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; margin-bottom: 0.25rem; font-family: 'Outfit', sans-serif; }
@@ -258,6 +276,7 @@
     .filter-bar { gap: 0.6rem; }
     .filter-label { width: 100%; }
     #categorySelect { flex: 1 1 100%; width: 100%; }
+    #stockSelect, #viewSelect { flex: 1 1 45%; max-width: none; }
     .filter-bar .toggle-btn { flex: 1 1 auto; justify-content: center; text-align: center; }
   }
 </style>
@@ -291,11 +310,17 @@
       onmouseover="this.style.background='#e8f0fe'" onmouseout="if(!mrpOnly)this.style.background='white'">
       ⟳ Solo MRP
     </button>
-    <button id="btnStock" class="toggle-btn" onclick="toggleStock()"
-      style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.45rem 1rem;border-radius:8px;border:1.5px solid #1a8c4a;background:white;color:#0f6e39;font-size:0.78rem;font-weight:700;font-family:'Outfit',sans-serif;cursor:pointer;transition:all 0.2s;letter-spacing:0.03em"
-      onmouseover="this.style.background='#e5f6ec'" onmouseout="if(!stockOnly)this.style.background='white'">
-      📦 Solo con stock
-    </button>
+    <select id="stockSelect" onchange="setStock(this.value)">
+      <option value="">Stock: todos</option>
+      <option value="any">📦 Con stock (cualquiera)</option>
+      <option value="bio">📦 Con stock Bioenergy</option>
+      <option value="agr">📦 Con stock Agrícola</option>
+    </select>
+    <select id="viewSelect" onchange="setView(this.value)">
+      <option value="">Ver: todos</option>
+      <option value="fav">⭐ Favoritos</option>
+      <option value="rec">🕘 Recientes</option>
+    </select>
   </div>
   <div id="catalogGrid">
     <div class="empty-state" id="welcomeState">
@@ -318,6 +343,8 @@
     <img src="logo_agricola.png" alt="Agrícola de los Llanos" onerror="this.style.display='none'">
   </div>
   <div class="footer-label">Catálogo Unificado de Materiales</div>
+  <div class="footer-report" id="footerDate"></div>
+  <div class="footer-report">¿Detectó una inconsistencia o un duplicado? Repórtelo de inmediato a <a href="mailto:catalogacion@bioenergy.com.co?subject=Reporte%20cat%C3%A1logo">catalogacion@bioenergy.com.co</a></div>
 </footer>
 
 <div class="modal-overlay" id="detailModal" onclick="closeModalOutside(event)">
@@ -345,7 +372,8 @@ let allMaterials   = [];   // array plano de objetos (en main thread para modal)
 let currentResults = [];   // [{mat, idx}] resultado actual ordenado
 let activeCategory = null;
   let mrpOnly = false;
-  let stockOnly = false;
+  let stockOnly = '';
+  let viewMode = '';
   let compareList = []; // índices de materiales seleccionados para comparar (máx 3)
 let renderOffset   = 0;
 const PAGE_SIZE    = 40;
@@ -634,6 +662,7 @@ function createWorker() {
     }
 
     // Resolver un token: exacto → prefijo → fuzzy
+    let fuzzyUsed = false;
     function lookup(tok) {
       if (inv[tok]) return inv[tok];
       // Prefijo: buscar claves del índice que empiecen con tok
@@ -643,11 +672,12 @@ function createWorker() {
       }
       if (set.size) return new Uint32Array([...set].sort((a,b)=>a-b));
       // Fuzzy solo para tokens ≥4 chars
-      if (tok.length>=4) {
-        const maxD = tok.length<=5?1:tok.length<=8?2:3;
+      if (tok.length>=4 && !/[0-9]/.test(tok)) {
+        const maxD = tok.length<=5?1:2;
         for (const k of Object.keys(inv)) {
           if (lev(tok,k,maxD)<=maxD) for (const idx of inv[k]) set.add(idx);
         }
+        if (set.size) fuzzyUsed = true;
       }
       return new Uint32Array([...set].sort((a,b)=>a-b));
     }
@@ -682,6 +712,7 @@ function createWorker() {
 
     // Búsqueda principal con expansión de sinónimos
     function search(query, catFilter) {
+      fuzzyUsed = false;
       const normQ = norm(query);
       const toks  = normQ.split(' ').filter(t=>t.length>=1);
       const qLoc  = normLoc(query);
@@ -748,7 +779,7 @@ function createWorker() {
         postMessage({type:'READY', count:m.length, cats, mats:m});
       } else if (type==='SEARCH') {
         const idxs = search(payload.q, payload.cat);
-        postMessage({type:'RESULTS', idxs, q:payload.q, rid:payload.rid});
+        postMessage({type:'RESULTS', idxs, q:payload.q, rid:payload.rid, fuzzy:fuzzyUsed});
       }
       else if (type==='ALL') {
         let idxs = Array.from({length:mats.length},(_,i)=>i);
@@ -778,10 +809,12 @@ function cardHTML(m, idx, delay) {
         <div class="card-code-left">
           <span class="card-code" style="margin-bottom:0">${esc(m.codigo)}</span>
           <span class="copy-btn" title="Copiar código" onclick="event.stopPropagation(); copyCode('${esc(m.codigo)}', this)">📋</span>
+          <span class="fav-star ${isFav(m.codigo)?'on':''}" data-fav="${esc(m.codigo)}" title="Favorito" onclick="toggleFav('${esc(m.codigo)}', event)">${isFav(m.codigo)?'★':'☆'}</span>
         </div>
         ${isMrp?'<span class="badge-mrp">⟳ MRP</span>':''}
       </div>
       <div class="card-name">${esc(m.nombre)}</div>
+      ${dupMap[idx]?'<span class="badge-dup" title="Hay otros códigos con el mismo nombre, descripción y unidad">⚠ Posible duplicado</span>':''}
       ${m.descripcion&&m.descripcion!==m.nombre?`<div class="card-desc">${esc(m.descripcion)}</div>`:''}
       <div class="card-societies">
         ${hasBio?`<span class="soc-badge soc-bio">🟢 Bioenergy${m.cantidad_bio?' · '+esc(m.cantidad_bio):''}</span>`:''}
@@ -795,7 +828,7 @@ function cardHTML(m, idx, delay) {
   </div>`;
 }
 
-function renderPage(results, query) {
+function renderPage(results, query, fuzzy) {
   const grid = document.getElementById('catalogGrid');
   renderOffset = 0;
   if (sentinelObs) { sentinelObs.disconnect(); sentinelObs=null; }
@@ -808,7 +841,7 @@ function renderPage(results, query) {
   const hint = query
     ? `<div style="grid-column:1/-1;font-size:0.75rem;color:var(--text-dim);margin-bottom:0.25rem;font-family:'Outfit',sans-serif">
          <span style="color:var(--bio-green-dark);font-weight:700">${results.length.toLocaleString()}</span>
-         resultado${results.length!==1?'s':''} para <em>"${esc(query)}"</em>
+         resultado${results.length!==1?'s':''} para <em>"${esc(query)}"</em>${fuzzy?' <span style="color:#8a5200">· incluye coincidencias aproximadas</span>':''}
        </div>` : '';
 
   const batch = results.slice(0, PAGE_SIZE);
@@ -857,7 +890,7 @@ async function init() {
     }
     else if (d.type==='READY') {
       const isFirstLoad = !workerReady;
-      allMaterials = d.mats;       // guardar en main thread para modal
+      allMaterials = d.mats; computeDups();       // guardar en main thread para modal
       bar.style.width = '100%';
       setTimeout(() => bar.style.width = '0%', 400);
       buildFilterUI(d.cats);
@@ -870,7 +903,7 @@ async function init() {
       } else {
         // Refresh en segundo plano — mostrar toast y re-aplicar filtros si hay búsqueda activa
         showRefreshToast();
-        if (document.getElementById('searchInput').value.trim().length >= 2 || activeCategory || mrpOnly || stockOnly) {
+        if (document.getElementById('searchInput').value.trim().length >= 2 || activeCategory || mrpOnly || stockOnly || viewMode) {
           if (window.applyFilters) window.applyFilters();
         }
       }
@@ -882,10 +915,15 @@ async function init() {
         const v = (allMaterials[i].mrp||'').trim().toUpperCase();
         return v==='1'||v==='SI'||v==='MRP';
       });
-      if (stockOnly) idxs = idxs.filter(i => hasStock(allMaterials[i]));
+      if (stockOnly) idxs = idxs.filter(i => hasStock(allMaterials[i], stockOnly));
+      if (viewMode==='fav') idxs = idxs.filter(i => favs.includes(allMaterials[i].codigo));
+      if (viewMode==='rec') {
+        const pos = i => recents.indexOf(allMaterials[i].codigo);
+        idxs = idxs.filter(i => pos(i)>=0).sort((a,b) => pos(a)-pos(b));
+      }
       currentResults = idxs;
-      const label = d.q || (mrpOnly ? 'MRP' : '') || (stockOnly ? 'Con stock' : '');
-      renderPage(currentResults, label);
+      const label = d.q || (mrpOnly ? 'MRP' : '') || (stockOnly ? 'Con stock' : '') || (viewMode==='fav' ? 'Favoritos' : viewMode==='rec' ? 'Recientes' : '');
+      renderPage(currentResults, label, d.fuzzy);
     }
   };
 
@@ -893,7 +931,7 @@ async function init() {
   bar.style.width = '10%';
   try {
     // ?v=timestamp evita que el navegador use caché y siempre descarga el CSV fresco
-    const res = await fetch('materiales.csv?v=' + Date.now());
+    const res = await fetch('materiales.csv?v=' + Date.now()); setDataDate(res);
     if (!res.ok) throw new Error('HTTP ' + res.status);
     bar.style.width = '40%';
     const csv = await res.text();
@@ -921,7 +959,7 @@ async function init() {
     if (!workerReady) return;
     const q = document.getElementById('searchInput').value.trim();
     const hasQuery = q.length >= 2;
-    const hasFilter = activeCategory || mrpOnly || stockOnly;
+    const hasFilter = activeCategory || mrpOnly || stockOnly || viewMode;
 
     if (!hasQuery && !hasFilter) {
       currentResults=[];
@@ -953,6 +991,7 @@ async function init() {
 function openDetail(idx) {
   const m = allMaterials[idx];
   if (!m) return;
+  addRecent(m.codigo);
   const hasBio = m.ubicacion_bio||m.cantidad_bio;
   const hasAgr = m.ubicacion_agr||m.cantidad_agr;
   const isMrp  = m.mrp && (m.mrp.trim()==='1'||m.mrp.trim().toUpperCase()==='SI'||m.mrp.trim().toUpperCase()==='MRP');
@@ -962,7 +1001,7 @@ function openDetail(idx) {
     <div class="modal-layout">
       <div class="modal-img">${m.imagen?imgWithFallback(esc(m.imagen),esc(m.nombre),'contain'):'📦'}</div>
       <div class="modal-body">
-        <div class="modal-code">${esc(m.codigo)}</div>
+        <div class="modal-code">${esc(m.codigo)}<span class="fav-star ${isFav(m.codigo)?'on':''}" data-fav="${esc(m.codigo)}" title="Favorito" onclick="toggleFav('${esc(m.codigo)}', event)">${isFav(m.codigo)?'★':'☆'}</span></div>
         <div class="modal-name">${esc(m.nombre)}</div>
         ${isMrp?'<div class="modal-mrp">⟳ MRP — Material de Reposición Automática</div>':''}
         ${m.unidad?`<div class="modal-unit">Unidad de medida: <strong>${esc(m.unidad)}</strong></div>`:''}
@@ -991,8 +1030,10 @@ function openDetail(idx) {
             `:'<div class="soc-na">Sin registros</div>'}
           </div>
         </div>
-        <div class="stock-warning">⚠️El Catálogo es una herramienta de consulta de materiales, el stock puede variar. Verifique cantidades exactas en SAP ⚠️</div>
-        ${m.categoria?`<div class="modal-field-row"><div class="modal-field"><div class="modal-field-label">Categoría</div><div class="modal-field-value">${esc(m.categoria)}</div></div></div>`:''}
+        ${m.categoria?`<div class="modal-cat"><span class="modal-field-label">Categoría</span><span class="modal-field-value">${esc(m.categoria)}</span></div>`:''}
+        <div class="stock-warning"><div>⚠️El Catálogo es una herramienta de consulta de materiales, el stock puede variar. Verifique cantidades exactas en SAP ⚠️${dataDate?`<br><span style="font-weight:500">Datos actualizados: ${esc(dataDate)}</span>`:''}</div></div>
+        ${dupHTML(idx)}
+        <div class="report-row"><a class="report-btn" href="${mailtoReport(m)}">✉️ Reportar errores o duplicados</a><span class="report-note">Cualquier inconsistencia puede reportarla de inmediato a catalogacion@bioenergy.com.co</span></div>
       </div>
     </div>`;
   document.getElementById('detailModal').classList.add('open');
@@ -1019,18 +1060,61 @@ function toggleMrp() {
   btn.style.borderColor = mrpOnly ? '#1a56cc' : '#4285f4';
   if (window.applyFilters) window.applyFilters();
 }
-// Un material "tiene stock" si la cantidad en Bioenergy o en Agrícola es > 0
-function hasStock(m) {
-  const qb = parseFloat((m.cantidad_bio||'0').toString().replace(',','.'));
-  const qa = parseFloat((m.cantidad_agr||'0').toString().replace(',','.'));
-  return (!isNaN(qb) && qb>0) || (!isNaN(qa) && qa>0);
+// Stock por sociedad: mode = 'bio' | 'agr' | cualquier otro valor = Bioenergy o Agrícola
+function hasStock(m, mode) {
+  const pos = v => { const n = parseFloat((v||'0').toString().replace(',','.')); return !isNaN(n) && n>0; };
+  const b = pos(m.cantidad_bio), g = pos(m.cantidad_agr);
+  return mode==='bio' ? b : mode==='agr' ? g : (b||g);
 }
-function toggleStock() {
-  stockOnly = !stockOnly;
-  const btn = document.getElementById('btnStock');
-  btn.style.background = stockOnly ? '#e5f6ec' : 'white';
-  btn.style.borderColor = stockOnly ? '#0f6e39' : '#1a8c4a';
-  if (window.applyFilters) window.applyFilters();
+function setStock(v) { stockOnly = v; if (window.applyFilters) window.applyFilters(); }
+function setView(v)  { viewMode = v;  if (window.applyFilters) window.applyFilters(); }
+
+// Favoritos y recientes (guardados en el navegador de cada usuario)
+function lsGet(k) { try { return JSON.parse(localStorage.getItem(k)||'[]'); } catch(e) { return []; } }
+function lsSet(k,v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) {} }
+let favs = lsGet('cat_favs'), recents = lsGet('cat_recents');
+function isFav(c) { return favs.includes(c); }
+function toggleFav(codigo, ev) {
+  if (ev) ev.stopPropagation();
+  const i = favs.indexOf(codigo);
+  if (i>=0) favs.splice(i,1); else favs.unshift(codigo);
+  lsSet('cat_favs', favs);
+  document.querySelectorAll('[data-fav="'+codigo+'"]').forEach(e => { e.classList.toggle('on', i<0); e.textContent = i<0 ? '★' : '☆'; });
+  if (viewMode==='fav' && window.applyFilters) window.applyFilters();
+}
+function addRecent(c) { recents = [c, ...recents.filter(x=>x!==c)].slice(0,30); lsSet('cat_recents', recents); }
+
+// Posibles duplicados: mismo nombre + descripción + unidad con distinto código
+let dupMap = {};
+function computeDups() {
+  const nk = t => String(t||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
+  const groups = new Map();
+  allMaterials.forEach((m,i) => {
+    const n = nk(m.nombre); if (!n) return;
+    const k = n+'|'+nk(m.descripcion)+'|'+nk(m.unidad);
+    if (!groups.has(k)) groups.set(k, []);
+    groups.get(k).push(i);
+  });
+  dupMap = {};
+  groups.forEach(g => { if (g.length>1) g.forEach(i => { dupMap[i] = g; }); });
+}
+function dupHTML(idx) {
+  const g = dupMap[idx]; if (!g) return '';
+  const others = g.filter(i=>i!==idx).slice(0,6);
+  return `<div class="dup-list">⚠ Posible duplicado: otros códigos con el mismo nombre, descripción y unidad: ${others.map(i=>`<a href="#" onclick="openDetail(${i});return false">${esc(allMaterials[i].codigo)}</a>`).join(', ')}${g.length-1>6?' …':''}</div>`;
+}
+function mailtoReport(m) {
+  const body = 'Material: '+m.codigo+' - '+m.nombre+'\nCategoría: '+(m.categoria||'')+'\n\nTipo de reporte (error de datos / posible duplicado / otro):\n\nDetalle:\n';
+  return 'mailto:catalogacion@bioenergy.com.co?subject='+encodeURIComponent('Reporte catálogo: material '+m.codigo)+'&body='+encodeURIComponent(body);
+}
+
+// Fecha de última actualización de los datos (cabecera Last-Modified del CSV)
+let dataDate = '';
+function setDataDate(res) {
+  const lm = res.headers.get('Last-Modified'); if (!lm) return;
+  const d = new Date(lm); if (isNaN(d)) return;
+  dataDate = d.toLocaleString('es-CO', {day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit'});
+  const el = document.getElementById('footerDate'); if (el) el.textContent = 'Datos actualizados: ' + dataDate;
 }
 function closeModal() { document.getElementById('detailModal').classList.remove('open'); document.body.style.overflow=''; }
 function closeModalOutside(e) { if(e.target===document.getElementById('detailModal')) closeModal(); }
@@ -1215,7 +1299,7 @@ async function refreshData() {
   if (q.length > 0) return;
 
   try {
-    const res = await fetch('materiales.csv?v=' + Date.now());
+    const res = await fetch('materiales.csv?v=' + Date.now()); setDataDate(res);
     if (!res.ok) return;
     const csv = await res.text();
 
